@@ -103,22 +103,22 @@ public class GameFrame extends JFrame {
 		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		// Draw ball
 //        GameObjects.MiddlePart.Tank.PlayerTank.PlayerTank.init(state, 200,200);
-		PlayerTank.playerTank.tankX = state.locX;
-		PlayerTank.playerTank.tankY = state.locY;
-		PlayerTank.playerTank.gunPosX = PlayerTank.getTank().tankX + PlayerTank.playerTank.tankBody.getWidth()/2;
-		PlayerTank.playerTank.gunPosY = PlayerTank.getTank().tankY + PlayerTank.playerTank.tankBody.getHeight()/2;
-        g2d.drawImage(PlayerTank.playerTank.tankBody,
-						PlayerTank.getTank().tankX,
-						PlayerTank.getTank().tankY,null);
-
-        g2d.drawImage(PlayerTank.getTank().tankGun,
-						PlayerTank.getTank().gunPosX,
-						PlayerTank.getTank().gunPosY,null);
-		if(!PlayerTank.playerTank.missiles.isEmpty()) {
-			for (MyCannonBullet2 bullet : PlayerTank.playerTank.missiles) {
-				g2d.drawImage(bullet.getBullet(), bullet.getLocationX(), bullet.getLocationY(), null);
-			}
-		}
+//		PlayerTank.playerTank.tankX = state.locX;
+//		PlayerTank.playerTank.tankY = state.locY;
+//		PlayerTank.playerTank.gunPosX = PlayerTank.getTank().tankX + PlayerTank.playerTank.tankBody.getWidth()/2;
+//		PlayerTank.playerTank.gunPosY = PlayerTank.getTank().tankY + PlayerTank.playerTank.tankBody.getHeight()/2;
+//        g2d.drawImage(PlayerTank.playerTank.tankBody,
+//						PlayerTank.getTank().tankX,
+//						PlayerTank.getTank().tankY,null);
+//
+//        g2d.drawImage(PlayerTank.getTank().tankGun,
+//						PlayerTank.getTank().gunPosX,
+//						PlayerTank.getTank().gunPosY,null);
+//		if(!PlayerTank.playerTank.missiles.isEmpty()) {
+//			for (MyCannonBullet2 bullet : PlayerTank.playerTank.missiles) {
+//				g2d.drawImage(bullet.getBullet(), bullet.getLocationX(), bullet.getLocationY(), null);
+//			}
+//		}
 
 		// Print FPS info
 		long currentRender = System.currentTimeMillis();

@@ -1,12 +1,11 @@
 package GameBasis;
 
 import GameObjects.BottomPart.BottomPart;
-import GameObjects.BottomPart.ExplodedGround;
 import GameObjects.BottomPart.Ground;
+import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.Item;
-import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank1Package.EnemyTank1;
-import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank2Package.EnemyTank2;
-import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank3Package.EnemyTank3;
+import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
+import GameObjects.MiddlePart.Items.RepairItem;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
 import GameObjects.GameObject;
@@ -44,7 +43,7 @@ public class BattleField {
     private void initialize(){
         // initialization of Map
        initializeGameLevel();
-       initializeSound();
+//       initializeSound();
 
         File file = new File(FILE_PATH);
         try {
@@ -55,11 +54,17 @@ public class BattleField {
             while(!(line = bufferedReader.readLine()).isEmpty()){
                 objects = line.split("|");
                 for (String object: objects) {
-                    makeObject(object);
-                    courserX += 100;
-                    if(courserX == 500){
-                        courserY += 100;
-                        courserX =0;
+                    String[] tmp = object.split("[/]");
+                    for (String item:tmp) {
+                        int length = everything.size();
+                        makeObject(item);
+                        if(length < everything.size()) {
+                            courserX += 100;
+                            if (courserX == 600) {
+                                courserY += 100;
+                                courserX = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -81,16 +86,31 @@ public class BattleField {
      */
     private void makeObject(String object) throws Exception {
         switch(object){
-            case "ground":
+            case " ":
                 everything.add(new Ground(courserX,courserY));
                 break;
-            case "hardWall":
+            case "#":
                 everything.add(new HardWall(courserX,courserY));
                 break;
-            case "softWall":
+            case "&":
                 everything.add(new SoftWall(courserX,courserY));
-            case "grass":
+            case "*":
                 everything.add(new Grass(courserX, courserY));
+                break;
+            case "MI":
+                everything.add(new MachineGunCartridgeItem(courserX,courserY));
+                break;
+            case "RI":
+                everything.add(new RepairItem(courserX,courserY));
+                break;
+            case "CI":
+                everything.add(new CannonBulletCartridgeItem(courserX,courserY));
+                break;
+            case "S":
+                ((Ground)everything.get(everything.size() - 1)).setStartingPoint();
+                break;
+            case "F":
+                ((Ground)everything.get(everything.size() - 1)).setFinishingPoint();
                 break;
 //            case "player GameObjects.MiddlePart.Tank.Tank":
 //                everything.add(new PlayerTank(courserX,courserY));
@@ -139,10 +159,10 @@ public class BattleField {
                     GameObject tmp = new Ground(gameObject.getLocationX(),gameObject.getLocationY());
                     gameObject = tmp;
                 }
-                if(gameObject instanceof Tank){
-                    GameObject tmp = new ExplodedGround(gameObject.getLocationX(),gameObject.getLocationY());
-                    gameObject = tmp;
-                }
+//                if(gameObject instanceof Tank){
+//                    GameObject tmp = new BottomPart.ExplodedGround(gameObject.getLocationX(),gameObject.getLocationY());
+//                    gameObject = tmp;
+//                }
             }
         }
     }
@@ -170,9 +190,9 @@ public class BattleField {
         }
     }
 
-    public void initializeSound(){
-        soundState = Main.getSoundState();
-    }
+//    public void initializeSound(){
+//        soundState = Main.getSoundState();
+//    }
 
     /**
      * This method checks whether the collision occurred
@@ -206,19 +226,19 @@ public class BattleField {
                 break;
             }
         }
-        if(thing instanceof PlayerTank) {
-            for (GameObject object : collidedObjects)
-                if(object instanceof Item)
-                    PlayerTank.eatItem(object);
-        }
-        else if(thing instanceof Exploder){
-            for (GameObject object: collidedObjects) {
-                if(object instanceof Explosive){
-                    ((Explosive) object).damage(thing.getDamage());
-                }
-            }
-        }
-        thing = null;
+//        if(thing instanceof PlayerTank) {
+//            for (GameObject object : collidedObjects)
+//                if(object instanceof Item)
+//                    PlayerTank.eatItem(object);
+//        }
+//        if(thing instanceof Exploder){
+//            for (GameObject object: collidedObjects) {
+//                if(object instanceof Explosive){
+//                    ((Explosive) object).damage(thing.getDamage());
+//                }
+//            }
+//        }
+//        thing = null;
     }
 
 }

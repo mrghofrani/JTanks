@@ -1,6 +1,5 @@
 package GameBasis; /*** In The Name of Allah ***/
 
-import PlayerTank;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,7 +30,7 @@ public class GameState {
     public GameState() {
         locX = 100;
         locY = 100;
-        PlayerTank.init(this,100,100);
+//        PlayerTank.init(this,100,100);
 
         gameOver = false;
 
@@ -93,19 +92,19 @@ public class GameState {
 			switch (e.getKeyCode())
 			{
 				case KeyEvent.VK_UP:
-				    playerTank.rotateTank(true);
+//				    playerTank.rotateTank(true);
 					keyUP = true;
 					break;
 				case KeyEvent.VK_DOWN:
-				    PlayerTank.playerTank.rotateTank(true);
+//				    PlayerTank.playerTank.rotateTank(true);
 					keyDOWN = true;
 					break;
 				case KeyEvent.VK_LEFT:
-                    PlayerTank.playerTank.rotateTank(false);
+//                    PlayerTank.playerTank.rotateTank(false);
                     keyLEFT = true;
 					break;
 				case KeyEvent.VK_RIGHT:
-                    PlayerTank.playerTank.rotateTank(false);
+//                    PlayerTank.playerTank.rotateTank(false);
                     keyRIGHT = true;
 					break;
 				case KeyEvent.VK_ESCAPE:
@@ -144,9 +143,9 @@ public class GameState {
 		public void mousePressed(MouseEvent e) {
 			if(e.getButton() == 3){
 //                System.out.println("click right");
-			    playerTank.switchGun();
+//			    playerTank.switchGun();
             }else if(e.getButton() == 1){
-                playerTank.fire(mouseX = e.getX(),mouseY = e.getY());
+//                playerTank.fire(mouseX = e.getX(),mouseY = e.getY());
                 mousePress = true;
             }
 		}
