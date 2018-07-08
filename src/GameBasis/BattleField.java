@@ -3,6 +3,7 @@ package GameBasis;
 import GameObjects.BottomPart.BottomPart;
 import GameObjects.BottomPart.ExplodedGround;
 import GameObjects.BottomPart.Ground;
+import GameObjects.MiddlePart.Items.Item;
 import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank1Package.EnemyTank1;
 import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank2Package.EnemyTank2;
 import GameObjects.MiddlePart.Tank.EnemyTank.EnemyTank3Package.EnemyTank3;
@@ -91,24 +92,24 @@ public class BattleField {
             case "grass":
                 everything.add(new Grass(courserX, courserY));
                 break;
-            case "player GameObjects.MiddlePart.Tank.Tank":
-                everything.add(new PlayerTank(courserX,courserY));
-                break;
-            case "Enemy Tank1":
-                everything.add(new EnemyTank1(courserX,courserY));
-                break;
-            case "Enemy Tank2":
-                everything.add(new EnemyTank2(courserX,courserY));
-                break;
-            case "Enemy Tank3":
-                everything.add(new EnemyTank3(courserX,courserY));
-                break;
-            case "Enemy Tank4":
-                everything.add(new EnemyTank4(courserX,courserY));
-                break;
-            case "Enemy Tank5":
-                everything.add(new EnemyTank5(courserX,courserY));
-                break;
+//            case "player GameObjects.MiddlePart.Tank.Tank":
+//                everything.add(new PlayerTank(courserX,courserY));
+//                break;
+//            case "Enemy Tank1":
+//                everything.add(new EnemyTank1(courserX,courserY));
+//                break;
+//            case "Enemy Tank2":
+//                everything.add(new EnemyTank2(courserX,courserY));
+//                break;
+//            case "Enemy Tank3":
+//                everything.add(new EnemyTank3(courserX,courserY));
+//                break;
+//            case "Enemy Tank4":
+//                everything.add(new EnemyTank4(courserX,courserY));
+//                break;
+//            case "Enemy Tank5":
+//                everything.add(new EnemyTank5(courserX,courserY));
+//                break;
             default:
                 throw new Exception("Object not found");
         }
@@ -172,4 +173,52 @@ public class BattleField {
     public void initializeSound(){
         soundState = Main.getSoundState();
     }
+
+    /**
+     * This method checks whether the collision occurred
+     * or not but the {@code realCollision} method simulates the
+     * collision by invoking objects' methods
+     * @param thing Does this object collide to any object in screen
+     * @return true if the collision have occurred otherwise returns false
+     */
+    public boolean collisionTest(GameObject thing){
+        ArrayList<GameObject> collidedObjects = new ArrayList<>();
+        for (GameObject object: middlePart) {
+            if(thing.getBounds().intersects(thing.getBounds())){
+                collidedObjects.add(object);
+                break;
+            }
+        }
+        return !collidedObjects.isEmpty();
+    }
+
+    /**
+     * This simulate collision in the code by invoking
+     * the objects' methods but {@code collisionTest} checks
+     * whether the collision occurred or not
+     * @param thing Game object that is going to collide
+     */
+    public void realCollision(GameObject thing){
+        ArrayList<GameObject> collidedObjects = new ArrayList<>();
+        for (GameObject object: middlePart) {
+            if(thing.getBounds().intersects(thing.getBounds())){
+                collidedObjects.add(object);
+                break;
+            }
+        }
+        if(thing instanceof PlayerTank) {
+            for (GameObject object : collidedObjects)
+                if(object instanceof Item)
+                    PlayerTank.eatItem(object);
+        }
+        else if(thing instanceof Exploder){
+            for (GameObject object: collidedObjects) {
+                if(object instanceof Explosive){
+                    ((Explosive) object).damage(thing.getDamage());
+                }
+            }
+        }
+        thing = null;
+    }
+
 }
