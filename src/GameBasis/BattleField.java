@@ -3,7 +3,6 @@ package GameBasis;
 import GameObjects.BottomPart.BottomPart;
 import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
-import GameObjects.MiddlePart.Items.Item;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
 import GameObjects.MiddlePart.Walls.HardWall;
@@ -26,9 +25,14 @@ public class BattleField {
     private boolean soundState;
     private int courserX;
     private int courserY;
+    public static int XOffset;
+    public static int YOffset;
 
     public BattleField(){
+        // Hi Mahandes !!!
+        // YaAllah !!!
         everything = new ArrayList<>();
+        bottomPart = new ArrayList<>();
         middlePart = new ArrayList<>();
         topPart = new ArrayList<>();
         players = new ArrayList<>();
@@ -51,22 +55,27 @@ public class BattleField {
             String[] objects;
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while(!(line = bufferedReader.readLine()).isEmpty()){
-                objects = line.split("|");
+            while((line = bufferedReader.readLine()) != null){
+                objects = line.split("[|]");
                 for (String object: objects) {
-                    String[] tmp = object.split("[/]");
-                    for (String item:tmp) {
-                        int length = everything.size();
-                        makeObject(item);
-                        if(length < everything.size()) {
-                            courserX += 100;
-                            if (courserX == 600) {
-                                courserY += 100;
-                                courserX = 0;
-                            }
+                    String[] tmp = object.split(":");
+                    for (int i = 0; i < tmp.length ; i++) {
+                        if(i == 0) {
+                            makeObject(tmp[i]);
+                        }
+                        else {
+                            if(tmp[i].equals("S"))
+                                ((Ground)everything.get(everything.size()-1)).setStartingPoint();
+                            else if(tmp[i].equals("F"))
+                                ((Ground)everything.get(everything.size()-1)).setFinishingPoint();
+                            else
+                                makeObject(tmp[i]);
                         }
                     }
+                    courserX += 100;
                 }
+                courserX = 0;
+                courserY += 100;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -94,7 +103,9 @@ public class BattleField {
                 break;
             case "&":
                 everything.add(new SoftWall(courserX,courserY));
+                break;
             case "*":
+                System.out.println("here");
                 everything.add(new Grass(courserX, courserY));
                 break;
             case "MI":
@@ -131,11 +142,9 @@ public class BattleField {
 //                everything.add(new EnemyTank5(courserX,courserY));
 //                break;
             default:
+                System.out.println(object);
                 throw new Exception("Object not found");
         }
-
-        courserX += everything.get(everything.size()-1).getBoundX();
-        courserY += everything.get(everything.size()-1).getBoundY();
 
         GameObject gameObject = everything.get(everything.size() - 1);
         if(gameObject instanceof BottomPart)
@@ -170,9 +179,19 @@ public class BattleField {
     /**
      * This is used to draw all objects of the game
      */
-    public void drawAllObjects(Graphics2D g){
-        for (GameObject object: everything) {
-            object.doRendering(g);
+    public void drawAllObjects(Graphics2D g2d){
+        if(XOffset > 0) XOffset = 0;
+        if(YOffset > 0) YOffset = 0;
+        if(XOffset + 1200 < 600) XOffset = -600;
+        if(YOffset + 1200 < 600) YOffset = -600;
+        for (GameObject object: bottomPart) {
+            object.doRendering(g2d,XOffset,YOffset);
+        }
+        for (GameObject object: middlePart) {
+            object.doRendering(g2d,XOffset,YOffset);
+        }
+        for (GameObject object: topPart) {
+            object.doRendering(g2d,XOffset,YOffset);
         }
     }
 
@@ -182,12 +201,16 @@ public class BattleField {
                 FILE_PATH += "easyMap.txt";
                 break;
             case 2:
-                FILE_PATH += "mediumMap.txt";
+                FILE_PATH += "JustTesting.txt";
                 break;
             case 3:
                 FILE_PATH += "hardMap.txt";
                 break;
         }
+    }
+
+    public static ArrayList<GameObject> getEverything() {
+        return everything;
     }
 
 //    public void initializeSound(){

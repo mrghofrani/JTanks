@@ -1,6 +1,7 @@
 package GameBasis; /*** In The Name of Allah ***/
 
 import Bullet.Cannon.MyCannonBullet2;
+import GameObjects.GameObject;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,8 +24,8 @@ import javax.swing.*;
 public class GameFrame extends JFrame {
 //	BufferedImage image;
 
-	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
-	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
+	public static final int GAME_HEIGHT = 600;
+	public static final int GAME_WIDTH = 600;
 
 	//uncomment all /*...*/ in the class for using GameObjects.MiddlePart.Tank.Tank icon instead of a simple circle
 	/*private BufferedImage image;*/
@@ -34,6 +35,7 @@ public class GameFrame extends JFrame {
 
 	private BufferStrategy bufferStrategy;
 
+	private BattleField battleField;
 
 	public GameFrame(String title) {
 		super(title);
@@ -41,7 +43,7 @@ public class GameFrame extends JFrame {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
-
+		battleField = new BattleField();
 
 //		try{
 //			image = ImageIO.read(new File("Icon.png"));
@@ -98,9 +100,9 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) {
-		// Draw background
+		/*// Draw background
 		g2d.setColor(Color.GRAY);
-		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);*/
 		// Draw ball
 //        GameObjects.MiddlePart.Tank.PlayerTank.PlayerTank.init(state, 200,200);
 //		PlayerTank.playerTank.tankX = state.locX;
@@ -119,7 +121,7 @@ public class GameFrame extends JFrame {
 //				g2d.drawImage(bullet.getBullet(), bullet.getLocationX(), bullet.getLocationY(), null);
 //			}
 //		}
-
+		battleField.drawAllObjects(g2d);
 		// Print FPS info
 		long currentRender = System.currentTimeMillis();
 		if (lastRender > 0) {
@@ -141,6 +143,9 @@ public class GameFrame extends JFrame {
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, strHeight+50);
 		}
 		lastRender = currentRender;
+
+
+
 		// Print user guide
 		String userGuide
 				= "Use the MOUSE or ARROW KEYS to move the BALL. "

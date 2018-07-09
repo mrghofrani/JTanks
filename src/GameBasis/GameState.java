@@ -53,14 +53,22 @@ public class GameState {
      */
     public void update() {
 
-		if (keyUP)
+		if (keyUP) {
 			locY -= 8;
-		if (keyDOWN)
+			BattleField.YOffset -= 8;
+		}
+		if (keyDOWN) {
 			locY += 8;
-		if (keyLEFT)
+			BattleField.YOffset += 8;
+		}
+		if (keyLEFT) {
 			locX -= 8;
-		if (keyRIGHT)
+			BattleField.XOffset -= 8;
+		}
+		if (keyRIGHT) {
 			locX += 8;
+			BattleField.XOffset += 8;
+		}
 
 		locX = Math.max(locX, 0);
 //		locX = Math.min(locX, GameBasis.GameFrame.GAME_WIDTH - (int)tankWidth);

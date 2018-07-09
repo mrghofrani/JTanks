@@ -148,11 +148,16 @@ public class MainMenu {
         }
     }
 
-
+    /**
+     * @return the level of hard of the game
+     */
     public int getGameLevel(){
         return gameLevel;
     }
 
+    /**
+     * This method is used to start the game
+     */
     private void startTheGame(){
         EventQueue.invokeLater(new Runnable() {
             @Override

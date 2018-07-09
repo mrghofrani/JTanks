@@ -30,7 +30,7 @@ public abstract class GameObject {
         try {
             this.image = ImageIO.read(file);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,"Error Occured while reading the file " + IMAGE_PATH,"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Error Occurred while reading the file " + IMAGE_PATH,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -86,8 +86,8 @@ public abstract class GameObject {
      * used to get the bufferStrategy's brush to
      * draw each element of GameObject on Screen.
      */
-    public void doRendering(Graphics2D g){
-        g.drawImage(image,locationX,locationY,null);
+    public void doRendering(Graphics2D g,int XOffset,int YOffset){
+        g.drawImage(image,locationX + XOffset,locationY + YOffset,null);
     }
 
     /**
