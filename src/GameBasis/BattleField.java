@@ -5,6 +5,7 @@ import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
+import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
 import GameObjects.GameObject;
@@ -21,7 +22,7 @@ public class BattleField {
     private static ArrayList<GameObject> bottomPart;
     private static ArrayList<GameObject> middlePart;
     private static ArrayList<GameObject> topPart;
-    private static ArrayList<GameObject> players;
+    private PlayerTank playerTank;
     private boolean soundState;
     private int courserX;
     private int courserY;
@@ -35,7 +36,6 @@ public class BattleField {
         bottomPart = new ArrayList<>();
         middlePart = new ArrayList<>();
         topPart = new ArrayList<>();
-        players = new ArrayList<>();
         initialize();
     }
 
@@ -64,8 +64,12 @@ public class BattleField {
                             makeObject(tmp[i]);
                         }
                         else {
-                            if(tmp[i].equals("S"))
-                                ((Ground)everything.get(everything.size()-1)).setStartingPoint();
+                            if(tmp[i].equals("S")) {
+                                ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
+                                playerTank = new PlayerTank(200,200);
+                                everything.add(playerTank);
+                                middlePart.add(playerTank);
+                            }
                             else if(tmp[i].equals("F"))
                                 ((Ground)everything.get(everything.size()-1)).setFinishingPoint();
                             else
@@ -124,7 +128,7 @@ public class BattleField {
                 ((Ground)everything.get(everything.size() - 1)).setFinishingPoint();
                 break;
 //            case "player GameObjects.MiddlePart.Tank.Tank":
-//                everything.add(new PlayerTank(courserX,courserY));
+//                everything.add(new UserTank(courserX,courserY));
 //                break;
 //            case "Enemy Tank1":
 //                everything.add(new EnemyTank1(courserX,courserY));
@@ -184,6 +188,17 @@ public class BattleField {
         if(YOffset > 0) YOffset = 0;
         if(XOffset + 1200 < 600) XOffset = -600;
         if(YOffset + 1200 < 600) YOffset = -600;
+
+        /*int viewRangeXRight = 600;
+        int viewRangeXLeft = 600;
+        int viewRangeYUp = 600;
+        int viewRangeYDown = 600;
+        if(playerTank.getLocationX() + viewRangeXRight > 1200) viewRangeXRight = GameFrame.GAME_WIDTH - playerTank.getLocationX();
+        if(playerTank.getLocationX() - viewRangeXLeft < 0) viewRangeXLeft = playerTank.getLocationX();
+        if(playerTank.getLocationY() - viewRangeYUp > 1200) viewRangeYUp = GameFrame.GAME_HEIGHT - playerTank.getLocationY();
+        if(playerTank.getLocationY() - viewRangeYDown < 0) viewRangeYDown = playerTank.getLocationY();
+        Rectangle viewPoint = new Rectangle (playerTank.getLocationX() - viewRangeXLeft, playerTank.getLocationY() - viewRangeYUp
+                                            , viewRangeXLeft + viewRangeXRight , viewRangeYDown + viewRangeYUp);*/
         for (GameObject object: bottomPart) {
             object.doRendering(g2d,XOffset,YOffset);
         }
@@ -249,10 +264,10 @@ public class BattleField {
                 break;
             }
         }
-//        if(thing instanceof PlayerTank) {
+//        if(thing instanceof UserTank) {
 //            for (GameObject object : collidedObjects)
 //                if(object instanceof Item)
-//                    PlayerTank.eatItem(object);
+//                    UserTank.eatItem(object);
 //        }
 //        if(thing instanceof Exploder){
 //            for (GameObject object: collidedObjects) {
