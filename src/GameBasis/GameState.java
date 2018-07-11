@@ -1,13 +1,9 @@
-package GameBasis; /*** In The Name of Allah ***/
+/*** In The Name of Allah ***/
+package GameBasis;
 
-
-import Bullet.Cannon.CannonBullet;
 import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
-import GameObjects.MiddlePart.Tank.UserTank.CannonGun;
-import GameObjects.MiddlePart.Tank.UserTank.PlayerGun;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -33,9 +29,10 @@ public class GameState {
     private int mouseX, mouseY;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
+    private BattleField battleField;
+    private PlayerTank playerTank;
 
-    public GameState() {
-//        UserTank.init(this,100,100);
+    public GameState(BattleField battleField) {
 
         gameOver = false;
 
@@ -50,6 +47,9 @@ public class GameState {
         //
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
+
+        this.battleField = battleField;
+        playerTank = battleField.getPlayerTank();
     }
 
 
@@ -57,221 +57,16 @@ public class GameState {
      * The method which updates the game state.
      */
     public void update() {
-        double mainAngle;
-        if(keyUP && !keyLEFT && !keyRIGHT){
-
-            if(Math.abs(PlayerTank.angle - (3*Math.PI/2)) < Math.abs(PlayerTank.angle + Math.PI/2 )){
-                mainAngle = 3*Math.PI/2;
-            }
-            else {
-                mainAngle = -Math.PI/2;
-            }
-
-            if(PlayerTank.angle - mainAngle > 0)
-                PlayerTank.angle -= 0.05;
-            else
-                PlayerTank.angle += 0.05;
-
-            if(Math.abs(PlayerTank.angle - mainAngle) < 0.1 )
-                PlayerTank.angle = mainAngle;
-
-            PlayerTank.YLocation -= 1;
-            if(PlayerTank.angle == mainAngle)
-                PlayerTank.YLocation -= 4;
-        }
-
-        else if(keyDOWN && !keyLEFT && !keyRIGHT){
-
-            if(Math.abs(PlayerTank.angle + (3*Math.PI/2)) < Math.abs(PlayerTank.angle - Math.PI/2 )){
-                mainAngle = -(3*Math.PI/2);
-            }
-            else {
-                mainAngle = Math.PI/2;
-            }
-            if(PlayerTank.angle > mainAngle){
-                PlayerTank.angle -= 0.05;
-            }
-            else
-                PlayerTank.angle += 0.05;
-            if(Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-            PlayerTank.YLocation -= 1;
-            if(PlayerTank.angle == mainAngle)
-                PlayerTank.YLocation += 4;
-        }
-
-        else if(keyRIGHT && !keyUP && !keyDOWN){
-            double difference = Math.abs(PlayerTank.angle);
-            mainAngle = 0;
-            if(Math.abs(PlayerTank.angle - 2 * Math.PI) < difference) {
-                mainAngle = 2 * Math.PI;
-                difference = Math.abs(PlayerTank.angle - 2 * Math.PI);
-            }
-            if(Math.abs(PlayerTank.angle + 2 * Math.PI) < difference){
-                mainAngle = -2*Math.PI;
-                difference = Math.abs(PlayerTank.angle + 2 * Math.PI);
-            }
+        playerTank.move(keyUP,keyDOWN,keyRIGHT,keyLEFT);
+        battleField.changeSeenArea(keyUP,keyDOWN,keyRIGHT,keyLEFT);
+//        System.out.println("GameState line 148" + " YLocation " + playerTank.YLocation + " YLocation " + playerTank.YLocation );
 
 
-            if(PlayerTank.angle - mainAngle> 0)
-                PlayerTank.angle -= 0.05;
-            else
-                PlayerTank.angle += 0.05;
 
-            if(Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = 0;
-
-            PlayerTank.XLocation += 1;
-            if(PlayerTank.angle == 0)
-                PlayerTank.XLocation += 4;
-        }
-
-        else if(keyLEFT && !keyUP && !keyDOWN){
-            if(Math.abs(PlayerTank.angle - (Math.PI)) < Math.abs(PlayerTank.angle + Math.PI ))
-                mainAngle = Math.PI;
-            else
-                mainAngle = -Math.PI;
-
-            if(PlayerTank.angle > mainAngle)
-                PlayerTank.angle -= 0.05;
-            else
-                PlayerTank.angle += 0.05;
-
-            if(Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-            PlayerTank.XLocation -= 1;
-            if(PlayerTank.angle == mainAngle)
-                PlayerTank.XLocation -= 4;
-        }
-
-        else if(keyLEFT && keyUP) {
-
-            if(Math.abs(PlayerTank.angle + (3*Math.PI/4)) < Math.abs(PlayerTank.angle - 5*Math.PI/4 )){
-                mainAngle = -3*Math.PI/4;
-            }
-            else {
-                mainAngle = 5*Math.PI/4;
-            }
-            if (PlayerTank.angle > mainAngle) {
-                PlayerTank.angle -= 0.05;
-            } else {
-                PlayerTank.angle += 0.05;
-            }
-
-            if (Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-
-            if(PlayerTank.angle == mainAngle){
-                PlayerTank.YLocation -= 2;
-                PlayerTank.XLocation += 2;
-            }
-            else {
-                PlayerTank.YLocation -= 1;
-                PlayerTank.XLocation += 1;
-            }
-        }
-
-        else if(keyLEFT && keyDOWN){
-            if(Math.abs(PlayerTank.angle - (3*Math.PI/4)) < Math.abs(PlayerTank.angle + 5*Math.PI/4 )){
-                mainAngle = 3*Math.PI/4;
-            }
-            else {
-                mainAngle = -5*Math.PI/4;
-            }
-            if (PlayerTank.angle > mainAngle) {
-                PlayerTank.angle -= 0.05;
-            } else {
-                PlayerTank.angle += 0.05;
-            }
-
-            if (Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-
-            if(PlayerTank.angle == mainAngle) {
-                PlayerTank.XLocation -= 2;
-                PlayerTank.YLocation += 2;
-            }
-            else{
-                PlayerTank.XLocation -= 1;
-                PlayerTank.YLocation += 1;
-            }
-        }
-
-        else if(keyRIGHT && keyDOWN){
-            if(Math.abs(PlayerTank.angle - (Math.PI/4)) < Math.abs(PlayerTank.angle + 7*Math.PI/4 )){
-                mainAngle = Math.PI/4;
-            }
-            else {
-                mainAngle = -7*Math.PI/4;
-            }
-            if (PlayerTank.angle > mainAngle) {
-                PlayerTank.angle -= 0.05;
-            } else {
-                PlayerTank.angle += 0.05;
-            }
-
-            if (Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-
-            if(Math.abs(PlayerTank.angle - (1d/4)*Math.PI) < 0.1)
-                PlayerTank.angle = (1d/4)*Math.PI;
-            if(PlayerTank.angle == (Math.PI/4)) {
-                PlayerTank.XLocation += 2;
-                PlayerTank.YLocation += 2;
-            }
-            else{
-                PlayerTank.XLocation += 1;
-                PlayerTank.YLocation += 1;
-            }
-        }
-
-        else if(keyRIGHT && keyUP) {
-            if(Math.abs(PlayerTank.angle - (7*Math.PI/4)) < Math.abs(PlayerTank.angle + Math.PI/4 )){
-                mainAngle = 7*Math.PI/4;
-            }
-            else {
-                mainAngle = -Math.PI/4;
-            }
-            if (PlayerTank.angle > mainAngle) {
-                PlayerTank.angle -= 0.05;
-            } else {
-                PlayerTank.angle += 0.05;
-            }
-
-            if (Math.abs(PlayerTank.angle - mainAngle) < 0.1)
-                PlayerTank.angle = mainAngle;
-
-            if (Math.abs(PlayerTank.angle + (1d / 4) * Math.PI) < 0.1)
-                PlayerTank.angle = -(1d / 4) * Math.PI;
-            if(PlayerTank.angle == -(Math.PI/4)) {
-                PlayerTank.XLocation += 2;
-                PlayerTank.YLocation -= 2;
-            }
-            else{
-                PlayerTank.XLocation += 1;
-                PlayerTank.YLocation -= 1;
-            }
-        }
-
-//        System.out.println("GameState line 148" + " YLocation " + PlayerTank.YLocation + " YLocation " + PlayerTank.YLocation );
-
-		if (keyUP)
-			BattleField.YOffset += 4;
-		if (keyDOWN)
-			BattleField.YOffset -= 4;
-		if (keyLEFT)
-			BattleField.XOffset += 4;
-		if (keyRIGHT)
-			BattleField.XOffset -= 4;
-
-		PlayerTank.gunAngle = Math.atan2(mouseX - (PlayerTank.XLocation + 50),mouseY - (PlayerTank.YLocation + 50));
-        PlayerTank.gunAngle *=(-1);
-        PlayerTank.gunAngle += Math.PI/2;
-
-//		if(PlayerTank.gunAngle < 0)
-//		    PlayerTank.gunAngle += Math.PI;
+//		if(playerTank.gunAngle < 0)
+//		    playerTank.gunAngle += Math.PI;
 //        System.out.println(this.getClass().getName() + "line 266" +  " mouseX " + mouseX + " mouseY " + mouseY);
-//        System.out.println(this.getClass().getName() + " line 158 " + " Angle is " + PlayerTank.angle);
+//        System.out.println(this.getClass().getName() + " line 158 " + " Angle is " + playerTank.angle);
 //		locX = Math.max(locX, 0);
 ////		locX = Math.min(locX, GameBasis.GameFrame.GAME_WIDTH - (int)tankWidth);
 //		locY = Math.max(locY, 0);
@@ -347,9 +142,9 @@ public class GameState {
         @Override
         public void mousePressed(MouseEvent e) {
             if(e.getButton() == 3){
-              PlayerTank.isCannonGun = !PlayerTank.isCannonGun;
+                playerTank.changeGun();
             }else if(e.getButton() == 1){
-                BattleField.add(new Cannon1(PlayerTank.XLocation, e.getX(),PlayerTank.YLocation,e.getY()));
+                playerTank.shot();
                 mousePress = true;
             }
 
@@ -357,7 +152,7 @@ public class GameState {
 
         public void mouseClicked(MouseEvent e){
             if(e.getButton() == 1){
-                BattleField.add(new Cannon1(PlayerTank.XLocation, e.getX(),PlayerTank.YLocation,e.getY()));
+                BattleField.add(new Cannon1(playerTank.XLocation, e.getX(),playerTank.YLocation,e.getY()));
                 mousePress = true;
             }
         }
@@ -373,6 +168,7 @@ public class GameState {
 
         @Override
         public void mouseMoved(MouseEvent e){
+            playerTank.aim(e.getX(),e.getY());
             mouseX = e.getX();
             mouseY = e.getY();
         }

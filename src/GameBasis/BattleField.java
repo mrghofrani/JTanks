@@ -29,8 +29,8 @@ public class BattleField {
     private boolean soundState;
     private int courserX;
     private int courserY;
-    public static int XOffset;
-    public static int YOffset;
+    public int XOffset;
+    public int YOffset;
 
     public BattleField() {
         // Hi Mahandes !!!
@@ -69,7 +69,7 @@ public class BattleField {
                         } else {
                             if (tmp[i].equals("S")) {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
-                                playerTank = new PlayerTank(200, 200);
+                                playerTank = new PlayerTank(this,200, 200);
                                 middlePart.add(new EnemyTank1(300,500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
@@ -233,6 +233,17 @@ public class BattleField {
         }
     }
 
+    public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
+        if (keyUP)
+            YOffset += 4;
+        if (keyDOWN)
+            YOffset -= 4;
+        if (keyLEFT)
+            XOffset += 4;
+        if (keyRIGHT)
+            XOffset -= 4;
+    }
+
     public static ArrayList<GameObject> getEverything() {
         return everything;
     }
@@ -300,6 +311,10 @@ public class BattleField {
         } else if (gameObject instanceof TopPart) {
             topPart.add(gameObject);
         }
+    }
+
+    public PlayerTank getPlayerTank() {
+        return playerTank;
     }
 
 

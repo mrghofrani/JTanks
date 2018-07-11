@@ -18,7 +18,7 @@ public class Cannon1 extends GameObject implements Exploder,MiddlePart {
     private int speed = 10;
 
 
-    public Cannon1(int locationX, int mouseX, int locationY,int mouseY){
+    public Cannon1(int locationX, int locationY, int mouseX, int mouseY){
         this.locationX = locationX + 50;
         this.locationY = locationY + 50;
         this.mouseX = mouseX;

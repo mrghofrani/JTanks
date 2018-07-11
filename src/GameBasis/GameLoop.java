@@ -35,8 +35,8 @@ public class GameLoop implements Runnable {
 	 */
 	public void init() {
 		battleField = new BattleField();
-		state = new GameState();
-
+		state = new GameState(battleField);
+		canvas.setBattleField(battleField);
 		canvas.addKeyListener(state.getKeyListener());
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());

@@ -36,7 +36,6 @@ public class GameFrame extends JFrame {
 	private BufferStrategy bufferStrategy;
 
 	private BattleField battleField;
-	
 
 	public GameFrame(String title) {
 		super(title);
@@ -44,7 +43,7 @@ public class GameFrame extends JFrame {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
-		battleField = new BattleField();
+
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 //		try{
@@ -102,27 +101,7 @@ public class GameFrame extends JFrame {
 	 * Rendering all game elements based on the game state.
 	 */
 	private void doRendering(Graphics2D g2d, GameState state) {
-		/*// Draw background
-		g2d.setColor(Color.GRAY);
-		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);*/
-		// Draw ball
-//        GameObjects.MiddlePart.Tank.UserTank.UserTank.init(state, 200,200);
-//		UserTank.playerTank.tankX = state.locX;
-//		UserTank.playerTank.tankY = state.locY;
-//		UserTank.playerTank.gunPosX = UserTank.getTank().tankX + UserTank.playerTank.tankBody.getWidth()/2;
-//		UserTank.playerTank.gunPosY = UserTank.getTank().tankY + UserTank.playerTank.tankBody.getHeight()/2;
-//        g2d.drawImage(UserTank.playerTank.tankBody,
-//						UserTank.getTank().tankX,
-//						UserTank.getTank().tankY,null);
-//
-//        g2d.drawImage(UserTank.getTank().tankGun,
-//						UserTank.getTank().gunPosX,
-//						UserTank.getTank().gunPosY,null);
-//		if(!UserTank.playerTank.missiles.isEmpty()) {
-//			for (MyCannonBullet2 bullet : UserTank.playerTank.missiles) {
-//				g2d.drawImage(bullet.getBullet(), bullet.getLocationX(), bullet.getLocationY(), null);
-//			}
-//		}
+
 		battleField.drawAllObjects(g2d);
 		// Print FPS info
 		long currentRender = System.currentTimeMillis();
@@ -164,4 +143,7 @@ public class GameFrame extends JFrame {
 		}
 	}
 
+	public void setBattleField(BattleField battleField) {
+		this.battleField = battleField;
+	}
 }
