@@ -2,6 +2,7 @@ package GameBasis; /*** In The Name of Allah ***/
 
 
 import Bullet.Cannon.CannonBullet;
+import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
 import GameObjects.MiddlePart.Tank.UserTank.CannonGun;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerGun;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
@@ -120,9 +121,9 @@ public class GameState {
             if(Math.abs(PlayerTank.angle - mainAngle) < 0.1)
                 PlayerTank.angle = 0;
 
-            PlayerTank.XLocation -= 1;
+            PlayerTank.XLocation += 1;
             if(PlayerTank.angle == 0)
-                PlayerTank.XLocation -= 4;
+                PlayerTank.XLocation += 4;
         }
 
         else if(keyLEFT && !keyUP && !keyDOWN){
@@ -264,6 +265,8 @@ public class GameState {
 			BattleField.XOffset -= 4;
 
 		PlayerTank.gunAngle = Math.atan2(mouseX - (PlayerTank.XLocation + 50),mouseY - (PlayerTank.YLocation + 50));
+        PlayerTank.gunAngle *=(-1);
+        PlayerTank.gunAngle += Math.PI/2;
 
 //		if(PlayerTank.gunAngle < 0)
 //		    PlayerTank.gunAngle += Math.PI;
@@ -346,11 +349,18 @@ public class GameState {
             if(e.getButton() == 3){
               PlayerTank.isCannonGun = !PlayerTank.isCannonGun;
             }else if(e.getButton() == 1){
-                BattleField.add(new CannonBullet(PlayerTank.XLocation + 50,PlayerTank.YLocation + 50));
+                BattleField.add(new Cannon1(PlayerTank.XLocation, e.getX(),PlayerTank.YLocation,e.getY()));
+                mousePress = true;
+            }
+
+        }
+
+        public void mouseClicked(MouseEvent e){
+            if(e.getButton() == 1){
+                BattleField.add(new Cannon1(PlayerTank.XLocation, e.getX(),PlayerTank.YLocation,e.getY()));
                 mousePress = true;
             }
         }
-//
         @Override
         public void mouseReleased(MouseEvent e) {
             mousePress = false;

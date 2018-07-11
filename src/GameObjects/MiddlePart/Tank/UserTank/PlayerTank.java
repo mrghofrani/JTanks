@@ -1,9 +1,7 @@
 package GameObjects.MiddlePart.Tank.UserTank;
 
-import GameBasis.GameState;
+import GameBasis.GameFrame;
 import GameObjects.GameObject;
-
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -43,11 +41,11 @@ public class PlayerTank extends GameObject {
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset){
         if(XLocation < 0 - image.getWidth()/2) XLocation = -image.getWidth()/2;
         if(YLocation < 0 - image.getHeight()/2) YLocation = -image.getHeight()/2;
-        if(XLocation > 600 + image.getWidth()/2) XLocation = 600 + image.getWidth()/2;
-        if(YLocation > 600 + image.getHeight()/2) YLocation = 600 + image.getHeight()/2;
-//        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + XLocation  + " locationY: " + YLocation );
+        if(XLocation > GameFrame.GAME_WIDTH - image.getWidth()/2) XLocation = GameFrame.GAME_WIDTH - image.getWidth()/2;
+        if(YLocation > GameFrame.GAME_HEIGHT - image.getHeight()/2 ) YLocation = GameFrame.GAME_HEIGHT - image.getHeight()/2;
+//        System.out.println(this.getClass().getName() + " line 49 " + " locationX: " + XLocation  + " locationY: " + YLocation );
 //        System.out.println(this.getClass().getName() + " line 105 " + " locationX: " + XLocation  + " locationY: " + YLocation );
-        System.out.println(this.getClass().getName() + " line 98 " + " gunAngle " + (gunAngle/Math.PI) + "PI");
+//        System.out.println(this.getClass().getName() + " line 98 " + " gunAngle " + (gunAngle/Math.PI) + "PI");
         paintTank(g2d);
 //        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + XLocation  + " locationY: " + YLocation );
 //        System.out.println(this.getClass().getName() + " line 113" + " gunLocationX: " + gunLocationX  + " gunLocationY: " + gunLocationY );
@@ -56,7 +54,7 @@ public class PlayerTank extends GameObject {
             gun = cannonGun;
         else
             gun = machineGun;
-        System.out.println(this.getClass().getName() + " line 59 " + " isCannonGun " + isCannonGun);
+//        System.out.println(this.getClass().getName() + " line 59 " + " isCannonGun " + isCannonGun);
         gun.doRendering(g2d,XLocation ,YLocation,gunAngle);
     }
 

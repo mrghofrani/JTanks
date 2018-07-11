@@ -25,11 +25,9 @@ public class CannonGun extends PlayerGun implements Gun {
 
 
     public void doRendering(Graphics2D g2d,int locationX , int locationY, double angle){
-        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + locationX + " locationY: " + locationY);
+//        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + locationX + " locationY: " + locationY);
         AffineTransform at = new AffineTransform();
-        at.setToTranslation(locationX + 54 ,locationY + 50);
-        angle *=(-1);
-        angle += Math.PI/2;
+        at.setToTranslation(locationX+ 54 ,locationY + 50);
         at.rotate(angle);
         at.translate(-44,-48);
 //        System.out.println(this.getClass().getName() + " line 113" + " gunLocationX: " + locationX  + " gunLocationY: " + locationY );

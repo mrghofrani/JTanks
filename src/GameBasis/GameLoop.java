@@ -24,6 +24,7 @@ public class GameLoop implements Runnable {
 	
 	private GameFrame canvas;
 	private GameState state;
+	private BattleField battleField;
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;
@@ -33,7 +34,9 @@ public class GameLoop implements Runnable {
 	 * This must be called before the game loop starts.
 	 */
 	public void init() {
+		battleField = new BattleField();
 		state = new GameState();
+
 		canvas.addKeyListener(state.getKeyListener());
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
@@ -53,7 +56,7 @@ public class GameLoop implements Runnable {
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 				if (delay > 0)
 					Thread.sleep(delay);
-			} catch (InterruptedException ex) {
+			} catch (InterruptedException ignored) {
 			}
 		}
 		canvas.render(state);

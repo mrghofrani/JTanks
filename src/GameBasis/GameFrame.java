@@ -36,10 +36,7 @@ public class GameFrame extends JFrame {
 	private BufferStrategy bufferStrategy;
 
 	private BattleField battleField;
-
-	public BattleField getBattleField() {
-		return battleField;
-	}
+	
 
 	public GameFrame(String title) {
 		super(title);
