@@ -1,8 +1,12 @@
 package GameBasis; /*** In The Name of Allah ***/
 
 
+import Bullet.Cannon.CannonBullet;
+import GameObjects.MiddlePart.Tank.UserTank.CannonGun;
+import GameObjects.MiddlePart.Tank.UserTank.PlayerGun;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,7 +28,7 @@ public class GameState {
     public boolean gameOver;
 
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
-    private boolean mousePress;
+    private static boolean mousePress;
     private int mouseX, mouseY;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
@@ -248,9 +252,6 @@ public class GameState {
             }
         }
 
-
-
-
 //        System.out.println("GameState line 148" + " YLocation " + PlayerTank.YLocation + " YLocation " + PlayerTank.YLocation );
 
 		if (keyUP)
@@ -262,7 +263,11 @@ public class GameState {
 		if (keyRIGHT)
 			BattleField.XOffset -= 4;
 
-		PlayerTank.gunAngle = Math.atan2(mouseX - PlayerTank.gunLocationX, mouseY - PlayerTank.gunLocationY);
+		PlayerTank.gunAngle = Math.atan2(mouseX - (PlayerTank.XLocation + 50),mouseY - (PlayerTank.YLocation + 50));
+
+//		if(PlayerTank.gunAngle < 0)
+//		    PlayerTank.gunAngle += Math.PI;
+//        System.out.println(this.getClass().getName() + "line 266" +  " mouseX " + mouseX + " mouseY " + mouseY);
 //        System.out.println(this.getClass().getName() + " line 158 " + " Angle is " + PlayerTank.angle);
 //		locX = Math.max(locX, 0);
 ////		locX = Math.min(locX, GameBasis.GameFrame.GAME_WIDTH - (int)tankWidth);
@@ -335,29 +340,32 @@ public class GameState {
 	/**
 	 * The mouse handler.
 	 */
-	class MouseHandler extends MouseAdapter implements MouseMotionListener{
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			if(e.getButton() == 3){
-//                System.out.println("click right");
-//			    playerTank.switchGun();
+	class MouseHandler extends MouseAdapter {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if(e.getButton() == 3){
+              PlayerTank.isCannonGun = !PlayerTank.isCannonGun;
             }else if(e.getButton() == 1){
-//                playerTank.fire(mouseX = e.getX(),mouseY = e.getY());
+                BattleField.add(new CannonBullet(PlayerTank.XLocation + 50,PlayerTank.YLocation + 50));
                 mousePress = true;
             }
-		}
+        }
+//
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            mousePress = false;
+        }
+//
+        @Override
+        public void mouseDragged(MouseEvent e) {
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			mousePress = false;
-		}
+        }
 
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			mouseX = e.getX();
-			mouseY = e.getY();
-		}
+        @Override
+        public void mouseMoved(MouseEvent e){
+            mouseX = e.getX();
+            mouseY = e.getY();
+        }
 
 
     }

@@ -8,29 +8,32 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class CannonGun extends PlayerGun implements Gun {
 
     private int numberOfBullet;
-    private Image image;
-    private String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
 
 
     public CannonGun(){
-        IMAGE_PATH += "playerCannonGun0.png";
+        this.IMAGE_PATH += "playerCannonGun0.png";
         setImage();
         numberOfBullet = 100;
     }
 
 
-    public void doRendering(Graphics2D g2d,int locationX, int locationY, double angle){
+    public void doRendering(Graphics2D g2d,int locationX , int locationY, double angle){
         System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + locationX + " locationY: " + locationY);
         AffineTransform at = new AffineTransform();
-        at.setToTranslation(locationX ,locationY);
+        at.setToTranslation(locationX + 54 ,locationY + 50);
+        angle *=(-1);
+        angle += Math.PI/2;
         at.rotate(angle);
-        g2d.drawImage(image,at,null);
+        at.translate(-44,-48);
+//        System.out.println(this.getClass().getName() + " line 113" + " gunLocationX: " + locationX  + " gunLocationY: " + locationY );
+        g2d.drawImage(image,at ,null);
     }
 
     @Override
@@ -41,12 +44,5 @@ public class CannonGun extends PlayerGun implements Gun {
     }
 
 
-    public void setImage(){
-        File file = new File(IMAGE_PATH);
-        try {
-            image = ImageIO.read(file);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,"Error Occurred while reading the file " + IMAGE_PATH,"Error",JOptionPane.ERROR_MESSAGE);
-        }
-    }
+
 }

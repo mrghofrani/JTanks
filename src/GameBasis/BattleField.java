@@ -127,7 +127,7 @@ public class BattleField {
             case "F":
                 ((Ground)everything.get(everything.size() - 1)).setFinishingPoint();
                 break;
-//            case "player GameObjects.MiddlePart.Tank.Tank":
+//            case "player GameObjects.MiddlePart.Tank.EnemyTanks.Tank":
 //                everything.add(new UserTank(courserX,courserY));
 //                break;
 //            case "Enemy Tank1":
@@ -264,6 +264,7 @@ public class BattleField {
                 break;
             }
         }
+
 //        if(thing instanceof UserTank) {
 //            for (GameObject object : collidedObjects)
 //                if(object instanceof Item)
@@ -279,4 +280,17 @@ public class BattleField {
 //        thing = null;
     }
 
+    public static void add(GameObject gameObject){
+        everything.add(gameObject);
+        if(gameObject instanceof BottomPart){
+           bottomPart.add(gameObject);
+        }
+        else if(gameObject instanceof MiddlePart){
+            middlePart.add(gameObject);
+        }else if(gameObject instanceof TopPart){
+            topPart.add(gameObject);
+        }
+    }
+
 }
+
