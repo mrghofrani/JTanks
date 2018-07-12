@@ -7,13 +7,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 public class PlayerTank extends GameObject {
-    public int YLocation;
-    public int XLocation;
     public double angle = -3 * Math.PI/2;
-    public double gunAngle = 0;
-    public int gunLocationX;
-    public int gunLocationY;
-    public boolean isCannonGun;
+    private boolean isCannonGun;
     private MachineGun machineGun;
     private CannonGun cannonGun;
     private PlayerGun gun;
@@ -21,14 +16,11 @@ public class PlayerTank extends GameObject {
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
-        XLocation = locationX;
-        YLocation = locationY;
+        this.locationX = locationX;
+        this.locationY = locationY;
         this.battleField = battleField;
-        gunLocationX = XLocation;
-        gunLocationY = YLocation;
         setImage();
-
-        cannonGun = new CannonGun();
+        cannonGun = new CannonGun(this.locationX + 20 ,this.locationY );
         machineGun = new MachineGun();
         gun = cannonGun;
         isCannonGun = true;
@@ -68,9 +60,10 @@ public class PlayerTank extends GameObject {
             if(Math.abs(angle - mainAngle) < 0.1 )
                 angle = mainAngle;
 
-            YLocation -= 1;
             if(angle == mainAngle)
-                YLocation -= 4;
+                this.locationY -= 4;
+            else
+                this.locationY -= 1;
         }
 
         else if(keyDOWN && !keyLEFT && !keyRIGHT){
@@ -88,9 +81,11 @@ public class PlayerTank extends GameObject {
                 angle += 0.05;
             if(Math.abs(angle - mainAngle) < 0.1)
                 angle = mainAngle;
-            YLocation -= 1;
+
             if(angle == mainAngle)
-                YLocation += 4;
+                this.locationY += 4;
+            else
+                this.locationY += 1;
         }
 
         else if(keyRIGHT && !keyUP && !keyDOWN){
@@ -113,9 +108,10 @@ public class PlayerTank extends GameObject {
             if(Math.abs(angle - mainAngle) < 0.1)
                 angle = 0;
 
-            XLocation += 1;
             if(angle == 0)
-                XLocation += 4;
+                this.locationX += 4;
+            else
+                this.locationX += 1;
         }
 
         else if(keyLEFT && !keyUP && !keyDOWN){
@@ -131,9 +127,11 @@ public class PlayerTank extends GameObject {
 
             if(Math.abs(angle - mainAngle) < 0.1)
                 angle = mainAngle;
-            XLocation -= 1;
+
             if(angle == mainAngle)
-                XLocation -= 4;
+                this.locationX -= 4;
+            else
+                this.locationX -= 1;
         }
 
         else if(keyLEFT && keyUP) {
@@ -154,12 +152,12 @@ public class PlayerTank extends GameObject {
                 angle = mainAngle;
 
             if(angle == mainAngle){
-                XLocation += 2;
-                YLocation -= 2;
+                this.locationX -= 4;
+                this.locationY -= 4;
             }
             else {
-                XLocation += 1;
-                YLocation -= 1;
+                this.locationX -= 2;
+                this.locationY -= 2;
             }
         }
 
@@ -180,12 +178,12 @@ public class PlayerTank extends GameObject {
                 angle = mainAngle;
 
             if(angle == mainAngle) {
-                XLocation -= 2;
-                YLocation += 2;
+                this.locationX -= 4;
+                this.locationY += 4;
             }
             else{
-                XLocation -= 1;
-                YLocation += 1;
+                this.locationX -= 1;
+                this.locationY += 1;
             }
         }
 
@@ -207,13 +205,14 @@ public class PlayerTank extends GameObject {
 
             if(Math.abs(angle - (1d/4)*Math.PI) < 0.1)
                 angle = (1d/4)*Math.PI;
+
             if(angle == (Math.PI/4)) {
-                XLocation += 2;
-                YLocation += 2;
+                this.locationX += 4;
+                this.locationY += 4;
             }
             else{
-                XLocation += 1;
-                YLocation += 1;
+                this.locationX += 1;
+                this.locationY += 1;
             }
         }
 
@@ -235,15 +234,22 @@ public class PlayerTank extends GameObject {
 
             if (Math.abs(angle + (1d / 4) * Math.PI) < 0.1)
                 angle = -(1d / 4) * Math.PI;
+
             if(angle == -(Math.PI/4)) {
-                XLocation += 2;
-                YLocation -= 2;
+                this.locationX += 4;
+                this.locationY -= 4;
             }
             else{
-                XLocation += 1;
-                YLocation -= 1;
+                this.locationX += 1;
+                this.locationY -= 1;
             }
         }
+
+        // The condition that allows the movement of tank or not
+        if(this.locationX < 0 - image.getWidth()/2) this.locationX = -image.getWidth()/2;
+        if(this.locationY < 0 - image.getHeight()/2) this.locationY = -image.getHeight()/2;
+        if(this.locationX > GameFrame.GAME_WIDTH - image.getWidth()/2) this.locationX = GameFrame.GAME_WIDTH - image.getWidth()/2;
+        if(this.locationY > GameFrame.GAME_HEIGHT - image.getHeight()/2 ) this.locationY = GameFrame.GAME_HEIGHT - image.getHeight()/2;
     }
 
     /**
@@ -253,13 +259,11 @@ public class PlayerTank extends GameObject {
      * @param mouseY Y location of mouse
      */
     public void aim(int mouseX,int mouseY){
-        gunAngle = Math.atan2(mouseX - (XLocation + 50),mouseY - (YLocation + 50));
-        gunAngle *=(-1);
-        gunAngle += Math.PI/2;
+        gun.aim(locationX + battleField.XOffset,locationY + battleField.YOffset,mouseX,mouseY);
     }
 
     public void shot(int mouseX,int mouseY){
-        gun.shot(battleField,mouseX,mouseY);
+        gun.shot(battleField,locationX + battleField.XOffset + image.getWidth()/2,locationY + battleField.YOffset + image.getHeight()/2 ,mouseX,mouseY);
     }
 
     /**
@@ -274,30 +278,31 @@ public class PlayerTank extends GameObject {
     }
 
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset){
-        if(XLocation < 0 - image.getWidth()/2) XLocation = -image.getWidth()/2;
-        if(YLocation < 0 - image.getHeight()/2) YLocation = -image.getHeight()/2;
-        if(XLocation > GameFrame.GAME_WIDTH - image.getWidth()/2) XLocation = GameFrame.GAME_WIDTH - image.getWidth()/2;
-        if(YLocation > GameFrame.GAME_HEIGHT - image.getHeight()/2 ) YLocation = GameFrame.GAME_HEIGHT - image.getHeight()/2;
-//        System.out.println(this.getClass().getName() + " line 49 " + " locationX: " + XLocation  + " locationY: " + YLocation );
-//        System.out.println(this.getClass().getName() + " line 105 " + " locationX: " + XLocation  + " locationY: " + YLocation );
-//        System.out.println(this.getClass().getName() + " line 98 " + " gunAngle " + (gunAngle/Math.PI) + "PI");
-        paintTank(g2d);
-//        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + XLocation  + " locationY: " + YLocation );
-//        System.out.println(this.getClass().getName() + " line 113" + " gunLocationX: " + gunLocationX  + " gunLocationY: " + gunLocationY );
-//        System.out.println(this.getClass().getName() + " line 114 " + " angle " + (gunAngle/Math.PI) + "PI");
+
         if(isCannonGun)
             gun = cannonGun;
         else
             gun = machineGun;
-//        System.out.println(this.getClass().getName() + " line 59 " + " isCannonGun " + isCannonGun);
-        gun.doRendering(g2d,XLocation ,YLocation,gunAngle);
+
+        paintTank(g2d,XOffset,YOffset);
+        gun.doRendering(g2d,locationX + XOffset,locationY + YOffset);
     }
 
-    private void paintTank(Graphics2D g2d){
+
+    private void paintTank(Graphics2D g2d,int XOffset,int YOffset){
+        AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
-        at.setToTranslation(XLocation + 50,YLocation + 50);
-        at.rotate(angle);
-        at.translate(-50,-50);
-        g2d.drawImage(image,at,null);
+        at.rotate(angle,this.locationX + XOffset + 50, this.locationY + YOffset + 50);
+        g2d.transform(at);
+        g2d.drawImage(image,this.locationX + XOffset ,this.locationY + YOffset ,null);
+        g2d.setTransform(backup);
+    }
+
+    public int getLocationX(){
+        return this.locationX;
+    }
+
+    public int getLocationY(){
+        return this.locationY;
     }
 }

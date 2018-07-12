@@ -12,7 +12,7 @@ public abstract class GameObject {
     protected int locationX; // X location of the object
     protected int locationY; // Y location of the object
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator; // Main part of image of the object
-    protected String SOUND_PATH = "files" + File.separator + "Images" + File.separator; // Main part of sound of the object
+    protected String SOUND_PATH = "files" + File.separator + "Sounds" + File.separator; // Main part of sound of the object
     protected BufferedImage image;// image of the object
     protected double health;
 
@@ -38,26 +38,24 @@ public abstract class GameObject {
      * This method gets {@param soundState} and
      * play a sound while creating an object
      */
-    protected synchronized void playSound(boolean soundState, String fileName) {
-        if(soundState) {
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        File soundFile = new File(SOUND_PATH + fileName);
-                        AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-                        Clip clip = AudioSystem.getClip();
-                        clip.open(audioIn);
-                        clip.start();
-                    } catch (UnsupportedAudioFileException e) {
-                        //e.printStackTrace();
-                    } catch (IOException e) {
-                        // e.printStackTrace();
-                    } catch (LineUnavailableException e) {
-                        // e.printStackTrace();
-                    }
+    protected synchronized void playSound(String fileName) {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    File soundFile = new File(SOUND_PATH + fileName);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioIn);
+                    clip.start();
+                } catch (UnsupportedAudioFileException e) {
+                    //e.printStackTrace();
+                } catch (IOException e) {
+                    // e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    // e.printStackTrace();
                 }
-            }).start();
-        }
+            }
+        }).start();
     }
     /**
      * @return returns the full boundary of an image in Rectangle

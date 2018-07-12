@@ -85,8 +85,8 @@ public class GameState {
     public MouseMotionListener getMouseMotionListener() {
         return mouseHandler;
     }
-//
-//
+
+
     /**
      * The keyboard handler.
      */
@@ -144,18 +144,18 @@ public class GameState {
             if(e.getButton() == 3){
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
-                playerTank.shot();
+                playerTank.shot(e.getX(),e.getY());
                 mousePress = true;
             }
 
         }
-
-        public void mouseClicked(MouseEvent e){
-            if(e.getButton() == 1){
-                BattleField.add(new Cannon1(playerTank.XLocation, e.getX(),playerTank.YLocation,e.getY()));
-                mousePress = true;
-            }
-        }
+//
+//        public void mouseClicked(MouseEvent e){
+//            if(e.getButton() == 1){
+//                BattleField.add(new Cannon1(playerTank.getLocationX(), e.getX(),playerTank.getLocationY(),e.getY()));
+//                mousePress = true;
+//            }
+//        }
         @Override
         public void mouseReleased(MouseEvent e) {
             mousePress = false;

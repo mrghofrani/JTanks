@@ -1,64 +1,42 @@
 package GameObjects.MiddlePart.Tank.UserTank;
 
-import Bullet.Cannon.CannonBullet;
 import GameBasis.BattleField;
 import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
-import GameObjects.MiddlePart.Tank.Gun;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class CannonGun extends PlayerGun {
 
     private int numberOfBullet;
+    private double angle;
 
 
     public CannonGun(int locationX,int locationY){
-        this.locationX = locationX;
-        this.locationY = locationY;
+        System.out.println("gunlocationX " + locationX + " gunLocationY " + locationY);
         this.IMAGE_PATH += "playerCannonGun0.png";
         setImage();
-        numberOfBullet = 100;
-    }
-
-
-    public void doRendering(Graphics2D g2d,int locationX , int locationY, double angle){
-//        System.out.println(this.getClass().getName() + " line 95 " + " locationX: " + locationX + " locationY: " + locationY);
-        AffineTransform at = new AffineTransform();
-        at.setToTranslation(locationX+ 54 ,locationY + 50);
-        at.rotate(angle);
-        at.translate(-44,-48);
-//        System.out.println(this.getClass().getName() + " line 113" + " gunLocationX: " + locationX  + " gunLocationY: " + locationY );
-        g2d.drawImage(image,at ,null);
+        numberOfBullet = 1;
     }
 
     @Override
-    public void shot(BattleField battleField, int mouseX, int mouseY) {
+    public void shot(BattleField battleField,int locationX,int locationY, int mouseX, int mouseY) {
         if(numberOfBullet > 0) {
-            battleField.add(new Cannon1(locationX, locationY, mouseX, mouseY));
+            battleField.add(new Cannon1(locationX,locationY ,mouseX, mouseY));
+            numberOfBullet--;
         }else{
-            try {
-                File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "emptyGun.wav");
-                AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioIn);
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+            outOfBulletSound();
         }
     }
 
-
+    @Override
+    public void aim(int locationX,int locationY,int mouseX, int mouseY) {
+        angle = Math.atan2(mouseY - locationY,mouseX - locationX);
+        System.out.println((angle/Math.PI));
+    }
 
 
 }

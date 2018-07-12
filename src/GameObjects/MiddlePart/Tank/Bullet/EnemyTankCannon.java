@@ -1,3 +1,4 @@
+/*
 package GameObjects.MiddlePart.Tank.Bullet;
 
 import GameBasis.BattleField;
@@ -42,3 +43,4 @@ public class EnemyTankCannon extends GameObject {
         locationY += speed * Math.sin(angle);
     }
 }
+*/

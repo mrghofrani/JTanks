@@ -5,7 +5,6 @@ import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
-import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank1Pack.EnemyTank1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
@@ -70,7 +69,7 @@ public class BattleField {
                             if (tmp[i].equals("S")) {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
                                 playerTank = new PlayerTank(this,200, 200);
-                                middlePart.add(new EnemyTank1(300,500));
+//                                middlePart.add(new EnemyTank1(300,500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))

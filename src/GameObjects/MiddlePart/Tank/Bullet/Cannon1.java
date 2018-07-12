@@ -17,26 +17,27 @@ public class Cannon1 extends GameObject implements Exploder,MiddlePart {
     private int mouseY;
     private int speed = 10;
 
-
     public Cannon1(int locationX, int locationY, int mouseX, int mouseY){
-        this.locationX = locationX + 50;
-        this.locationY = locationY + 50;
+        this.locationX = locationX;
+        this.locationY = locationY;
         this.mouseX = mouseX;
         this.mouseY = mouseY;
         angle = Math.atan2(mouseY - locationY,mouseX - locationX);
         this.IMAGE_PATH += "Cannon1.png";
         setImage();
+        playSound("cannon.wav");
         act();
     }
 
     @Override
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         move();
+        AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
-        at.setToTranslation(locationX + XOffset ,locationY + YOffset);
-        at.rotate(angle - Math.PI/2);
-        g2d.drawImage(image,at,null);
-        g2d.drawLine(locationX,locationY,mouseX,mouseY);
+        at.rotate(angle - Math.PI/2,locationX + XOffset, locationY + YOffset);
+        g2d.transform(at);
+        g2d.drawImage(image,locationX + XOffset,locationY + YOffset,null);
+        g2d.setTransform(backup);
     }
 
     @Override

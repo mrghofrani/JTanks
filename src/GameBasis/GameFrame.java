@@ -3,11 +3,9 @@ package GameBasis; /*** In The Name of Allah ***/
 import Bullet.Cannon.MyCannonBullet2;
 import GameObjects.GameObject;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -46,6 +44,11 @@ public class GameFrame extends JFrame {
 
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+		//Change the cursor's image
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("files" + File.separator + "Images" + File.separator + "cursor.png");
+		Cursor c = toolkit.createCustomCursor(image , new Point(this.getX(), this.getY()), "img");
+		this.setCursor (c);
 //		try{
 //			image = ImageIO.read(new File("Icon.png"));
 //		}
@@ -125,14 +128,13 @@ public class GameFrame extends JFrame {
 		}
 		lastRender = currentRender;
 
-
-
-		// Print user guide
+		/*// Print user guide
 		String userGuide
 				= "Use the MOUSE or ARROW KEYS to move the BALL. "
 				+ "Press ESCAPE to end the game.";
 		g2d.setFont(g2d.getFont().deriveFont(18.0f));
-		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);
+		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);*/
+
 		// Draw GAME OVER
 		if (state.gameOver) {
 			String str = "GAME OVER";
