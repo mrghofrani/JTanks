@@ -163,7 +163,10 @@ public class GameState {
 //
         @Override
         public void mouseDragged(MouseEvent e) {
-
+            // TODO if player drags his mouse the game will be incorrupted
+            playerTank.shot(e.getX(), e.getY());
+            mousePress = true;
+            playerTank.aim(e.getX(),e.getY());
         }
 
         @Override

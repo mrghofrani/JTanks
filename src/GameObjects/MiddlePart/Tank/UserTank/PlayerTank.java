@@ -8,7 +8,6 @@ import java.awt.geom.AffineTransform;
 
 public class PlayerTank extends GameObject {
     public double angle = -3 * Math.PI/2;
-    private boolean isCannonGun;
     private MachineGun machineGun;
     private CannonGun cannonGun;
     private PlayerGun gun;
@@ -20,10 +19,9 @@ public class PlayerTank extends GameObject {
         this.locationY = locationY;
         this.battleField = battleField;
         setImage();
-        cannonGun = new CannonGun(this.locationX + 20 ,this.locationY );
+        cannonGun = new CannonGun();
         machineGun = new MachineGun();
         gun = cannonGun;
-        isCannonGun = true;
     }
 
 
@@ -248,8 +246,8 @@ public class PlayerTank extends GameObject {
         // The condition that allows the movement of tank or not
         if(this.locationX < 0 - image.getWidth()/2) this.locationX = -image.getWidth()/2;
         if(this.locationY < 0 - image.getHeight()/2) this.locationY = -image.getHeight()/2;
-        if(this.locationX > GameFrame.GAME_WIDTH - image.getWidth()/2) this.locationX = GameFrame.GAME_WIDTH - image.getWidth()/2;
-        if(this.locationY > GameFrame.GAME_HEIGHT - image.getHeight()/2 ) this.locationY = GameFrame.GAME_HEIGHT - image.getHeight()/2;
+        if(this.locationX > GameFrame.GAME_WIDTH + image.getWidth()/2) this.locationX = GameFrame.GAME_WIDTH + image.getWidth()/2;
+        if(this.locationY > GameFrame.GAME_HEIGHT + image.getHeight()/2 ) this.locationY = GameFrame.GAME_HEIGHT + image.getHeight()/2;
     }
 
     /**
@@ -278,12 +276,6 @@ public class PlayerTank extends GameObject {
     }
 
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset){
-
-        if(isCannonGun)
-            gun = cannonGun;
-        else
-            gun = machineGun;
-
         paintTank(g2d,XOffset,YOffset);
         gun.doRendering(g2d,locationX + XOffset,locationY + YOffset);
     }
