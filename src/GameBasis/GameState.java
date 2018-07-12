@@ -144,7 +144,8 @@ public class GameState {
             if(e.getButton() == 3){
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
-                playerTank.shot(e.getX(),e.getY());
+//                TODO : System.out.println(this.getClass().getName() + " mouseX " + e.getX());
+                playerTank.shot(mouseX = e.getX(),mouseY =e.getY());
                 mousePress = true;
             }
 
@@ -164,6 +165,7 @@ public class GameState {
         @Override
         public void mouseDragged(MouseEvent e) {
             // TODO if player drags his mouse the game will be incorrupted
+            System.out.println(this.getClass().getName() + " mouseX " + e.getX());
             playerTank.shot(e.getX(), e.getY());
             mousePress = true;
             playerTank.aim(e.getX(),e.getY());

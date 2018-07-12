@@ -246,8 +246,8 @@ public class PlayerTank extends GameObject {
         // The condition that allows the movement of tank or not
         if(this.locationX < 0 - image.getWidth()/2) this.locationX = -image.getWidth()/2;
         if(this.locationY < 0 - image.getHeight()/2) this.locationY = -image.getHeight()/2;
-        if(this.locationX > GameFrame.GAME_WIDTH + image.getWidth()/2) this.locationX = GameFrame.GAME_WIDTH + image.getWidth()/2;
-        if(this.locationY > GameFrame.GAME_HEIGHT + image.getHeight()/2 ) this.locationY = GameFrame.GAME_HEIGHT + image.getHeight()/2;
+        if(this.locationX > 2*GameFrame.GAME_WIDTH - image.getWidth()/2) this.locationX = 2*GameFrame.GAME_WIDTH - image.getWidth()/2;
+        if(this.locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2 ) this.locationY = 2*GameFrame.GAME_HEIGHT - image.getHeight()/2;
     }
 
     /**
@@ -261,7 +261,7 @@ public class PlayerTank extends GameObject {
     }
 
     public void shot(int mouseX,int mouseY){
-        gun.shot(battleField,locationX + battleField.XOffset + image.getWidth()/2,locationY + battleField.YOffset + image.getHeight()/2 ,mouseX,mouseY);
+        gun.shot(battleField,locationX + 50,locationY + 50 ,mouseX,mouseY);
     }
 
     /**

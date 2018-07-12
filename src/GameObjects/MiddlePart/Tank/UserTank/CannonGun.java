@@ -17,6 +17,7 @@ public class CannonGun extends PlayerGun {
 
     @Override
     public void shot(BattleField battleField,int locationX,int locationY, int mouseX, int mouseY) {
+
         if(numberOfBullet > 0) {
             battleField.add(new Cannon1(locationX,locationY ,mouseX, mouseY));
             numberOfBullet--;
