@@ -262,8 +262,10 @@ public class BattleField {
     public boolean collisionTest(GameObject thing) {
         ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
-            if (thing.getBounds().intersects(thing.getBounds())) {
+            if (thing.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank)) {
                 collidedObjects.add(object);
+                System.out.printf("(%d,%d) %s ",thing.getLocationX(),thing.getLocationY(),thing.getClass().getName());
+                System.out.printf("(%d,%d) %s \n",object.getLocationX(),object.getLocationY(),object.getClass().getName());
                 break;
             }
         }

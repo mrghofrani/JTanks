@@ -12,6 +12,8 @@ public class PlayerTank extends GameObject {
     private CannonGun cannonGun;
     private PlayerGun gun;
     private BattleField battleField;
+    private int savedLocationX;
+    private int savedLocationY;
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -41,6 +43,8 @@ public class PlayerTank extends GameObject {
      */
     public void move(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
         double mainAngle;
+        savedLocationX = locationX;
+        savedLocationY = locationY;
         if(keyUP && !keyLEFT && !keyRIGHT){
 
             if(Math.abs(angle - (3*Math.PI/2)) < Math.abs(angle + Math.PI/2 )){
@@ -242,12 +246,26 @@ public class PlayerTank extends GameObject {
                 this.locationY -= 1;
             }
         }
+        restrictMovement();
 
+    }
+
+
+    /**
+     * This method is supposed to used
+     * for restrictions of tank's movement
+     */
+    private void restrictMovement(){
         // The condition that allows the movement of tank or not
-        if(this.locationX < 0 - image.getWidth()/2) this.locationX = -image.getWidth()/2;
-        if(this.locationY < 0 - image.getHeight()/2) this.locationY = -image.getHeight()/2;
-        if(this.locationX > 2*GameFrame.GAME_WIDTH - image.getWidth()/2) this.locationX = 2*GameFrame.GAME_WIDTH - image.getWidth()/2;
-        if(this.locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2 ) this.locationY = 2*GameFrame.GAME_HEIGHT - image.getHeight()/2;
+        if(locationX < 0 - image.getWidth()/2 || locationX > 2*GameFrame.GAME_WIDTH - image.getWidth()/2)
+            locationX = savedLocationX;
+        if(locationY < 0 - image.getHeight()/2 || locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2)
+            locationY = savedLocationY;
+
+        if(battleField.collisionTest(this)) {
+            locationX = savedLocationX;
+            locationY = savedLocationY;
+        }
     }
 
     /**

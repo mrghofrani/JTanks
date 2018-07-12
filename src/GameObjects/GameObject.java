@@ -61,21 +61,21 @@ public abstract class GameObject {
      * @return returns the full boundary of an image in Rectangle
      */
     public Rectangle getBounds(){
-        return new Rectangle(locationX,locationY,getBoundX() - 5,getBoundY() - 5);
+        return new Rectangle(locationX + 5,locationY + 5,getBoundX() - 5,getBoundY() - 5);
     }
 
     /**
      * @return the width of the game object's image
      */
     public int getBoundX(){
-        return image.getWidth() - 5;
+        return image.getWidth();
     }
 
     /**
      * @return the height of the game object's image
      */
     public int getBoundY(){
-        return image.getHeight() - 5;
+        return image.getHeight();
     }
 
     /**
@@ -107,5 +107,18 @@ public abstract class GameObject {
      */
     public int getLocationY() {
         return locationY;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+        if(obj instanceof GameObject){
+            return (locationX == ((GameObject) obj).locationX) &&
+                    (locationY == ((GameObject) obj).locationY) &&
+                    (IMAGE_PATH.equals(((GameObject) obj).IMAGE_PATH));
+        }
+        else return false;
+
     }
 }
