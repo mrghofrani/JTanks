@@ -187,11 +187,11 @@ public class MainMenu {
             clip.open(audioIn);
             clip.loop(1000);
         } catch (UnsupportedAudioFileException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } catch (IOException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         } catch (LineUnavailableException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

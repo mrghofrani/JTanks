@@ -61,7 +61,7 @@ public abstract class GameObject {
      * @return returns the full boundary of an image in Rectangle
      */
     public Rectangle getBounds(){
-        return new Rectangle(locationX + 5,locationY + 5,getBoundX() - 5,getBoundY() - 5);
+        return new Rectangle(locationX  + 5,locationY + 5,image.getWidth() - 5,image.getHeight() - 5);
     }
 
     /**

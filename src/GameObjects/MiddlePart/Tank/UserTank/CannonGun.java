@@ -12,14 +12,13 @@ public class CannonGun extends PlayerGun {
     public CannonGun(){
         this.IMAGE_PATH += "playerCannonGun0.png";
         setImage();
-        numberOfBullet = 1;
+        numberOfBullet = 100;
     }
 
     @Override
     public void shot(BattleField battleField,int locationX,int locationY, int mouseX, int mouseY) {
-
         if(numberOfBullet > 0) {
-            battleField.add(new Cannon1(locationX,locationY ,mouseX, mouseY));
+            battleField.add(new Cannon1(battleField,locationX,locationY ,mouseX, mouseY));
             numberOfBullet--;
         }else{
             outOfBulletSound();
@@ -30,6 +29,5 @@ public class CannonGun extends PlayerGun {
     public void aim(int locationX,int locationY,int mouseX, int mouseY) {
         angle = Math.atan2(mouseY - locationY,mouseX - locationX);
     }
-
 
 }

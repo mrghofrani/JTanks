@@ -1,10 +1,13 @@
 package GameObjects.MiddlePart.Tank.Bullet;
 
 
+import GameBasis.BattleField;
+
 public class Cannon1 extends Bullet{
 
 
-    public Cannon1(int locationX, int locationY, int mouseX, int mouseY){
+    public Cannon1(BattleField battleField, int locationX, int locationY, int mouseX, int mouseY){
+        this.battleField = battleField;
         this.locationX = locationX;
         this.locationY = locationY;
         angle = Math.atan2(mouseY - locationY,mouseX - locationX);
@@ -12,6 +15,7 @@ public class Cannon1 extends Bullet{
         setImage();
         playSound("cannon.wav");
         act();
+        move();
     }
 
 
@@ -19,10 +23,7 @@ public class Cannon1 extends Bullet{
     public void act() {
     }
 
-    public void move(){
-        locationX += speed * Math.cos(angle);
-        locationY += speed * Math.sin(angle);
-    }
+
 
 
 }

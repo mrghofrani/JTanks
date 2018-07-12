@@ -247,7 +247,6 @@ public class PlayerTank extends GameObject {
             }
         }
         restrictMovement();
-
     }
 
 
@@ -265,7 +264,10 @@ public class PlayerTank extends GameObject {
         if(battleField.collisionTest(this)) {
             locationX = savedLocationX;
             locationY = savedLocationY;
-        }
+            battleField.stop();
+        } else
+            battleField.move();
+
     }
 
     /**

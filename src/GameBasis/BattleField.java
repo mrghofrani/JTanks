@@ -5,6 +5,7 @@ import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
+import GameObjects.MiddlePart.Tank.Bullet.EnemyTank1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
@@ -30,6 +31,7 @@ public class BattleField {
     private int courserY;
     public int XOffset;
     public int YOffset;
+    private boolean stop;
 
     public BattleField() {
         // Hi Mahandes !!!
@@ -69,7 +71,7 @@ public class BattleField {
                             if (tmp[i].equals("S")) {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
                                 playerTank = new PlayerTank(this,200, 200);
-//                                middlePart.add(new EnemyTank1(300,500));
+                                middlePart.add(new EnemyTank1(this,300,500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -233,16 +235,25 @@ public class BattleField {
     }
 
     public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
-        if (keyUP)
-            YOffset += 4;
-        if (keyDOWN)
-            YOffset -= 4;
-        if (keyLEFT)
-            XOffset += 4;
-        if (keyRIGHT)
-            XOffset -= 4;
+        if(!stop) {
+            if (keyUP)
+                YOffset += 4;
+            if (keyDOWN)
+                YOffset -= 4;
+            if (keyLEFT)
+                XOffset += 4;
+            if (keyRIGHT)
+                XOffset -= 4;
+        }
     }
 
+    public void stop(){
+        stop = true;
+    }
+
+    public void move(){
+        stop = false;
+    }
     public static ArrayList<GameObject> getEverything() {
         return everything;
     }
@@ -262,7 +273,7 @@ public class BattleField {
     public boolean collisionTest(GameObject thing) {
         ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
-            if (thing.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank)) {
+            if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank)) {
                 collidedObjects.add(object);
                 System.out.printf("(%d,%d) %s ",thing.getLocationX(),thing.getLocationY(),thing.getClass().getName());
                 System.out.printf("(%d,%d) %s \n",object.getLocationX(),object.getLocationY(),object.getClass().getName());
