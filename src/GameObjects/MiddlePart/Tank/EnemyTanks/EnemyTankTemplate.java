@@ -2,6 +2,8 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.Explosive;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class EnemyTankTemplate  extends GameObject {
+public abstract class EnemyTankTemplate  extends GameObject implements Explosive{
     protected double angle;
     protected int speed;
 
@@ -65,11 +67,9 @@ public abstract class EnemyTankTemplate  extends GameObject {
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
         System.out.println(locationX + " " + locationY);
-        if(battleField.collisionTest(this)){
-            locationX = backUpLocationX;
-            locationY = backUpLocationY;
-            System.out.println("collide");
-        }
+        battleField.collisionTest(this);
+
+
     }
 
     protected void checkNear(){

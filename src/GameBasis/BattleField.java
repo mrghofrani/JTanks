@@ -73,9 +73,9 @@ public class BattleField {
                         } else {
                             if (tmp[i].equals("S")) {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
-                                playerTank = new PlayerTank(this,200, 200);
-                                middlePart.add(new EnemyTank1(this,300,500));
-                                everything.add(new EnemyTank1(this,300,500));
+                                playerTank = new PlayerTank(this, 200, 200);
+                                middlePart.add(new EnemyTank1(this, 300, 500));
+                                everything.add(new EnemyTank1(this, 300, 500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -239,8 +239,8 @@ public class BattleField {
         }
     }
 
-    public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
-        if(!stop) {
+    public void changeSeenArea(boolean keyUP, boolean keyDOWN, boolean keyRIGHT, boolean keyLEFT) {
+        if (!stop) {
             if (keyUP)
                 YOffset += 4;
             if (keyDOWN)
@@ -252,13 +252,14 @@ public class BattleField {
         }
     }
 
-    public void stop(){
+    public void stop() {
         stop = true;
     }
 
-    public void move(){
+    public void move() {
         stop = false;
     }
+
     public ArrayList<GameObject> getEverything() {
         return everything;
     }
@@ -275,19 +276,19 @@ public class BattleField {
      * @param thing Does this object collide to any object in screen
      * @return true if the collision have occurred otherwise returns false
      */
-    public boolean collisionTest(GameObject thing) {
-       /* ArrayList<GameObject> collidedObjects = new ArrayList<>();
-        for (GameObject object : middlePart) {
-            if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank) && !object.equals(thing)) {
-                collidedObjects.add(object);
-                System.out.printf("(%d,%d) %s ",thing.getLocationX(),thing.getLocationY(),thing.getClass().getName());
-                System.out.printf("(%d,%d) %s \n",object.getLocationX(),object.getLocationY(),object.getClass().getName());
-                break;
-            }
-        }
-        return !collidedObjects.isEmpty();*/
-       return false;
-    }
+//    public boolean collisionTest(GameObject thing) {
+//       /* ArrayList<GameObject> collidedObjects = new ArrayList<>();
+//        for (GameObject object : middlePart) {
+//            if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank) && !object.equals(thing)) {
+//                collidedObjects.add(object);
+//                System.out.printf("(%d,%d) %s ",thing.getLocationX(),thing.getLocationY(),thing.getClass().getName());
+//                System.out.printf("(%d,%d) %s \n",object.getLocationX(),object.getLocationY(),object.getClass().getName());
+//                break;
+//            }
+//        }
+//        return !collidedObjects.isEmpty();*/
+//        return false;
+//    }
 
     /**
      * This simulate collision in the code by invoking
@@ -296,7 +297,7 @@ public class BattleField {
      *
      * @param thing Game object that is going to collide
      */
-    public void realCollision(GameObject thing) {
+    public void collisionTest(GameObject thing) {
         ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
             if (thing.getBounds().intersects(thing.getBounds())) {
@@ -304,45 +305,36 @@ public class BattleField {
                 break;
             }
         }
-        if (!collidedObjects.isEmpty()) {
-            for (GameObject object : collidedObjects)
-            {
-                {
-                    if (!thing.equals(object))
-                    {
-                        if (((thing instanceof Explosive && object instanceof Exploder) || (thing instanceof Exploder && object instanceof Explosive)))
-                        {
-                            thing.explode();
-                            object.explode();
-                        }
+//        System.out.println("collide");
+//        if (!collidedObjects.isEmpty()) {
+            System.out.println("collide");
+            for (GameObject object : collidedObjects) {
+                if (!thing.equals(object)) {
+                    if (((thing instanceof Explosive && object instanceof Exploder) || (thing instanceof Exploder && object instanceof Explosive))) {
+                        ((Explosive) thing).explode();
+                        ((Exploder) object).explode();
+                        System.out.println("golole");
+                    } else if (thing instanceof HardObject && object instanceof HardObject) {
+//                            thing.stop();
+//                            object.stop();
+                    } else if ((thing instanceof PlayerTank && object instanceof Item)) {
+                        ((PlayerTank) thing).eatItem((Item) object);
 
-                         else if (thing instanceof HardObject && object instanceof HardObject)
-                        {
-                            thing.stop();
-                            object.stop();
-                        }
-                        else if((thing instanceof PlayerTank && object instanceof Item))
-                        {
-                            ((PlayerTank)thing).eatItem((Item)object);
+                    } else if (thing instanceof Item && object instanceof PlayerTank) {
+                        ((PlayerTank) object).eatItem((Item) thing);
 
-                        }
-                        else if(thing instanceof Item && object instanceof PlayerTank)
-                        {
-                            ((PlayerTank)object).eatItem((Item)thing);
-
-                        }
-                        else if(thing instanceof Bullet && object instanceof  HardWall){
-                            ((Bullet)thing).dispose();
-                        }
-                        else if(thing instanceof HardWall && object instanceof Bullet)
-                        {
-                            ((Bullet)object).dispose();
-                        }
+                    } else if (thing instanceof Bullet && object instanceof HardWall) {
+//                            ((Bullet)thing).dispose();
+                    } else if (thing instanceof HardWall && object instanceof Bullet) {
+//                            ((Bullet)object).dispose();
                     }
-
                 }
+
             }
-        }
+
+//        }
+    }
+
 
 
 //        if(thing instanceof UserTank) {
@@ -358,7 +350,8 @@ public class BattleField {
 //            }
 //        }
 //        thing = null;
-    }
+
+
 
     public void add(GameObject gameObject) {
         everything.add(gameObject);

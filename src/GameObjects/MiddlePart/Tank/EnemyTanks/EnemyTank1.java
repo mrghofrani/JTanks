@@ -60,4 +60,14 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject{
     protected void shot() {
         battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX(),battleField.getPlayerTank().getLocationY()));
     }
+
+    @Override
+    public void damage(double value) {
+
+    }
+
+    @Override
+    public void explode() {
+
+    }
 }

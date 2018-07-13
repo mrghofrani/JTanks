@@ -23,4 +23,13 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         new EnemyBullet(battleField,locationX,locationY,battleField.getPlayerTank().getLocationX(),battleField.getPlayerTank().getLocationY());
     }
 
+    @Override
+    public void damage(double value) {
+
+    }
+
+    @Override
+    public void explode() {
+
+    }
 }

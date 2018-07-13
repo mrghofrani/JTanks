@@ -21,4 +21,14 @@ public class EnemyTank4 extends EnemyTankTemplate  {
     protected void shot() {
 
     }
+
+    @Override
+    public void damage(double value) {
+
+    }
+
+    @Override
+    public void explode() {
+
+    }
 }

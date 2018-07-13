@@ -270,12 +270,7 @@ public class PlayerTank extends GameObject {
         if(locationY < 0 - image.getHeight()/2 || locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2)
             locationY = savedLocationY;
 
-        if(battleField.collisionTest(this)) {
-            locationX = savedLocationX;
-            locationY = savedLocationY;
-            battleField.stop();
-        } else
-            battleField.move();
+        battleField.collisionTest(this);
 
     }
 

@@ -54,4 +54,9 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart{
 //            battle.clearScreen();
         }
     }
+
+    @Override
+    public void explode() {
+
+    }
 }

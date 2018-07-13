@@ -22,4 +22,14 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
     protected void shot() {
         new EnemyBullet(battleField,locationX,locationY,battleField.getPlayerTank().getLocationX(),battleField.getPlayerTank().getLocationY());
     }
+
+    @Override
+    public void damage(double value) {
+
+    }
+
+    @Override
+    public void explode() {
+
+    }
 }

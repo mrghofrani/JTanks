@@ -15,7 +15,7 @@ public abstract class PlayerGun {
 
     protected BufferedImage image;
     protected double angle;
-    protected int damgePower;
+    protected int damagePower;
     protected int numberOfBullet;
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
 

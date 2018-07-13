@@ -13,7 +13,7 @@ public class CannonGun extends PlayerGun {
         this.IMAGE_PATH += "playerCannonGun0.png";
         setImage();
         numberOfBullet = 100;
-        damgePower = 5; //TODO may need to change
+        damagePower = 5; //TODO may need to change
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CannonGun extends PlayerGun {
     @Override
     public void promote(){
         IMAGE_PATH = "files\\Images\\playerCannonGun1.png";
-        damgePower = 10; //TODO may be changed
+        damagePower = 10; //TODO may be changed
     }
 
     @Override

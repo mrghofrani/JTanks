@@ -24,10 +24,10 @@ public class EBullet extends GameObject implements MiddlePart,Exploder {
     }
 
     public void move(){
-        if(!battleField.collisionTest(this)) {
             locationX += speed * Math.cos(angle);
-            locationY += speed * Math.sin(angle);
-        }
+        locationY += speed * Math.sin(angle);
+
+        battleField.collisionTest(this);
     }
 
     @Override
