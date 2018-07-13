@@ -140,13 +140,13 @@ public class GameState {
             if(e.getButton() == 3){
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
-//                TODO : System.out.println(this.getClass().getName() + " mouseX " + e.getX());
                 if(System.currentTimeMillis() - clickTime> 1) {
+                    playerTank.aim(e.getX(),e.getY());
                     playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
                     mousePress = true;
                 }
                 clickTime = System.currentTimeMillis()/1000;
-                System.out.println(clickTime);
+//              TODO:  System.out.println(clickTime);
             }
 
         }
@@ -165,12 +165,13 @@ public class GameState {
 
         @Override
         public void mouseDragged(MouseEvent e) {
+            playerTank.aim(e.getX(),e.getY());
             if(System.currentTimeMillis() - clickTime > 1) {
                 playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
                 mousePress = true;
             }
             clickTime = System.currentTimeMillis()/1000;
-            System.out.println(clickTime);
+//          TODO:  System.out.println(clickTime);
         }
 
         @Override

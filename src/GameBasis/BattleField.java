@@ -219,6 +219,7 @@ public class BattleField {
                 object.doRendering(g2d, XOffset, YOffset);
             }
         }
+        playerTank.drawDetails(g2d);
     }
 
     public void initializeGameLevel() {

@@ -3,8 +3,13 @@ package GameObjects.MiddlePart.Tank.UserTank;
 import GameBasis.BattleField;
 import GameBasis.GameFrame;
 import GameObjects.GameObject;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class PlayerTank extends GameObject {
     public double angle = -3 * Math.PI/2;
@@ -15,6 +20,7 @@ public class PlayerTank extends GameObject {
     private int savedLocationX;
     private int savedLocationY;
     private int delay;
+    private int health = 5;
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -301,6 +307,7 @@ public class PlayerTank extends GameObject {
             gun = cannonGun;
     }
 
+
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset){
         paintTank(g2d,XOffset,YOffset);
         gun.doRendering(g2d,locationX + XOffset,locationY + YOffset);
@@ -314,6 +321,57 @@ public class PlayerTank extends GameObject {
         g2d.transform(at);
         g2d.drawImage(image,this.locationX + XOffset ,this.locationY + YOffset ,null);
         g2d.setTransform(backup);
+    }
+
+
+    public void drawDetails(Graphics2D g2d){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("files" + File.separator + "Images" + File.separator + "NumberOfHeavyBullet.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g2d.setFont(g2d.getFont().deriveFont(18.0f));
+        g2d.drawImage(image,50,50,null);
+        g2d.setColor(Color.YELLOW);
+        g2d.drawString(cannonGun.getNumberOfBullet() + "",110,100);
+
+        try{
+            image = ImageIO.read(new File("files" + File.separator + "Images" + File.separator + "NumberOfMachinGun.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g2d.setFont(g2d.getFont().deriveFont(18.0f));
+        g2d.drawImage(image,50,100,null);
+        g2d.setColor(Color.YELLOW);
+        g2d.drawString(machineGun.getNumberOfBullet() + "",110,150);
+
+
+        try {
+            image = ImageIO.read(new File("files" + File.separator + "Images" + File.separator + "health.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int savedHealth = health;
+
+        if(savedHealth == 5) {
+            g2d.drawImage(image, 200, 50, null);
+            savedHealth--;
+        }if(savedHealth == 4) {
+            g2d.drawImage(image, 200 + 50, 50, null);
+            savedHealth--;
+        }if(savedHealth == 3) {
+            g2d.drawImage(image, 200 + 100, 50, null);
+            savedHealth--;
+        }if(savedHealth == 2) {
+            g2d.drawImage(image, 200 + 150, 50, null);
+            savedHealth--;
+        }if(savedHealth == 1) {
+            g2d.drawImage(image, 200 + 200, 50, null);
+            savedHealth--;
+        }
+
     }
 
     public int getLocationX(){

@@ -6,7 +6,7 @@ import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
 
 public class CannonGun extends PlayerGun {
 
-    private int numberOfBullet;
+
 
 
     public CannonGun(){

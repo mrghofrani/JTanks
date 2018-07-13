@@ -15,6 +15,7 @@ public abstract class PlayerGun {
 
     protected BufferedImage image;
     protected double angle;
+    protected int numberOfBullet;
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
 
 
@@ -54,5 +55,9 @@ public abstract class PlayerGun {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getNumberOfBullet() {
+        return numberOfBullet;
     }
 }

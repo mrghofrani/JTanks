@@ -7,8 +7,6 @@ import GameObjects.MiddlePart.Tank.Bullet.Bullet1;
 
 public class MachineGun extends PlayerGun {
 
-    private int numberOfBullet;
-
     MachineGun(){
         this.IMAGE_PATH += "playerMachineGun0.png";
         setImage();
