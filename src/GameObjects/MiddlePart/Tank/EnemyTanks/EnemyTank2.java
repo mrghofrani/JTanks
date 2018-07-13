@@ -3,6 +3,11 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 import GameBasis.BattleField;
 import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
+import ThreadPool.ThreadPool;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
 
@@ -10,26 +15,78 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         this.battleField = battleField;
         this.locationX = locationX;
         this.locationY = locationY;
-        this.IMAGE_PATH += "enemyTank1.png";
-        this.GUN_IMAGE += "enemyGun1.png";
+        this.IMAGE_PATH += "enemyTank2.png";
+        this.speed = 7;
+        this.health = 1;
         isNear = false;
         setImage();
-        setGunImage();
-//        act();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Timer timer =  new Timer(100, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        checkNear();
+                        if(isNear && health > 0){
+                            move();
+                        }
+                    }
+                });
+                timer.start();
+            }
+        };
+        ThreadPool.execute(runnable);
+        Runnable runnable2 = new Runnable() {
+            @Override
+            public void run() {
+                Timer fireTimer = new Timer(3000, new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(checkNearGun()){
+                            shot();
+                        }
+                    }
+                });
+                fireTimer.start();
+            }
+        };
+        ThreadPool.execute(runnable2);
+        Runnable runnable3 = new Runnable() {
+            @Override
+            public void run() {
+                Timer aimTimer = new Timer(100, new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        aim();
+                    }
+                });
+                aimTimer.start();
+            }
+        };
+        ThreadPool.execute(runnable3);
     }
 
     @Override
     protected void shot() {
-        new EnemyBullet(battleField,locationX,locationY,battleField.getPlayerTank().getLocationX(),battleField.getPlayerTank().getLocationY());
+        for (int i = 0; i < 2; i++) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            battleField.add(new EnemyBullet(battleField,locationX + 50,locationY + 40,battleField.getPlayerTank().getLocationX() + 50,battleField.getPlayerTank().getLocationY() + 50));
+        }
     }
 
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
     @Override
     public void damage(double value) {
-
-    }
-
-    @Override
-    public void explode() {
 
     }
 }

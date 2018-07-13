@@ -16,11 +16,9 @@ public class MachineGun extends PlayerGun {
     }
 
     @Override
-    public void shot(BattleField battleField, int locationX,int locationY,int mouseX, int mouseY) {
-//     TODO:   System.out.println(this.getClass().getName() + " mouseX " + mouseX);
-//     TODO:   System.out.println(this.getClass().getName() + " locationX " + locationX);
+    public void shot(BattleField battleField, int locationX,int locationY) {
         if(numberOfBullet > 0) {
-            battleField.add(new Bullet1(battleField,locationX, locationY, mouseX, mouseY));
+            battleField.add(new Bullet1(battleField,locationX, locationY, angle));
             numberOfBullet--;
         }
         else

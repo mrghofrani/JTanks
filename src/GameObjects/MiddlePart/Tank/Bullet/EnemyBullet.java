@@ -12,6 +12,6 @@ public class EnemyBullet extends EBullet {
         angle = Math.atan2(mouseY - locationY, mouseX - locationX);
         this.IMAGE_PATH += "bullet1.png";
         setImage();
-        playSound("eshot.wav");
+        playSound("emachinegun.wav");
     }
 }

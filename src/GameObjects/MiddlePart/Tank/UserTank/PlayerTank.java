@@ -284,13 +284,9 @@ public class PlayerTank extends GameObject {
         gun.aim(locationX + battleField.XOffset,locationY + battleField.YOffset,mouseX,mouseY);
     }
 
-    public void shot(int mouseX,int mouseY){
-        gun.shot(battleField,locationX + 50,locationY + 50 ,mouseX,mouseY);
-//        try {
-//            wait(100);
-//        } catch (InterruptedException e) {
-////            e.printStackTrace();
-//        }
+    public void shot(){
+        gun.shot(battleField,locationX + 50,locationY + 50);
+        playSound("recosh.wav");
     }
 
     /**
@@ -389,6 +385,11 @@ public class PlayerTank extends GameObject {
             promoteWeapon();
         }
 //        item.dispose();
+    }
+
+
+    public boolean isMainGun(){
+        return gun == cannonGun;
     }
 
     public int getLocationX(){

@@ -1,16 +1,13 @@
 package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
-import GameObjects.MiddlePart.HardObject;
-import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyCannon;
 import ThreadPool.ThreadPool;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnemyTank1 extends EnemyTankTemplate implements HardObject{
+public class EnemyTank1 extends EnemyTankTemplate {
 
     public EnemyTank1(BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
@@ -32,33 +29,52 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject{
                         checkNear();
                         if(isNear && health > 0){
                             move();
-                            aim();
                         }
                     }
                 });
                 timer.start();
+            }
+        };
+        ThreadPool.execute(runnable);
+        Runnable runnable2 = new Runnable() {
+            @Override
+            public void run() {
                 Timer fireTimer = new Timer(1000, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        checkNear();
-                        if(Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200
-                                && health > 0){
+                        if(checkNearGun()){
                             shot();
-                            System.out.println("here");
                         }
                     }
                 });
                 fireTimer.start();
             }
         };
-        ThreadPool.execute(runnable);
-
+        ThreadPool.execute(runnable2);
+        Runnable runnable3 = new Runnable() {
+            @Override
+            public void run() {
+                Timer aimTimer = new Timer(100, new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        aim();
+                    }
+                });
+                aimTimer.start();
+            }
+        };
+        ThreadPool.execute(runnable3);
     }
 
 
     @Override
     protected void shot() {
-        battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX(),battleField.getPlayerTank().getLocationY()));
+        battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX() + 50,battleField.getPlayerTank().getLocationY() + 50));
+    }
+
+    @Override
+    public void damage(double value) {
+
     }
 
     @Override
