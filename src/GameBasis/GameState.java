@@ -28,6 +28,7 @@ public class GameState {
     private BattleField battleField;
     private PlayerTank playerTank;
     private long clickTime;
+    private int difference;
 
     public GameState(BattleField battleField) {
 
@@ -140,12 +141,18 @@ public class GameState {
             if(e.getButton() == 3){
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
-                if(System.currentTimeMillis() - clickTime> 1) {
-                    playerTank.aim(e.getX(),e.getY());
-                    playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
+                if(playerTank.isMainGun())
+                    difference = 800;
+                else
+                    difference = 200;
+                if(clickTime == 0){
+                    clickTime = System.currentTimeMillis();
+                } else if (System.currentTimeMillis() - clickTime > difference){
+                    playerTank.shot();
                     mousePress = true;
+                    clickTime = System.currentTimeMillis();
                 }
-                clickTime = System.currentTimeMillis()/1000;
+                System.out.println(clickTime + "pressed");
 //              TODO:  System.out.println(clickTime);
             }
 
@@ -166,11 +173,18 @@ public class GameState {
         @Override
         public void mouseDragged(MouseEvent e) {
             playerTank.aim(e.getX(),e.getY());
-            if(System.currentTimeMillis() - clickTime > 1) {
-                playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
+            if(playerTank.isMainGun())
+                difference = 800;
+            else
+                difference = 200;
+            if(clickTime == 0){
+                clickTime = System.currentTimeMillis();
+            } else if (System.currentTimeMillis() - clickTime > difference){
+                playerTank.shot();
                 mousePress = true;
+                clickTime = System.currentTimeMillis();
             }
-            clickTime = System.currentTimeMillis()/1000;
+            System.out.println(clickTime + "drag");
 //          TODO:  System.out.println(clickTime);
         }
 

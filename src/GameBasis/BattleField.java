@@ -5,14 +5,16 @@ import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
-import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank1;
+import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank2;
+import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank3;
+import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank4;
+import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank5;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
 import GameObjects.GameObject;
 import GameObjects.TopPart.*;
 import GameObjects.MiddlePart.*;
-
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -71,8 +73,8 @@ public class BattleField {
                             if (tmp[i].equals("S")) {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
                                 playerTank = new PlayerTank(this,200, 200);
-                                middlePart.add(new EnemyTank1(this,300,500));
-                                everything.add(new EnemyTank1(this,300,500));
+                                middlePart.add(new EnemyTank5(this,300,500));
+                                everything.add(new EnemyTank5(this,300,500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -273,7 +275,7 @@ public class BattleField {
      * @return true if the collision have occurred otherwise returns false
      */
     public boolean collisionTest(GameObject thing) {
-       /* ArrayList<GameObject> collidedObjects = new ArrayList<>();
+        /*ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
             if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank) && !object.equals(thing)) {
                 collidedObjects.add(object);
@@ -283,7 +285,7 @@ public class BattleField {
             }
         }
         return !collidedObjects.isEmpty();*/
-       return false;
+        return false;
     }
 
     /**

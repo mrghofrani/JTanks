@@ -2,6 +2,9 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.Explosive;
+import GameObjects.MiddlePart.MiddlePart;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -11,7 +14,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class EnemyTankTemplate  extends GameObject {
+public abstract class EnemyTankTemplate  extends GameObject implements MiddlePart,Explosive {
     protected double angle;
     protected int speed;
 
@@ -22,7 +25,6 @@ public abstract class EnemyTankTemplate  extends GameObject {
 
     protected boolean isNear;
     protected BattleField battleField;
-    protected Timer actionTimer;
 
     protected int health;
 
@@ -40,7 +42,7 @@ public abstract class EnemyTankTemplate  extends GameObject {
         paintGun(g2d,XOffset,YOffset);
     }
 
-    private void paintTank(Graphics2D g2d, int XOffset, int YOffset){
+    protected void paintTank(Graphics2D g2d, int XOffset, int YOffset){
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
         at.rotate(gunAngle,this.locationX + XOffset + 50, this.locationY + YOffset + 50);
@@ -49,7 +51,7 @@ public abstract class EnemyTankTemplate  extends GameObject {
         g2d.setTransform(backup);
     }
 
-    private void paintGun(Graphics2D g2d, int XOffset, int YOffset){
+    protected void paintGun(Graphics2D g2d, int XOffset, int YOffset){
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
         at.rotate(gunAngle,locationX  + XOffset + 50, locationY + YOffset + image.getHeight()/2);
@@ -64,17 +66,19 @@ public abstract class EnemyTankTemplate  extends GameObject {
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX);
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
-        System.out.println(locationX + " " + locationY);
         if(battleField.collisionTest(this)){
             locationX = backUpLocationX;
             locationY = backUpLocationY;
-            System.out.println("collide");
         }
     }
 
     protected void checkNear(){
         isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200)
                 && (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) > 100);
+    }
+
+    protected boolean checkNearGun(){
+        return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200 && health >0;
     }
 
     protected void aim(){

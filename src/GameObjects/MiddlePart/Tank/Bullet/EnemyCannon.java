@@ -9,9 +9,9 @@ public class EnemyCannon extends EBullet{
         this.battleField = battleField;
         speed = 3;
         angle = Math.atan2(mouseY - locationY, mouseX - locationX);
-        this.IMAGE_PATH += "bullet1.png";
+        this.IMAGE_PATH += "Cannon1.png";
         setImage();
-        playSound("emashinegun.wav");
+        playSound("eshot.wav");
         move();
         System.out.println("shot");
     }

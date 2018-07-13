@@ -19,7 +19,7 @@ public abstract class PlayerGun {
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
 
 
-    public abstract void shot(BattleField battleField,int locationX,int locationY,int mouseX,int mouseY);
+    public abstract void shot(BattleField battleField,int locationX,int locationY);
     public abstract void aim(int locationX,int locationY, int mouseX,int mouseY);
 
 

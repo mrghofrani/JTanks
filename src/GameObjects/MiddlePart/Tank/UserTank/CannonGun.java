@@ -16,9 +16,9 @@ public class CannonGun extends PlayerGun {
     }
 
     @Override
-    public void shot(BattleField battleField,int locationX,int locationY, int mouseX, int mouseY) {
+    public void shot(BattleField battleField,int locationX,int locationY) {
         if(numberOfBullet > 0) {
-            battleField.add(new Cannon1(battleField,locationX,locationY ,mouseX, mouseY));
+            battleField.add(new Cannon1(battleField,locationX,locationY ,angle));
             numberOfBullet--;
         }else{
             outOfBulletSound();

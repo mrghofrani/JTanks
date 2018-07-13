@@ -5,7 +5,9 @@ package GameBasis; /*** In The Name of Allah ***/
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.sound.sampled.*;
 import javax.swing.*;
 
 /**
@@ -48,6 +50,9 @@ public class GameFrame extends JFrame {
 		Image image = toolkit.getImage("files" + File.separator + "Images" + File.separator + "cursor.png");
 		Cursor c = toolkit.createCustomCursor(image , new Point(this.getX(), this.getY()), "img");
 		this.setCursor (c);
+		playSound();
+		
+		
 //		try{
 //			image = ImageIO.read(new File("Icon.png"));
 //		}
@@ -141,6 +146,23 @@ public class GameFrame extends JFrame {
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+		}
+	}
+	
+	
+	private void playSound(){
+		try {
+			File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "gameSound1.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioIn);
+			clip.loop(1000);
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
 		}
 	}
 
