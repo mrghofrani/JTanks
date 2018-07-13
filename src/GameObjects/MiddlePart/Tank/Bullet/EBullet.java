@@ -34,4 +34,9 @@ public class EBullet extends GameObject implements MiddlePart,Exploder {
     public void act() {
 
     }
+
+    @Override
+    public void explode() {
+        // inja
+    }
 }
