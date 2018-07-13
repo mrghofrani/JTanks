@@ -4,13 +4,9 @@ package GameBasis;
 import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * This class holds the state of game and all of its elements.
@@ -31,6 +27,7 @@ public class GameState {
     private MouseHandler mouseHandler;
     private BattleField battleField;
     private PlayerTank playerTank;
+    private long clickTime;
 
     public GameState(BattleField battleField) {
 
@@ -59,7 +56,6 @@ public class GameState {
     public void update() {
         playerTank.move(keyUP,keyDOWN,keyRIGHT,keyLEFT);
         battleField.changeSeenArea(keyUP,keyDOWN,keyRIGHT,keyLEFT);
-//        System.out.println("GameState line 148" + " YLocation " + playerTank.YLocation + " YLocation " + playerTank.YLocation );
 
 
 
@@ -145,8 +141,12 @@ public class GameState {
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
 //                TODO : System.out.println(this.getClass().getName() + " mouseX " + e.getX());
-                playerTank.shot(mouseX = e.getX(),mouseY =e.getY());
-                mousePress = true;
+                if(System.currentTimeMillis() - clickTime> 1) {
+                    playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
+                    mousePress = true;
+                }
+                clickTime = System.currentTimeMillis()/1000;
+                System.out.println(clickTime);
             }
 
         }
@@ -162,13 +162,15 @@ public class GameState {
             mousePress = false;
         }
 //
+
         @Override
         public void mouseDragged(MouseEvent e) {
-            // TODO if player drags his mouse the game will be incorrupted
-            System.out.println(this.getClass().getName() + " mouseX " + e.getX());
-            playerTank.shot(e.getX(), e.getY());
-            mousePress = true;
-            playerTank.aim(e.getX(),e.getY());
+            if(System.currentTimeMillis() - clickTime > 1) {
+                playerTank.shot(mouseX = e.getX(), mouseY = e.getY());
+                mousePress = true;
+            }
+            clickTime = System.currentTimeMillis()/1000;
+            System.out.println(clickTime);
         }
 
         @Override

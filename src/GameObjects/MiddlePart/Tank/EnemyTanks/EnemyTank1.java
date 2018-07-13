@@ -29,10 +29,9 @@ public class EnemyTank1 extends EnemyTankTemplate {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
-                        if(isNear){
+                        if(isNear && health > 0){
                             move();
                             aim();
-                            System.out.println("here");
                         }
                     }
                 });
@@ -41,8 +40,10 @@ public class EnemyTank1 extends EnemyTankTemplate {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
-                        if(isNear){
+                        if(Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200
+                                && health > 0){
                             shot();
+                            System.out.println("here");
                         }
                     }
                 });

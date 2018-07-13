@@ -14,6 +14,7 @@ public class PlayerTank extends GameObject {
     private BattleField battleField;
     private int savedLocationX;
     private int savedLocationY;
+    private int delay;
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -282,6 +283,11 @@ public class PlayerTank extends GameObject {
 
     public void shot(int mouseX,int mouseY){
         gun.shot(battleField,locationX + 50,locationY + 50 ,mouseX,mouseY);
+//        try {
+//            wait(100);
+//        } catch (InterruptedException e) {
+////            e.printStackTrace();
+//        }
     }
 
     /**
