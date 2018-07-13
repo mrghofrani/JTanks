@@ -4,7 +4,6 @@ import GameBasis.BattleField;
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Exploder;
 import GameObjects.MiddlePart.MiddlePart;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 

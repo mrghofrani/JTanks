@@ -8,6 +8,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class EnemyTankTemplate  extends GameObject {
     protected double angle;
@@ -20,7 +22,9 @@ public abstract class EnemyTankTemplate  extends GameObject {
 
     protected boolean isNear;
     protected BattleField battleField;
+    protected Timer actionTimer;
 
+    protected int health;
 
     protected void setGunImage(){
         File file = new File(GUN_IMAGE);
@@ -32,13 +36,6 @@ public abstract class EnemyTankTemplate  extends GameObject {
     }
 
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
-        checkNear();
-        if(isNear){
-            move();
-            aim();
-            shot();
-            System.out.println("here");
-        }
         paintTank(g2d,XOffset,YOffset);
         paintGun(g2d,XOffset,YOffset);
     }
@@ -61,7 +58,7 @@ public abstract class EnemyTankTemplate  extends GameObject {
         g2d.setTransform(backup);
     }
 
-    private void move(){
+    protected void move(){
         int backUpLocationX = locationX;
         int backUpLocationY = locationY;
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX);
@@ -75,12 +72,12 @@ public abstract class EnemyTankTemplate  extends GameObject {
         }
     }
 
-    private void checkNear(){
-        isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 2000)
+    protected void checkNear(){
+        isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200)
                 && (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) > 100);
     }
 
-    private void aim(){
+    protected void aim(){
         gunAngle = Math.atan2(battleField.getPlayerTank().getLocationY() - (locationY + 50),battleField.getPlayerTank().getLocationX() - (locationX + 50));
     }
 
@@ -91,4 +88,5 @@ public abstract class EnemyTankTemplate  extends GameObject {
     public void act() {
 
     }
+
 }

@@ -272,7 +272,7 @@ public class BattleField {
      * @return true if the collision have occurred otherwise returns false
      */
     public boolean collisionTest(GameObject thing) {
-        ArrayList<GameObject> collidedObjects = new ArrayList<>();
+       /* ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
             if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank) && !object.equals(thing)) {
                 collidedObjects.add(object);
@@ -281,7 +281,8 @@ public class BattleField {
                 break;
             }
         }
-        return !collidedObjects.isEmpty();
+        return !collidedObjects.isEmpty();*/
+       return false;
     }
 
     /**
