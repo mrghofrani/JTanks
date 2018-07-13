@@ -5,7 +5,7 @@ import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
-import GameObjects.MiddlePart.Tank.Bullet.EnemyTank1;
+import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
 import GameObjects.MiddlePart.Walls.SoftWall;
@@ -21,10 +21,10 @@ import java.util.List;
 
 public class BattleField {
     private String FILE_PATH = "files" + File.separator + "Texts" + File.separator;
-    private static ArrayList<GameObject> everything;
-    private static ArrayList<GameObject> bottomPart;
-    private static List<GameObject> middlePart;
-    private static ArrayList<GameObject> topPart;
+    private ArrayList<GameObject> everything;
+    private ArrayList<GameObject> bottomPart;
+    private List<GameObject> middlePart;
+    private ArrayList<GameObject> topPart;
     private PlayerTank playerTank;
     private boolean soundState;
     private int courserX;
@@ -72,6 +72,7 @@ public class BattleField {
                                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
                                 playerTank = new PlayerTank(this,200, 200);
                                 middlePart.add(new EnemyTank1(this,300,500));
+                                everything.add(new EnemyTank1(this,300,500));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -131,7 +132,7 @@ public class BattleField {
             case "F":
                 ((Ground) everything.get(everything.size() - 1)).setFinishingPoint();
                 break;
-//            case "player GameObjects.MiddlePart.Tank.EnemyTanks.Tank":
+//            case "player GameObjects.MiddlePart.Tank.EnemyTank2.Tank":
 //                everything.add(new UserTank(courserX,courserY));
 //                break;
 //            case "Enemy Tank1":
@@ -169,7 +170,7 @@ public class BattleField {
      * SoftWall -> Ground
      * Tank -> ExplodedGround
      */
-    public static void clearScreen() {
+    public void clearScreen() {
         for (GameObject gameObject : everything) {
             if (gameObject.getHealth() == 0) {
                 if (gameObject instanceof SoftWall) {
@@ -203,7 +204,7 @@ public class BattleField {
         if(playerTank.getLocationY() - viewRangeYDown < 0) viewRangeYDown = playerTank.getLocationY();
         Rectangle viewPoint = new Rectangle (playerTank.getLocationX() - viewRangeXLeft, playerTank.getLocationY() - viewRangeYUp
                                             , viewRangeXLeft + viewRangeXRight , viewRangeYDown + viewRangeYUp);*/
-        synchronized(bottomPart) {
+        synchronized (bottomPart) {
             for (GameObject object : bottomPart) {
                 object.doRendering(g2d, XOffset, YOffset);
             }
@@ -254,7 +255,7 @@ public class BattleField {
     public void move(){
         stop = false;
     }
-    public static ArrayList<GameObject> getEverything() {
+    public ArrayList<GameObject> getEverything() {
         return everything;
     }
 
@@ -273,7 +274,7 @@ public class BattleField {
     public boolean collisionTest(GameObject thing) {
         ArrayList<GameObject> collidedObjects = new ArrayList<>();
         for (GameObject object : middlePart) {
-            if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank)) {
+            if (object.getBounds().intersects(thing.getBounds()) && !(object instanceof PlayerTank) && !object.equals(thing)) {
                 collidedObjects.add(object);
                 System.out.printf("(%d,%d) %s ",thing.getLocationX(),thing.getLocationY(),thing.getClass().getName());
                 System.out.printf("(%d,%d) %s \n",object.getLocationX(),object.getLocationY(),object.getClass().getName());
@@ -314,14 +315,21 @@ public class BattleField {
 //        thing = null;
     }
 
-    public static void add(GameObject gameObject) {
+    public void add(GameObject gameObject) {
         everything.add(gameObject);
+
         if (gameObject instanceof BottomPart) {
-            bottomPart.add(gameObject);
+            synchronized (bottomPart) {
+                bottomPart.add(gameObject);
+            }
         } else if (gameObject instanceof MiddlePart) {
-            middlePart.add(gameObject);
+            synchronized (middlePart) {
+                middlePart.add(gameObject);
+            }
         } else if (gameObject instanceof TopPart) {
-            topPart.add(gameObject);
+            synchronized (topPart) {
+                topPart.add(gameObject);
+            }
         }
     }
 

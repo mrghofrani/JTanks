@@ -51,7 +51,7 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart{
             IMAGE_PATH += "softWall_4.png";
         }
         else if(health == 0) {
-            BattleField.clearScreen();
+//            battle.clearScreen();
         }
     }
 }

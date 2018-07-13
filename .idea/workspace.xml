@@ -2,17 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dade5ff-6a26-4759-8442-666c0bafdcad" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EBullet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyBullet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyCannon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTankTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/Images/EnemyTank1Gun.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Images/Enemy2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Images/EnemyTank2.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/Images/EnemyTank2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Images/MashinGunFood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Images/MashinGunFood2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Images/mine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Sounds/enemyshot.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Sounds/lightgun.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBasis/BattleField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBasis/BattleField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBasis/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBasis/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBasis/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBasis/GameLoop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBasis/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBasis/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTankCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTank1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTank1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,67 +40,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BattleField.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameFrame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameBasis/GameFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4635#4636#0" expanded="true" />
+                <element signature="e#4672#4673#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameLoop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameBasis/GameLoop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+              <folding>
+                <element signature="e#856#857#0" expanded="true" />
+                <element signature="e#877#878#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BattleField.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameBasis/BattleField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="73" column="74" selection-start-line="73" selection-start-column="74" selection-end-line="73" selection-end-column="74" />
+            <state relative-caret-position="86">
+              <caret line="205" column="24" lean-forward="true" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9604#9605#0" expanded="true" />
+                <element signature="e#9631#9632#0" expanded="true" />
+                <element signature="e#9656#9657#0" expanded="true" />
+                <element signature="e#9684#9685#0" expanded="true" />
+                <element signature="e#9735#9736#0" expanded="true" />
+                <element signature="e#9768#9769#0" expanded="true" />
+                <element signature="e#12523#12524#0" expanded="true" />
+                <element signature="e#12556#12557#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnemyTank1.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTank1.java">
+      <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameBasis/MainMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="74" column="80" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
+            <state relative-caret-position="205">
+              <caret line="167" column="29" lean-forward="true" selection-start-line="167" selection-start-column="29" selection-end-line="167" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#5703#5704#0" expanded="true" />
+                <element signature="e#5735#5736#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerTank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java">
+      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameBasis/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="279" column="14" selection-start-line="279" selection-start-column="14" selection-end-line="279" selection-end-column="14" />
+            <state relative-caret-position="330">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="docComment;method#move#0;class#PlayerTank#0" />
-                <element signature="method#move#0;class#PlayerTank#0" />
-                <element signature="docComment;method#aim#0;class#PlayerTank#0" />
-                <element signature="e#8120#8121#0" expanded="true" />
-                <element signature="e#8202#8203#0" expanded="true" />
-                <element signature="docComment;method#changeGun#0;class#PlayerTank#0" />
-                <element signature="method#changeGun#0;class#PlayerTank#0" />
-                <element signature="e#9061#9062#0" expanded="true" />
-                <element signature="e#9098#9099#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerGun.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerGun.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CannonGun.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2303#2304#0" expanded="true" />
+                <element signature="e#2336#2337#0" expanded="true" />
+                <element signature="e#2383#2384#0" expanded="true" />
+                <element signature="e#2418#2419#0" expanded="true" />
+                <element signature="e#2477#2478#0" expanded="true" />
+                <element signature="e#2512#2513#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,19 +174,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/BattleField.java" />
-        <option value="$PROJECT_DIR$/src/GameBasis/MianMenu.java" />
-        <option value="$PROJECT_DIR$/src/GameBasis/MainnMenu.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/BottomPart/ExplodedGround.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank1Package/EnemyTank1Gun.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank1Package/EnemyTank1.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank2Package/EnemyTank2.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank2Package/EnemyTank2Gun.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank3Package/EnemyTank3.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank3Package/EnemyTank3Gun.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/MovingEnemy.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/HardWall.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Items/CannonBulletCartridgeItem.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Items/RepairItem.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Items/UpgradeGun.java" />
@@ -179,27 +196,35 @@
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerCannonBullet.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/PlayerCannonBullet.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1Gun.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1Pack/EnemyTank1.java" />
-        <option value="$PROJECT_DIR$/src/GameBasis/GameLoop.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1Pack/EnemyTank1Gun.java" />
-        <option value="$PROJECT_DIR$/src/GameBasis/GameFrame.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerGun.java" />
         <option value="$PROJECT_DIR$/src/GameBasis/Main.java" />
         <option value="$PROJECT_DIR$/src/GameBasis/GameState.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/GameObject.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/MachineGun.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java" />
-        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java" />
         <option value="$PROJECT_DIR$/files/Texts/JustTesting.txt" />
-        <option value="$PROJECT_DIR$/src/GameBasis/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTankCannon.java" />
-        <option value="$PROJECT_DIR$/src/GameBasis/BattleField.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java" />
         <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTank1.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EBullet.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank2.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank3.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank4.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTankTemplate.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyCannon.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyBullet.java" />
+        <option value="$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1.java" />
+        <option value="$PROJECT_DIR$/src/GameBasis/GameFrame.java" />
+        <option value="$PROJECT_DIR$/src/GameBasis/MainMenu.java" />
+        <option value="$PROJECT_DIR$/src/GameBasis/GameLoop.java" />
+        <option value="$PROJECT_DIR$/src/GameBasis/BattleField.java" />
       </list>
     </option>
   </component>
@@ -213,9 +238,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="427" />
-    <option name="y" value="47" />
-    <option name="width" value="979" />
+    <option name="x" value="426" />
+    <option name="y" value="46" />
+    <option name="width" value="980" />
     <option name="height" value="725" />
   </component>
   <component name="ProjectView">
@@ -223,7 +248,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -291,6 +315,15 @@
               <item name="GameObjects" type="462c0819:PsiDirectoryNode" />
               <item name="MiddlePart" type="462c0819:PsiDirectoryNode" />
               <item name="Tank" type="462c0819:PsiDirectoryNode" />
+              <item name="EnemyTanks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AP Final Project II" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AP Final Project II" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GameObjects" type="462c0819:PsiDirectoryNode" />
+              <item name="MiddlePart" type="462c0819:PsiDirectoryNode" />
+              <item name="Tank" type="462c0819:PsiDirectoryNode" />
               <item name="UserTank" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -310,6 +343,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -425,7 +459,8 @@
       <workItem from="1531335328603" duration="8340000" />
       <workItem from="1531376572684" duration="4038000" />
       <workItem from="1531384109095" duration="23583000" />
-      <workItem from="1531424203361" duration="2873000" />
+      <workItem from="1531424203361" duration="9279000" />
+      <workItem from="1531459559986" duration="3566000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of grass,ground, hard and soft wall is done and I'm going to change implementation of PlayerTank">
       <created>1530803267499</created>
@@ -532,11 +567,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531417127399</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="#Test It.">
+      <created>1531427226509</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1531427226509</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175929000" />
+    <option name="totallyTimeSpent" value="185901000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -561,13 +603,12 @@
       <window_info anchor="right" id="Maven Projects" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32909605" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32627118" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.38418078" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.84322035" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20268457" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20536913" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32909605" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.24966443" />
       <window_info id="UI Designer" order="5" />
@@ -576,42 +617,12 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997175" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.3295302" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32909605" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.3295302" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32627118" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.24966443" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20268457" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997175" />
-      <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.84322035" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32909605" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32909605" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32909605" />
-      <window_info anchor="right" id="Maven Projects" order="9" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -661,39 +672,20 @@
     <MESSAGE value="#Test It. Now the implementation of PlayerTank and its bullets are almost done but I have a bit problem with player tank's movement it doesn't go near the borders" />
     <MESSAGE value="#Test it. I left the bug in the bullets and I'm going to implement collision" />
     <MESSAGE value="#Test it. I left the collision and I'm going to get rid of XOffset and YOffset." />
-    <option name="LAST_COMMIT_MESSAGE" value="#Test it. I left the collision and I'm going to get rid of XOffset and YOffset." />
+    <MESSAGE value="#Test It." />
+    <option name="LAST_COMMIT_MESSAGE" value="#Test It." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameBasis/GameState.java</url>
-          <line>147</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java</url>
-          <line>29</line>
-          <properties />
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBasis/BattleField.java</url>
-          <line>266</line>
+          <line>267</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java</url>
-          <line>43</line>
-          <properties class="GameObjects.MiddlePart.Tank.UserTank.PlayerTank" method="move">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="42" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -710,27 +702,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Bullet/Cannon/MyCannonBullet2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="9" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank1Package/EnemyTank1.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank1Package/EnemyTank1Gun.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank2Package/EnemyTank2.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank2Package/EnemyTank2Gun.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank3Package/EnemyTank3.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/EnemyTank3Package/EnemyTank3Gun.java" />
     <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTank/MovingEnemy.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Exploder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -822,13 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="908" selection-start-line="908" selection-end-line="908" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/awt/Graphics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -866,16 +831,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1Pack/EnemyTank1Gun.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameBasis/GameFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameBasis/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -887,17 +842,185 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameBasis/GameLoop.java">
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/TopPart/TopPart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/Texts/JustTesting.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerGun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/MachineGun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Walls/SoftWall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTank1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="24" column="159" selection-start-line="24" selection-start-column="159" selection-end-line="24" selection-end-column="159" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/EnemyTanks/EnemyTankTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="79" column="114" selection-start-line="79" selection-start-column="114" selection-end-line="79" selection-end-column="114" />
+          <folding>
+            <element signature="method#setGunImage#0;class#EnemyTankTemplate#0" />
+            <element signature="method#paintGun#0;class#EnemyTankTemplate#0" />
+            <element signature="method#aim#0;class#EnemyTankTemplate#0" />
+            <element signature="method#act#0;class#EnemyTankTemplate#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyCannon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#move#0;class#PlayerTank#0" />
+            <element signature="docComment;method#aim#0;class#PlayerTank#0" />
+            <element signature="e#8120#8121#0" expanded="true" />
+            <element signature="e#8202#8203#0" expanded="true" />
+            <element signature="docComment;method#changeGun#0;class#PlayerTank#0" />
+            <element signature="method#changeGun#0;class#PlayerTank#0" />
+            <element signature="e#9061#9062#0" expanded="true" />
+            <element signature="e#9098#9099#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyBullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EBullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="908" selection-start-line="908" selection-end-line="908" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameBasis/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="330">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2303#2304#0" expanded="true" />
@@ -910,62 +1033,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/TopPart/TopPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="63" column="57" selection-start-line="63" selection-start-column="57" selection-end-line="63" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/MachineGun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Cannon1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/Bullet1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/Texts/JustTesting.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameBasis/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="193" column="12" selection-start-line="193" selection-start-column="12" selection-end-line="193" selection-end-column="12" />
+        <state relative-caret-position="205">
+          <caret line="167" column="29" lean-forward="true" selection-start-line="167" selection-start-column="29" selection-end-line="167" selection-end-column="29" />
           <folding>
             <element signature="e#5703#5704#0" expanded="true" />
             <element signature="e#5735#5736#0" expanded="true" />
@@ -973,58 +1044,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameBasis/GameFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4635#4636#0" expanded="true" />
+            <element signature="e#4672#4673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameBasis/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+          <folding>
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameBasis/BattleField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="73" column="74" selection-start-line="73" selection-start-column="74" selection-end-line="73" selection-end-column="74" />
+        <state relative-caret-position="86">
+          <caret line="205" column="24" lean-forward="true" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerTank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="279" column="14" selection-start-line="279" selection-start-column="14" selection-end-line="279" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#move#0;class#PlayerTank#0" />
-            <element signature="method#move#0;class#PlayerTank#0" />
-            <element signature="docComment;method#aim#0;class#PlayerTank#0" />
-            <element signature="e#8120#8121#0" expanded="true" />
-            <element signature="e#8202#8203#0" expanded="true" />
-            <element signature="docComment;method#changeGun#0;class#PlayerTank#0" />
-            <element signature="method#changeGun#0;class#PlayerTank#0" />
-            <element signature="e#9061#9062#0" expanded="true" />
-            <element signature="e#9098#9099#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/PlayerGun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/UserTank/CannonGun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjects/MiddlePart/Tank/Bullet/EnemyTank1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="74" column="80" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#9604#9605#0" expanded="true" />
+            <element signature="e#9631#9632#0" expanded="true" />
+            <element signature="e#9656#9657#0" expanded="true" />
+            <element signature="e#9684#9685#0" expanded="true" />
+            <element signature="e#9735#9736#0" expanded="true" />
+            <element signature="e#9768#9769#0" expanded="true" />
+            <element signature="e#12523#12524#0" expanded="true" />
+            <element signature="e#12556#12557#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -164,7 +164,6 @@ public class MainMenu {
             public void run() {
                 GameFrame frame = new GameFrame("Normal Tanks");
                 frame.setLocationRelativeTo(null); // put frame at center of screen
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
                 frame.initBufferStrategy();
                 // Create and execute the game-loop

@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
 	public static final int GAME_HEIGHT = 600;
 	public static final int GAME_WIDTH = 600;
 
-	//uncomment all /*...*/ in the class for using GameObjects.MiddlePart.Tank.EnemyTanks.Tank icon instead of a simple circle
+	//uncomment all /*...*/ in the class for using GameObjects.MiddlePart.Tank.EnemyTank2.Tank icon instead of a simple circle
 	/*private BufferedImage image;*/
 
 	private long lastRender;

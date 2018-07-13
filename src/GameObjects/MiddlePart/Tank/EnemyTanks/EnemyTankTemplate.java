@@ -1,8 +1,7 @@
-package GameObjects.MiddlePart.Tank.Bullet;
+package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
 import GameObjects.GameObject;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -10,31 +9,20 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class EnemyTank1 extends GameObject {
-    private double angle;
-    private int speed = 2;
+public abstract class EnemyTankTemplate  extends GameObject {
+    protected double angle;
+    protected int speed;
 
-    private double gunAngle;
-    private String GUN_IMAGE = "files" + File.separator + "Images" + File.separator;
-    private BufferedImage gunImage;
-
-    private boolean isNear;
-    private BattleField battleField;
+    protected double gunAngle;
+    protected String GUN_IMAGE = "files" + File.separator + "Images" + File.separator;
+    protected BufferedImage gunImage;
 
 
-    public EnemyTank1(BattleField battleField, int locationX, int locationY){
-        this.battleField = battleField;
-        this.locationX = locationX;
-        this.locationY = locationY;
-        this.IMAGE_PATH += "enemyTank1.png";
-        this.GUN_IMAGE += "enemyGun1.png";
-        isNear = false;
-        setImage();
-        setGunImage();
-        act();
-    }
+    protected boolean isNear;
+    protected BattleField battleField;
 
-    private void setGunImage(){
+
+    protected void setGunImage(){
         File file = new File(GUN_IMAGE);
         try {
             gunImage = ImageIO.read(file);
@@ -42,20 +30,17 @@ public class EnemyTank1 extends GameObject {
             e.printStackTrace();
         }
     }
-    @Override
+
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         checkNear();
         if(isNear){
             move();
             aim();
             shot();
+            System.out.println("here");
         }
         paintTank(g2d,XOffset,YOffset);
         paintGun(g2d,XOffset,YOffset);
-    }
-
-    @Override
-    public void act() {
     }
 
     private void paintTank(Graphics2D g2d, int XOffset, int YOffset){
@@ -82,22 +67,28 @@ public class EnemyTank1 extends GameObject {
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX);
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
+        System.out.println(locationX + " " + locationY);
         if(battleField.collisionTest(this)){
             locationX = backUpLocationX;
             locationY = backUpLocationY;
+            System.out.println("collide");
         }
     }
 
-
     private void checkNear(){
-        isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - (locationX + 50),battleField.getPlayerTank().getLocationY() - (locationY + 50)) < 1000);
+        isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 2000)
+                && (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) > 100);
     }
 
     private void aim(){
         gunAngle = Math.atan2(battleField.getPlayerTank().getLocationY() - (locationY + 50),battleField.getPlayerTank().getLocationX() - (locationX + 50));
     }
 
-    private void shot(){
-//        battleField.add(new )
+    protected abstract void shot();
+
+    @Override
+
+    public void act() {
+
     }
 }

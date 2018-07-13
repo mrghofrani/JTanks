@@ -40,6 +40,7 @@ public class GameLoop implements Runnable {
 		canvas.addKeyListener(state.getKeyListener());
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
+
 	}
 
 	@Override

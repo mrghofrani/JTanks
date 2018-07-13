@@ -8,7 +8,7 @@ import GameObjects.MiddlePart.MiddlePart;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public class Bullet extends GameObject implements Exploder,MiddlePart {
+public class EBullet extends GameObject implements MiddlePart,Exploder {
     protected double angle;
     protected int speed;
     protected BattleField battleField;
