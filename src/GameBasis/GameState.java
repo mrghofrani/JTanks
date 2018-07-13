@@ -126,7 +126,30 @@ public class GameState {
 				case KeyEvent.VK_RIGHT:
 					keyRIGHT = false;
 					break;
-			}
+                case KeyEvent.VK_SHIFT:
+                    System.out.println("cheat mode is on!");
+                    battleField.isCheatMode = true;
+                    break;
+                case KeyEvent.VK_P:
+                    //TODO playerTank.promoteWeapon();
+                    break;
+                case KeyEvent.VK_T:
+                    playerTank.getGun().setNumberOfBulletsToDefault();
+                    break;
+                case KeyEvent.VK_I:
+                    playerTank.getGun().setNumberOfBulletsToInfinite();
+                    System.out.println("rey gamaj!");
+                    break;
+                case KeyEvent.VK_L:
+                    playerTank.setDefaultLife();
+                    System.out.println("life was reset");
+                    break;
+                case KeyEvent.VK_H:
+                    playerTank.setDefaultHealth();
+                    System.out.println("health is in default value");
+                    break;
+
+            }
 		}
 
 	}

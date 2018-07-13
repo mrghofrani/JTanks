@@ -32,6 +32,7 @@ public class BattleField {
     public int XOffset;
     public int YOffset;
     private boolean stop;
+    public static boolean isCheatMode = false;
 
     public BattleField() {
         // Hi Mahandes !!!

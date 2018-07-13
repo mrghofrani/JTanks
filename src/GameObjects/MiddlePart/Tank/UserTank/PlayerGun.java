@@ -60,4 +60,11 @@ public abstract class PlayerGun {
     public int getNumberOfBullet() {
         return numberOfBullet;
     }
+
+    public abstract void setNumberOfBulletsToDefault();
+
+    public void setNumberOfBulletsToInfinite(){
+        numberOfBullet = Integer.MAX_VALUE;
+    }
+
 }

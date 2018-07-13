@@ -20,6 +20,7 @@ public class PlayerTank extends GameObject {
     private int savedLocationX;
     private int savedLocationY;
     private int delay;
+    private int life = 3;
     private int health = 5;
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
@@ -373,6 +374,13 @@ public class PlayerTank extends GameObject {
         }
 
     }
+    public void setDefaultLife(){
+        life = 3;
+    }
+
+    public void setDefaultHealth(){
+        health = 5;
+    }
 
     public int getLocationX(){
         return this.locationX;
@@ -381,4 +389,9 @@ public class PlayerTank extends GameObject {
     public int getLocationY(){
         return this.locationY;
     }
+
+    public PlayerGun getGun() {
+        return gun;
+    }
+
 }
