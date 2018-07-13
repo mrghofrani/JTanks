@@ -1,6 +1,7 @@
 package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyCannon;
 import ThreadPool.ThreadPool;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnemyTank3 extends EnemyTankTemplate {
+public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
 
     public EnemyTank3(BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;

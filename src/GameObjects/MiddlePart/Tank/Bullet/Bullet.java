@@ -33,4 +33,11 @@ public class Bullet extends GameObject implements Exploder,MiddlePart {
     public void act() {
 
     }
+
+    @Override
+    public void explode() {
+        // inja
+        playSound("files\\Sounds\\EnemyBulletToMyTank.wav");
+        
+    }
 }
