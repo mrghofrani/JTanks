@@ -3,7 +3,7 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 import GameBasis.BattleField;
 import GameObjects.MiddlePart.Tank.Bullet.EBullet;
 
-public class EnemyTank4 extends EnemyTankTemplate {
+public class EnemyTank4 extends EnemyTankTemplate  {
 
     public EnemyTank4 (BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;

@@ -3,6 +3,7 @@ package GameObjects.MiddlePart.Tank.UserTank;
 import GameBasis.BattleField;
 import GameBasis.GameFrame;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.Items.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -382,6 +383,19 @@ public class PlayerTank extends GameObject {
         health = 5;
     }
 
+    public void eatItem(Item item){
+        if(item instanceof CannonBulletCartridgeItem){
+            cannonGun.numberOfBullet += ((CannonBulletCartridgeItem) item).getAddingCannonBullet();
+        }else if(item instanceof MachineGunCartridgeItem){
+            machineGun.numberOfBullet += ((MachineGunCartridgeItem)item).getAddingCartridge();
+        }else if(item instanceof RepairItem){
+            setDefaultHealth();
+        }else if(item instanceof UpgradeGunItem){
+            promoteWeapon();
+        }
+//        item.dispose();
+    }
+
     public int getLocationX(){
         return this.locationX;
     }
@@ -392,6 +406,9 @@ public class PlayerTank extends GameObject {
 
     public PlayerGun getGun() {
         return gun;
+    }
+    private void promoteWeapon(){
+        gun.promote();
     }
 
 }

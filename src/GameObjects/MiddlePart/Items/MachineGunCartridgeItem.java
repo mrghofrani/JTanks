@@ -5,6 +5,7 @@ import GameObjects.MiddlePart.MiddlePart;
 
 public class MachineGunCartridgeItem extends GameObject implements Item,MiddlePart {
 
+    private final int addingCartridge = 50;
     public MachineGunCartridgeItem(int locationX,int locationY){
         this.locationX = locationX;
         this.locationY = locationY;
@@ -12,6 +13,9 @@ public class MachineGunCartridgeItem extends GameObject implements Item,MiddlePa
         setImage();
     }
 
+    public int getAddingCartridge() {
+        return addingCartridge;
+    }
 
     @Override
     public void act() {

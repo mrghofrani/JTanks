@@ -15,6 +15,7 @@ public abstract class PlayerGun {
 
     protected BufferedImage image;
     protected double angle;
+    protected int damgePower;
     protected int numberOfBullet;
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
 
@@ -56,6 +57,7 @@ public abstract class PlayerGun {
             e.printStackTrace();
         }
     }
+    public abstract void promote();
 
     public int getNumberOfBullet() {
         return numberOfBullet;

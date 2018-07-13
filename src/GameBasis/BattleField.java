@@ -3,8 +3,10 @@ package GameBasis;
 import GameObjects.BottomPart.BottomPart;
 import GameObjects.BottomPart.Ground;
 import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
+import GameObjects.MiddlePart.Items.Item;
 import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
 import GameObjects.MiddlePart.Items.RepairItem;
+import GameObjects.MiddlePart.Tank.Bullet.Bullet;
 import GameObjects.MiddlePart.Tank.EnemyTanks.EnemyTank1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 import GameObjects.MiddlePart.Walls.HardWall;
@@ -302,6 +304,46 @@ public class BattleField {
                 break;
             }
         }
+        if (!collidedObjects.isEmpty()) {
+            for (GameObject object : collidedObjects)
+            {
+                {
+                    if (!thing.equals(object))
+                    {
+                        if (((thing instanceof Explosive && object instanceof Exploder) || (thing instanceof Exploder && object instanceof Explosive)))
+                        {
+                            thing.explode();
+                            object.explode();
+                        }
+
+                         else if (thing instanceof HardObject && object instanceof HardObject)
+                        {
+                            thing.stop();
+                            object.stop();
+                        }
+                        else if((thing instanceof PlayerTank && object instanceof Item))
+                        {
+                            ((PlayerTank)thing).eatItem((Item)object);
+
+                        }
+                        else if(thing instanceof Item && object instanceof PlayerTank)
+                        {
+                            ((PlayerTank)object).eatItem((Item)thing);
+
+                        }
+                        else if(thing instanceof Bullet && object instanceof  HardWall){
+                            ((Bullet)thing).dispose();
+                        }
+                        else if(thing instanceof HardWall && object instanceof Bullet)
+                        {
+                            ((Bullet)object).dispose();
+                        }
+                    }
+
+                }
+            }
+        }
+
 
 //        if(thing instanceof UserTank) {
 //            for (GameObject object : collidedObjects)
