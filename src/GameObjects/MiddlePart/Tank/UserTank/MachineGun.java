@@ -12,7 +12,7 @@ public class MachineGun extends PlayerGun {
         this.IMAGE_PATH += "playerMachineGun0.png";
         setImage();
         numberOfBullet = 200;
-        damgePower = 2; // TODO this may be changed
+        damagePower = 2; // TODO this may be changed
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MachineGun extends PlayerGun {
     @Override
     public void promote(){
         IMAGE_PATH = "files\\Images\\playerBulletGun1.png";
-        damgePower = 4; // TODO may be changed
+        damagePower = 4; // TODO may be changed
     }
 
     @Override
