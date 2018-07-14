@@ -76,4 +76,22 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
         battleField.add(new EnemyCannon(battleField, locationX + 60, locationY + 50, battleField.getPlayerTank().getLocationX() + 50, battleField.getPlayerTank().getLocationY() + 50));
     }
 
+
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
+    public void explode(int value) {
+        if (health - value > 0)
+            health -= value;
+        else {
+            health = 0;
+            collidable = false;
+            isDeleted = true;
+        }
+    }
+
 }

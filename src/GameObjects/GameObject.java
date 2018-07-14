@@ -15,6 +15,7 @@ public abstract class GameObject {
     protected String SOUND_PATH = "files" + File.separator + "Sounds" + File.separator; // Main part of sound of the object
     protected BufferedImage image;// image of the object
     protected int health;
+    public boolean collidable = true;
     public boolean isDeleted = false;
 
     /**

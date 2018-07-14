@@ -116,26 +116,15 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
         if (health - value > 0)
             health -= value;
         else {
-            Runnable stop = new Runnable() {
-                @Override
-                public void run() {
-                    javax.swing.Timer aimTimer = new javax.swing.Timer(1, new ActionListener(){
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            health = 0;
-                            isDeleted = true;
-                            if(aimThread != null)
-                                aimThread.interrupt();
-                            if(moveThread != null)
-                                moveThread.interrupt();
-                            if(fireThread != null)
-                                fireThread.interrupt();
-                        }
-                    });
-                    aimTimer.start();
-                }
-            };
-            ThreadPool.execute(stop);
+            health = 0;
+            collidable = false;
+            isDeleted = true;
+            if (aimThread != null)
+                aimThread.interrupt();
+            if (moveThread != null)
+                moveThread.interrupt();
+            if (fireThread != null)
+                fireThread.interrupt();
         }
     }
 
@@ -147,5 +136,6 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
     public int getHealth() {
         return health;
     }
+
 
 }

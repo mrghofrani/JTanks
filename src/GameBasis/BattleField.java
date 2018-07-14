@@ -81,8 +81,11 @@ public class BattleField {
                                 playerTank = new PlayerTank(this,200, 200);
                                 middlePart.add(new EnemyTank1(this,300,500));
                                 everything.add(new EnemyTank1(this,300,500));
-                                middlePart.add(new UpgradeGunItem(this,100,100));
-                                everything.add(new UpgradeGunItem(this,100,100));
+                                Ground ground = new Ground(100,100);
+                                bottomPart.add(ground);
+                                everything.add(ground);
+                                ground.setFinishingPoint();
+
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -190,8 +193,6 @@ public class BattleField {
                     }
                     if (gameObject instanceof EnemyTankTemplate) {
                         bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
-                        gameObject = null;
-                        iterator.remove();
                     }
                     if (gameObject instanceof Item) {
                         iterator.remove();
@@ -213,7 +214,6 @@ public class BattleField {
                     }
                     if (gameObject instanceof EnemyTankTemplate) {
                         bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
-                        iterator.remove();
                     }
                     if (gameObject instanceof Item) {
                         iterator.remove();
@@ -256,7 +256,8 @@ public class BattleField {
             try {
                 int size = middlePart.size();
                 for (int i = 0; i < size - 1; i++) {
-                    middlePart.get(i).doRendering(g2d, XOffset, YOffset);
+                    if(!middlePart.get(i).isDeleted)
+                        middlePart.get(i).doRendering(g2d, XOffset, YOffset);
                 }
                 if (size - 1 < middlePart.size()) {
                     for (int i = size; i < middlePart.size(); i++) {
@@ -333,10 +334,9 @@ public class BattleField {
             }
             if (!collidedObjects.isEmpty()) {
                 for (GameObject object : collidedObjects) {
-                    if (!thing.equals(object)) {
+                    if (!thing.equals(object) && thing.collidable) {
                         if (thing instanceof Explosive && object instanceof Exploder) {
                             if (!(thing instanceof PlayerTank && object instanceof MyBullet) && !(thing instanceof EnemyTankTemplate && object instanceof EBullet) && !(thing instanceof EnemyTankTemplate && object instanceof ESBullet)) {
-                                System.out.println("UP");
                                 ((Explosive) thing).explode(((Exploder) object).getDamage());
                                 ((Exploder) object).explode();
                             }
@@ -344,7 +344,6 @@ public class BattleField {
                             if (!(object instanceof PlayerTank && thing instanceof MyBullet) && !(object instanceof EnemyTankTemplate && thing instanceof EBullet) && !(object instanceof EnemyTankTemplate && thing instanceof ESBullet)) {
                                 ((Explosive) object).explode((((Exploder) thing).getDamage()));
                                 ((Exploder) thing).explode();
-                                System.out.println("Down");
                             }
                         } else if (thing instanceof HardObject && object instanceof HardObject) {
                             ((HardObject) thing).stop();
@@ -360,6 +359,14 @@ public class BattleField {
                         }
 //                        clearScreen();
                     }
+                }
+            }
+        }
+        synchronized (bottomPart){
+            for (GameObject gameObject:bottomPart) {
+                if(gameObject instanceof Ground && ((Ground)gameObject).isFinishingPoint()){
+                    if(playerTank.getBounds().intersects(gameObject.getBounds()))
+                        GameState.gameWon = true;
                 }
             }
         }

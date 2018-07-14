@@ -1,5 +1,9 @@
 package GameBasis; /*** In The Name of Allah ***/
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -22,6 +26,7 @@ public class GameLoop implements Runnable {
 	 */
 	public static final int FPS = 30;
 	public static boolean gameOver = false;
+	public static boolean gameWon = false;
 	
 	private GameFrame canvas;
 	private GameState state;
@@ -46,13 +51,15 @@ public class GameLoop implements Runnable {
 
 	@Override
 	public void run() {
-		while (!gameOver) {
+		while (!gameOver && !gameWon) {
 			try {
 				long start = System.currentTimeMillis();
 				//
 				state.update();
 				canvas.render(state);
 				gameOver = state.gameOver;
+				gameWon = state.gameWon;
+
 				//
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 				if (delay > 0)
@@ -60,6 +67,48 @@ public class GameLoop implements Runnable {
 			} catch (InterruptedException ignored) {
 			}
 		}
+		canvas.stop();
+		playSound();
 		canvas.render(state);
+	}
+	private synchronized void playSound(){
+		if(gameWon){
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						File soundFile = new File("files\\Sounds\\endOfGame.wav");
+						AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioIn);
+						clip.start();
+					} catch (UnsupportedAudioFileException e) {
+						//e.printStackTrace();
+					} catch (IOException e) {
+						// e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+		if(gameOver){
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						File soundFile = new File("files\\Sounds\\gameOver.wav");
+						AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioIn);
+						clip.start();
+					} catch (UnsupportedAudioFileException e) {
+						//e.printStackTrace();
+					} catch (IOException e) {
+						// e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// e.printStackTrace();
+					}
+				}
+			}).start();
+		}
 	}
 }

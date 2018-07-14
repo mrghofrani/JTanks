@@ -31,6 +31,7 @@ public class GameFrame extends JFrame {
 
 	private long lastRender;
 	private ArrayList<Float> fpsHistory;
+	private Clip clip;
 
 	private BufferStrategy bufferStrategy;
 
@@ -142,7 +143,14 @@ public class GameFrame extends JFrame {
 		// Draw GAME OVER
 		if (state.gameOver) {
 			String str = "GAME OVER";
-			g2d.setColor(Color.WHITE);
+			g2d.setColor(Color.RED);
+			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+			int strWidth = g2d.getFontMetrics().stringWidth(str);
+			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+		}
+		if(state.gameWon){
+			String str = "YOU WON";
+			g2d.setColor(Color.RED);
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
@@ -154,7 +162,7 @@ public class GameFrame extends JFrame {
 		try {
 			File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "gameSound1.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			Clip clip = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
 			clip.open(audioIn);
 			clip.loop(1000);
 		} catch (UnsupportedAudioFileException e) {
@@ -168,5 +176,9 @@ public class GameFrame extends JFrame {
 
 	public void setBattleField(BattleField battleField) {
 		this.battleField = battleField;
+	}
+
+	public void stop(){
+		clip.stop();
 	}
 }
