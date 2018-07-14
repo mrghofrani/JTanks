@@ -30,26 +30,22 @@ public class BattleField {
     private ArrayList<GameObject> middlePart;
     private ArrayList<GameObject> topPart;
     private PlayerTank playerTank;
-    private boolean soundState;
     private int courserX;
     private int courserY;
     public int XOffset;
     public int YOffset;
     private boolean stop;
-    private final int MAP_HEIGTH = 1200;
+    private final int MAP_HEIGHT = 1200;
     private final int MAP_WIDTH = 1200;
-    private Camera camera;
 
     public BattleField() {
         // Hi Mahandes !!!
         // YaAllah !!!
         everything = new ArrayList<>();
         bottomPart = new ArrayList<>();
-//        middlePart = new ArrayList<>();
-        middlePart = new ArrayList<GameObject>();
+        middlePart = new ArrayList<>();
         topPart = new ArrayList<>();
         initialize();
-        camera = new Camera(0,0);
     }
 
     /**
@@ -61,6 +57,10 @@ public class BattleField {
         // initialization of Map
         initializeGameLevel();
 //       initializeSound();
+
+        playerTank = new PlayerTank(this,100,100);
+        everything.add(playerTank);
+        middlePart.add(playerTank);
 
         File file = new File(FILE_PATH);
         try {
@@ -76,19 +76,7 @@ public class BattleField {
                         if (i == 0) {
                             makeObject(tmp[i]);
                         } else {
-                            if (tmp[i].equals("S")) {
-                                ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
-                                playerTank = new PlayerTank(this,200, 200);
-                                middlePart.add(new EnemyTank1(this,300,500));
-                                everything.add(new EnemyTank1(this,300,500));
-                                Ground ground = new Ground(100,100);
-                                bottomPart.add(ground);
-                                everything.add(ground);
-                                ground.setFinishingPoint();
-
-                                everything.add(playerTank);
-                                middlePart.add(playerTank);
-                            } else if (tmp[i].equals("F"))
+                            if (tmp[i].equals("F"))
                                 ((Ground) everything.get(everything.size() - 1)).setFinishingPoint();
                             else
                                 makeObject(tmp[i]);
@@ -106,6 +94,8 @@ public class BattleField {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     /**
@@ -193,6 +183,7 @@ public class BattleField {
                     }
                     if (gameObject instanceof EnemyTankTemplate) {
                         bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
+                        iterator.remove();
                     }
                     if (gameObject instanceof Item) {
                         iterator.remove();
@@ -204,16 +195,24 @@ public class BattleField {
             }
         }
         synchronized (middlePart){
+            int i = 3;
+            GameObject gameObjectTmp = null;
             Iterator<GameObject> iterator = middlePart.iterator();
             while (iterator.hasNext()) {
                 GameObject gameObject = (GameObject) iterator.next();
-
                 if (gameObject.isDeleted) {
                     if (gameObject instanceof SoftWall) {
+                        if((new Random().nextInt(100))%10 == 0 ){
+                            gameObjectTmp = gameObject;
+                            i = (new Random().nextInt(100))%3;
+                        }
+                        else
+                            i = 3;
                         iterator.remove();
                     }
                     if (gameObject instanceof EnemyTankTemplate) {
                         bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
+                        iterator.remove();
                     }
                     if (gameObject instanceof Item) {
                         iterator.remove();
@@ -221,6 +220,23 @@ public class BattleField {
                     if (gameObject instanceof Bullet) {
                         iterator.remove();
                     }
+                }
+            }
+            if(gameObjectTmp != null) {
+                switch (i) {
+                    case 1:
+                        middlePart.add(new CannonBulletCartridgeItem(this, gameObjectTmp.getLocationX(), gameObjectTmp.getLocationY()));
+                        break;
+                    case 2:
+                        middlePart.add(new MachineGunCartridgeItem(this,gameObjectTmp.getLocationX(),gameObjectTmp.getLocationY()));
+                        break;
+                    case 3:
+                        middlePart.add(new RepairItem(this,gameObjectTmp.getLocationX(),gameObjectTmp.getLocationY()));
+                        break;
+                    case 4:
+                        break;
+                        default:
+                            break;
                 }
             }
         }
@@ -236,16 +252,6 @@ public class BattleField {
         if (XOffset + 1200 < 600) XOffset = -600;
         if (YOffset + 1200 < 600) YOffset = -600;
 
-        /*int viewRangeXRight = 600;
-        int viewRangeXLeft = 600;
-        int viewRangeYUp = 600;
-        int viewRangeYDown = 600;
-        if(playerTank.getLocationX() + viewRangeXRight > 1200) viewRangeXRight = GameFrame.GAME_WIDTH - playerTank.getLocationX();
-        if(playerTank.getLocationX() - viewRangeXLeft < 0) viewRangeXLeft = playerTank.getLocationX();
-        if(playerTank.getLocationY() - viewRangeYUp > 1200) viewRangeYUp = GameFrame.GAME_HEIGHT - playerTank.getLocationY();
-        if(playerTank.getLocationY() - viewRangeYDown < 0) viewRangeYDown = playerTank.getLocationY();
-        Rectangle viewPoint = new Rectangle (playerTank.getLocationX() - viewRangeXLeft, playerTank.getLocationY() - viewRangeYUp
-                                            , viewRangeXLeft + viewRangeXRight , viewRangeYDown + viewRangeYUp);*/
         clearScreen();
         synchronized (bottomPart) {
             for (GameObject object : bottomPart) {
@@ -253,20 +259,16 @@ public class BattleField {
             }
         }
         synchronized (middlePart) {
-            try {
-                int size = middlePart.size();
-                for (int i = 0; i < size - 1; i++) {
+            int size = middlePart.size();
+            for (int i = 0; i < size - 1; i++) {
+                if(!middlePart.get(i).isDeleted)
+                    middlePart.get(i).doRendering(g2d, XOffset, YOffset);
+            }
+            if (size - 1 < middlePart.size()) {
+                for (int i = size; i < middlePart.size(); i++) {
                     if(!middlePart.get(i).isDeleted)
                         middlePart.get(i).doRendering(g2d, XOffset, YOffset);
                 }
-                if (size - 1 < middlePart.size()) {
-                    for (int i = size; i < middlePart.size(); i++) {
-                        middlePart.get(i).doRendering(g2d, XOffset, YOffset);
-                    }
-                }
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-
             }
         }
         synchronized (topPart) {
@@ -334,7 +336,7 @@ public class BattleField {
             }
             if (!collidedObjects.isEmpty()) {
                 for (GameObject object : collidedObjects) {
-                    if (!thing.equals(object) && thing.collidable) {
+                    if (!thing.equals(object)) {
                         if (thing instanceof Explosive && object instanceof Exploder) {
                             if (!(thing instanceof PlayerTank && object instanceof MyBullet) && !(thing instanceof EnemyTankTemplate && object instanceof EBullet) && !(thing instanceof EnemyTankTemplate && object instanceof ESBullet)) {
                                 ((Explosive) thing).explode(((Exploder) object).getDamage());
@@ -404,35 +406,5 @@ public class BattleField {
         return playerTank;
     }
 
-    private class Camera {
-
-        private int x;
-        private int y;
-
-        private int xmov;
-        private int ymov;
-
-        Camera(int x, int y) {
-            this.x = x;
-            this.y = y;
-            xmov = 0;
-            ymov = 0;
-        }
-
-        private void update(PlayerTank playerTank) {
-            int xnew = playerTank.getLocationX();
-            int ynew = playerTank.getLocationY();
-            int xCam = Math.min(Math.max(0, (xnew + playerTank.getWidth() / 2) - GameFrame.GAME_WIDTH / 2),
-                     MAP_WIDTH - GameFrame.GAME_WIDTH);
-            int yCam = Math.min(Math.max(0, (ynew + playerTank.getHeight() / 2) - GameFrame.GAME_HEIGHT / 2),
-                    MAP_HEIGTH - GameFrame.GAME_HEIGHT);
-
-            xmov = xCam - x;
-            x = xCam;
-
-            ymov = yCam - y;
-            y = yCam;
-        }
-    }
 }
 

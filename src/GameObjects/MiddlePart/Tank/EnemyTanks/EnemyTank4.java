@@ -35,9 +35,8 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
-                        if(isNear && health > 0 && !isDeleted){
+                        if(isNear && health > 0){
                             move();
-                            System.out.println("move");
                         }
                     }
                 });
@@ -52,9 +51,8 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
                 Timer aimTimer = new Timer(100, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(health > 0 && !isDeleted) {
+                        if(health > 0) {
                             aim();
-                            System.out.println("aim");
                         }
                     }
                 });

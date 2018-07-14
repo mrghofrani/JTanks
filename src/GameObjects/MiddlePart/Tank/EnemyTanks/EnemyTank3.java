@@ -31,7 +31,9 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if(checkNearGun()){
-                            shot();
+                            if(health > 0) {
+                                shot();
+                            }
                         }
                     }
                 });
@@ -46,7 +48,9 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
                 Timer aimTimer = new Timer(100, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        aim();
+                        if(health > 0) {
+                            aim();
+                        }
                     }
                 });
                 aimTimer.start();
@@ -63,18 +67,6 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
     @Override
     protected void paintTank(Graphics2D g2d, int XOffset, int YOffset) {
         g2d.drawImage(image,locationX + XOffset ,locationY + YOffset ,null);
-    }
-
-    /**
-     * This method runs when
-     * a explosive object is
-     * going to be damaged
-     *
-     * @param value
-     */
-    @Override
-    public void explode(int value) {
-
     }
 
     @Override

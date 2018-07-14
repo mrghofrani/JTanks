@@ -17,7 +17,7 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
         this.IMAGE_PATH += "enemyTank1.png";
         this.GUN_IMAGE += "enemyGun1.png";
         this.speed = 5;
-        this.health = 20;
+        this.health = 30;
         isNear = false;
         setImage();
         setGunImage();
@@ -28,7 +28,7 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
-                        if (isNear && health > 0 && !isDeleted) {
+                        if (isNear && health > 0 ) {
                             move();
                         }
                     }
@@ -43,7 +43,7 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
                 Timer fireTimer = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (!isDeleted) {
+                        if (health > 0) {
                             if (checkNearGun()) {
                                 shot();
                             }
@@ -60,7 +60,7 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
                 Timer aimTimer = new Timer(100, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (!isDeleted)
+                        if (health > 0)
                             aim();
                     }
                 });
@@ -74,24 +74,6 @@ public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
     @Override
     protected void shot() {
         battleField.add(new EnemyCannon(battleField, locationX + 60, locationY + 50, battleField.getPlayerTank().getLocationX() + 50, battleField.getPlayerTank().getLocationY() + 50));
-    }
-
-
-    /**
-     * This method runs when
-     * a explosive object is
-     * going to be damaged
-     *
-     * @param value
-     */
-    public void explode(int value) {
-        if (health - value > 0)
-            health -= value;
-        else {
-            health = 0;
-            collidable = false;
-            isDeleted = true;
-        }
     }
 
 }

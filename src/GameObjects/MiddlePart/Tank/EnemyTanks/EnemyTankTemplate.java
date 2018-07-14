@@ -30,7 +30,6 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
 
     protected boolean isNear;
     protected BattleField battleField;
-    protected int turn = 0;
 
     protected int health;
     protected Thread moveThread;
@@ -117,7 +116,6 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
             health -= value;
         else {
             health = 0;
-            collidable = false;
             isDeleted = true;
             if (aimThread != null)
                 aimThread.interrupt();

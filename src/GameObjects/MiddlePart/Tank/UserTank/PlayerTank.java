@@ -26,7 +26,6 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
     private BattleField battleField;
     private int savedLocationX;
     private int savedLocationY;
-    private int delay;
     private int life = 3;
     private int health ;
 
@@ -370,6 +369,12 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
             g2d.drawImage(image, 150 + 200, 50, null);
         } else if(savedHealth > 0 && savedHealth < 10){
             g2d.drawImage(image, 150 + 200, 50, null);
+        }
+
+        try {
+            image = ImageIO.read(new File("files" + File.separator + "Images" + File.separator + "heart.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         int lifeTmp = life;
