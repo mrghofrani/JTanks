@@ -3,6 +3,7 @@ package GameBasis;
 
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 
+import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -162,13 +163,15 @@ public class GameState {
                 playerTank.changeGun();
             }else if(e.getButton() == 1){
                 if(playerTank.isMainGun())
-                    difference = 800;
+                    difference = 700;
                 else
                     difference = 200;
                 if(clickTime == 0){
                     clickTime = System.currentTimeMillis();
+                    playerTank.aim(e.getX(),e.getY());
                     playerTank.shot();
                 } else if (System.currentTimeMillis() - clickTime > difference){
+                    playerTank.aim(e.getX(),e.getY());
                     playerTank.shot();
                     mousePress = true;
                     clickTime = System.currentTimeMillis();
@@ -193,7 +196,7 @@ public class GameState {
         public void mouseDragged(MouseEvent e) {
             playerTank.aim(e.getX(),e.getY());
             if(playerTank.isMainGun())
-                difference = 800;
+                difference = 700;
             else
                 difference = 200;
             if(clickTime == 0){

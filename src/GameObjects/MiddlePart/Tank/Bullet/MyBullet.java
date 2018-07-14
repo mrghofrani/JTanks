@@ -6,7 +6,10 @@ import GameObjects.MiddlePart.Exploder;
 import GameObjects.MiddlePart.MiddlePart;
 import ThreadPool.ThreadPool;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,9 +23,9 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     protected BattleField battleField;
     protected int savedLocationX;
     protected int savedLocationY;
+    protected Runnable actions;
 
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
-        move();
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
         at.rotate(angle - Math.PI/2,locationX + XOffset, locationY + YOffset);
@@ -41,7 +44,20 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
 
     @Override
     public void act() {
-
+        actions = new Runnable() {
+            @Override
+            public void run() {
+                Timer moveTimer = new Timer(90, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(damage != 0)
+                            move();
+                    }
+                });
+                moveTimer.start();
+            }
+        };
+        ThreadPool.execute(actions);
     }
 
     @Override
@@ -59,6 +75,7 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     public void dispose() {
         playSound("recosh.wav");
         damage = 0;
+        battleField.clearScreen();
     }
 
     @Override

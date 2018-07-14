@@ -21,6 +21,7 @@ public class CannonGun extends PlayerGun {
 
     @Override
     public void shot(BattleField battleField,int locationX,int locationY) {
+//        double angle = Math.atan2(mouseY - locationY, mouseX - locationX);
         if(numberOfBullet > 0) {
             switch (level){
                 case 1:

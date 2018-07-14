@@ -25,14 +25,15 @@ public class EnemyTank5 extends EnemyTankTemplate {
         isNear = false;
         setImage();
         setGunImage();
-        Runnable fireThread = new Runnable() {
+        fireThread = new Runnable() {
             @Override
             public void run() {
                 Timer fireTimer = new Timer(1000, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if(checkNearGun()){
-                            shot();
+                            if(health > 0)
+                                shot();
                         }
                     }
                 });
@@ -41,13 +42,14 @@ public class EnemyTank5 extends EnemyTankTemplate {
         };
         ThreadPool.execute(fireThread);
 
-        Runnable aimThread = new Runnable() {
+        aimThread = new Runnable() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        aim();
+                        if(health > 0)
+                            aim();
                     }
                 });
                 aimTimer.start();

@@ -20,7 +20,7 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         this.health = 1;
         isNear = false;
         setImage();
-        Runnable runnable = new Runnable() {
+        moveThread = new Runnable() {
             @Override
             public void run() {
                 Timer timer =  new Timer(100, new ActionListener() {
@@ -28,18 +28,15 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
                         if(isNear && health > 0){
-                            savedLocationX = locationX;
-                            savedLocationY = locationY;
                             move();
-                            battleField.collision(EnemyTank2.this);
                         }
                     }
                 });
                 timer.start();
             }
         };
-        ThreadPool.execute(runnable);
-        Runnable runnable2 = new Runnable() {
+        ThreadPool.execute(moveThread);
+        fireThread = new Runnable() {
             @Override
             public void run() {
                 Timer fireTimer = new Timer(3000, new ActionListener(){
@@ -53,7 +50,7 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                 fireTimer.start();
             }
         };
-        ThreadPool.execute(runnable2);
+        ThreadPool.execute(fireThread);
         Runnable runnable3 = new Runnable() {
             @Override
             public void run() {
@@ -66,7 +63,7 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(runnable3);
+        ThreadPool.execute(aimThread);
     }
 
     @Override

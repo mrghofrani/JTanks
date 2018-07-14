@@ -5,6 +5,7 @@ import GameObjects.GameObject;
 import GameObjects.MiddlePart.Explosive;
 import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.MiddlePart;
+import ThreadPool.ThreadPool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -27,8 +28,13 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
 
     protected boolean isNear;
     protected BattleField battleField;
+    public boolean act = true;
 
     protected int health;
+    protected Runnable moveThread;
+    protected Runnable fireThread;
+    protected Runnable aimThread;
+
 
     protected void setGunImage(){
         File file = new File(GUN_IMAGE);
@@ -63,8 +69,8 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
     }
 
     protected void move(){
-        int backUpLocationX = locationX;
-        int backUpLocationY = locationY;
+        savedLocationX = locationX;
+        savedLocationY = locationY;
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX);
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
@@ -90,6 +96,37 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
 
     public void act() {
 
+    }
+
+    public void stop(){
+        locationY = savedLocationY;
+        locationX = savedLocationX;
+    }
+
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
+    public void explode(int value) {
+        if (health - value > 0)
+            health -= value;
+        else {
+            health = 0;
+            act = false;
+            battleField.clearScreen();
+        }
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
     }
 
 }

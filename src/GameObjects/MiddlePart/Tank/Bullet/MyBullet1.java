@@ -15,7 +15,7 @@ public class MyBullet1 extends MyBullet {
         this.IMAGE_PATH += "bullet1.png";
         setImage();
         playSound("mashinegun.wav");
-        move();
+        act();
     }
 
 

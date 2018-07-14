@@ -91,7 +91,7 @@ public abstract class GameObject {
     /**
      * @returns the health of the object
      */
-    public double getHealth(){
+    public int getHealth(){
         return health;
     }
 

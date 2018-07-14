@@ -20,6 +20,7 @@ public class MachineGun extends PlayerGun {
 
     @Override
     public void shot(BattleField battleField, int locationX,int locationY) {
+//        aim(locationX,locationY);
         if(numberOfBullet > 0) {
             switch (level){
                 case 1:

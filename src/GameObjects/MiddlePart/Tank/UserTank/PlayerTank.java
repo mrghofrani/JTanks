@@ -273,7 +273,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
             locationX = savedLocationX;
         if(locationY < 0 - image.getHeight()/2 || locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2)
             locationY = savedLocationY;
-
+        battleField.move();
         battleField.collision(this);
     }
 
@@ -289,7 +289,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
 
     public void shot(){
         gun.shot(battleField,locationX + 50,locationY + 50);
-        playSound("recosh.wav");
+//        playSound("recosh.wav");
     }
 
     /**
@@ -411,6 +411,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
     public PlayerGun getGun() {
         return gun;
     }
+
     private void promoteWeapon(){
         gun.promote();
     }

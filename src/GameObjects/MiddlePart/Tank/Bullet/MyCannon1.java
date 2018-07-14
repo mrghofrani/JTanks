@@ -16,6 +16,5 @@ public class MyCannon1 extends MyBullet {
         setImage();
         playSound("cannon.wav");
         act();
-        move();
     }
 }

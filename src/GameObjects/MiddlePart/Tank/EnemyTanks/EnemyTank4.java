@@ -11,20 +11,24 @@ import java.awt.event.ActionListener;
 
 public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
     private int damage;
+
     public EnemyTank4 (BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
         this.locationX = locationX;
         this.locationY = locationY;
+        savedLocationX = locationX;
+        savedLocationY = locationY;
         damage = 10;
         this.IMAGE_PATH += "enemyTank4.png";
         this.GUN_IMAGE += "enemyGun4.png";
         isNear = false;
         setImage();
         this.speed = 10;
-        this.health = 1;
+        this.health = 10;
+        this.damage = 10;
         setImage();
 
-        Runnable moveThread = new Runnable() {
+        moveThread = new Runnable() {
             @Override
             public void run() {
                 Timer timer =  new Timer(100, new ActionListener() {
@@ -40,13 +44,14 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
             }
         };
         ThreadPool.execute(moveThread);
-        Runnable aimThread = new Runnable() {
+        aimThread = new Runnable() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        aim();
+                        if(health > 0)
+                            aim();
                     }
                 });
                 aimTimer.start();
@@ -65,7 +70,13 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
 
     @Override
     public void explode() {
+        dispose();
+        stop();
+    }
 
+    public void dispose() {
+        playSound("recosh.wav");
+        damage = 0;
     }
 
     @Override
@@ -73,20 +84,5 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
         return damage;
     }
 
-    /**
-     * This method runs when
-     * a explosive object is
-     * going to be damaged
-     *
-     * @param value
-     */
-    @Override
-    public void explode(int value) {
 
-    }
-
-    @Override
-    public void stop() {
-        // Shouldn't be implemented
-    }
 }
