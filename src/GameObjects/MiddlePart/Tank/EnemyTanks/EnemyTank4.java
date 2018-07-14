@@ -28,36 +28,40 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
         this.damage = 10;
         setImage();
 
-        moveThread = new Runnable() {
+        moveThread = new Thread() {
             @Override
             public void run() {
                 Timer timer =  new Timer(100, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
-                        if(isNear && health > 0){
+                        if(isNear && health > 0 && !isDeleted){
                             move();
+                            System.out.println("move");
                         }
                     }
                 });
                 timer.start();
             }
         };
-        ThreadPool.execute(moveThread);
-        aimThread = new Runnable() {
+        moveThread.start();
+
+        aimThread = new Thread() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(health > 0)
+                        if(health > 0 && !isDeleted) {
                             aim();
+                            System.out.println("aim");
+                        }
                     }
                 });
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(aimThread);
+        aimThread.start();
     }
 
     protected void checkNear(){
@@ -71,12 +75,11 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
     @Override
     public void explode() {
         dispose();
-        stop();
     }
 
     public void dispose() {
-        playSound("recosh.wav");
-        damage = 0;
+        playSound("heavygun.wav");
+        isDeleted = true;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class GameLoop implements Runnable {
 	 * Higher is better, but any value above 24 is fine.
 	 */
 	public static final int FPS = 30;
+	public static boolean gameOver = false;
 	
 	private GameFrame canvas;
 	private GameState state;
@@ -45,7 +46,6 @@ public class GameLoop implements Runnable {
 
 	@Override
 	public void run() {
-		boolean gameOver = false;
 		while (!gameOver) {
 			try {
 				long start = System.currentTimeMillis();

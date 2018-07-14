@@ -9,6 +9,8 @@ import ThreadPool.ThreadPool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,7 +18,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class EnemyTankTemplate  extends GameObject implements MiddlePart,Explosive,HardObject {
+public abstract class EnemyTankTemplate extends GameObject implements MiddlePart,Explosive {
     protected double angle;
     protected int speed;
 
@@ -28,12 +30,12 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
 
     protected boolean isNear;
     protected BattleField battleField;
-    public boolean act = true;
+    protected int turn = 0;
 
     protected int health;
-    protected Runnable moveThread;
-    protected Runnable fireThread;
-    protected Runnable aimThread;
+    protected Thread moveThread;
+    protected Thread fireThread;
+    protected Thread aimThread;
 
 
     protected void setGunImage(){
@@ -83,7 +85,7 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
     }
 
     protected boolean checkNearGun(){
-        return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200 && health >0;
+        return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 2000 && health >0;
     }
 
     protected void aim(){
@@ -114,9 +116,26 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
         if (health - value > 0)
             health -= value;
         else {
-            health = 0;
-            act = false;
-            battleField.clearScreen();
+            Runnable stop = new Runnable() {
+                @Override
+                public void run() {
+                    javax.swing.Timer aimTimer = new javax.swing.Timer(1, new ActionListener(){
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            health = 0;
+                            isDeleted = true;
+                            if(aimThread != null)
+                                aimThread.interrupt();
+                            if(moveThread != null)
+                                moveThread.interrupt();
+                            if(fireThread != null)
+                                fireThread.interrupt();
+                        }
+                    });
+                    aimTimer.start();
+                }
+            };
+            ThreadPool.execute(stop);
         }
     }
 

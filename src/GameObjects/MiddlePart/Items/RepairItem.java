@@ -23,7 +23,7 @@ public class RepairItem extends GameObject implements Item,MiddlePart {
 
     @Override
     public void dispose() {
-        gift = 0;
+        isDeleted = true;
     }
 
     @Override

@@ -4,6 +4,7 @@ import GameBasis.BattleField;
 import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
 import ThreadPool.ThreadPool;
+import sun.print.PrintJob2D;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         this.health = 1;
         isNear = false;
         setImage();
-        moveThread = new Runnable() {
+        moveThread = new Thread() {
             @Override
             public void run() {
                 Timer timer =  new Timer(100, new ActionListener() {
@@ -35,8 +36,8 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                 timer.start();
             }
         };
-        ThreadPool.execute(moveThread);
-        fireThread = new Runnable() {
+        moveThread.interrupt();
+        fireThread = new Thread() {
             @Override
             public void run() {
                 Timer fireTimer = new Timer(3000, new ActionListener(){
@@ -50,8 +51,8 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                 fireTimer.start();
             }
         };
-        ThreadPool.execute(fireThread);
-        Runnable runnable3 = new Runnable() {
+        fireThread.start();
+        aimThread = new Thread() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
@@ -63,7 +64,7 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(aimThread);
+        aimThread.start();
     }
 
     @Override

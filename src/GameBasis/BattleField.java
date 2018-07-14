@@ -15,6 +15,8 @@ import GameObjects.MiddlePart.Walls.SoftWall;
 import GameObjects.GameObject;
 import GameObjects.TopPart.*;
 import GameObjects.MiddlePart.*;
+import javafx.collections.transformation.TransformationList;
+
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -25,7 +27,7 @@ public class BattleField {
     private String FILE_PATH = "files" + File.separator + "Texts" + File.separator;
     private ArrayList<GameObject> everything;
     private ArrayList<GameObject> bottomPart;
-    private List<GameObject> middlePart;
+    private ArrayList<GameObject> middlePart;
     private ArrayList<GameObject> topPart;
     private PlayerTank playerTank;
     private boolean soundState;
@@ -44,7 +46,7 @@ public class BattleField {
         everything = new ArrayList<>();
         bottomPart = new ArrayList<>();
 //        middlePart = new ArrayList<>();
-        middlePart = new CopyOnWriteArrayList<GameObject>();
+        middlePart = new ArrayList<GameObject>();
         topPart = new ArrayList<>();
         initialize();
         camera = new Camera(0,0);
@@ -179,71 +181,50 @@ public class BattleField {
      */
     public void clearScreen() {
         synchronized (everything) {
-            GameObject[] everyThingArray = new GameObject[everything.size()];
-            everyThingArray = everything.toArray(everyThingArray);
-
-            for (int i = 0; i < everyThingArray.length; i++) {
-                if (everyThingArray[i] instanceof SoftWall) {
-                    if (everyThingArray[i].getHealth() == 0)
-                        everyThingArray[i] = null;
-                }
-                if(everyThingArray[i] instanceof EnemyTankTemplate) {
-                    if (everyThingArray[i].getHealth() == 0) {
-                        everyThingArray[i] = new ExplodedGround(everyThingArray[i].getLocationX(), everyThingArray[i].getLocationY(), ((EnemyTankTemplate) everyThingArray[i]).getAngle());
-                        bottomPart.add(everyThingArray[i]);
-                        System.out.println(this.getClass().getName() + " line 190");
+            Iterator<GameObject> iterator = everything.iterator();
+            while (iterator.hasNext()) {
+                GameObject gameObject = iterator.next();
+                if (gameObject.isDeleted) {
+                    if (gameObject instanceof SoftWall) {
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof EnemyTankTemplate) {
+                        bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
+                        gameObject = null;
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof Item) {
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof Bullet) {
+                        iterator.remove();
                     }
                 }
-                if (everyThingArray[i] instanceof Item) {
-                    if (((Item) everyThingArray[i]).getGift() == 0) {
-                        everyThingArray[i] = null;
-                    }
-                }
-                if (everyThingArray[i] instanceof Bullet) {
-                    if (((Bullet) everyThingArray[i]).getDamage() == 0) {
-                        everyThingArray[i] = null;
-                    }
-                }
-
-            }
-            everything = new ArrayList<GameObject>();
-
-            for (int i = 0; i < everyThingArray.length; i++) {
-                if(everyThingArray[i] != null)
-                    everything.add(everyThingArray[i]);
-            }
-
-            GameObject[] middlePartArray = new GameObject[middlePart.size()];
-            middlePartArray = middlePart.toArray(middlePartArray);
-
-            for (int i = 0; i < middlePartArray.length; i++) {
-                if (middlePartArray[i] instanceof SoftWall) {
-                    if (middlePartArray[i].getHealth() == 0)
-                        middlePartArray[i] = new Ground(middlePartArray[i].getLocationX(),everyThingArray[i].getLocationY());
-                }
-                if(middlePartArray[i] instanceof EnemyTankTemplate) {
-                    if (middlePartArray[i].getHealth() == 0) {
-                        middlePartArray[i] = new ExplodedGround(middlePartArray[i].getLocationX() - 50, middlePartArray[i].getLocationY() - 50, ((EnemyTankTemplate) middlePartArray[i]).getAngle());
-                        System.out.println(this.getClass().getName() + " line 190");
-                    }
-                }
-                if (middlePartArray[i] instanceof Item) {
-                    if (((Item) middlePartArray[i]).getGift() == 0) {
-                        middlePartArray[i] = null;
-                    }
-                }
-                if (middlePartArray[i] instanceof Bullet) {
-                    if (((Bullet) middlePartArray[i]).getDamage() == 0) {
-                        middlePartArray[i] = null;
-                    }
-                }
-            }
-            middlePart.clear();
-            for (int i = 0; i < middlePartArray.length; i++) {
-                if(middlePartArray[i] != null)
-                    middlePart.add(middlePartArray[i]);
             }
         }
+        synchronized (middlePart){
+            Iterator<GameObject> iterator = middlePart.iterator();
+            while (iterator.hasNext()) {
+                GameObject gameObject = (GameObject) iterator.next();
+
+                if (gameObject.isDeleted) {
+                    if (gameObject instanceof SoftWall) {
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof EnemyTankTemplate) {
+                        bottomPart.add(new ExplodedGround(gameObject.getLocationX(), gameObject.getLocationY(), ((EnemyTankTemplate) gameObject).getAngle()));
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof Item) {
+                        iterator.remove();
+                    }
+                    if (gameObject instanceof Bullet) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+
     }
 
     /**
@@ -265,7 +246,7 @@ public class BattleField {
         if(playerTank.getLocationY() - viewRangeYDown < 0) viewRangeYDown = playerTank.getLocationY();
         Rectangle viewPoint = new Rectangle (playerTank.getLocationX() - viewRangeXLeft, playerTank.getLocationY() - viewRangeYUp
                                             , viewRangeXLeft + viewRangeXRight , viewRangeYDown + viewRangeYUp);*/
-
+        clearScreen();
         synchronized (bottomPart) {
             for (GameObject object : bottomPart) {
                 object.doRendering(g2d, XOffset, YOffset);
@@ -274,8 +255,6 @@ public class BattleField {
         synchronized (middlePart) {
             try {
                 int size = middlePart.size();
-                System.out.println("size " + size);
-                System.out.println("middlePart.size " + middlePart.size());
                 for (int i = 0; i < size - 1; i++) {
                     middlePart.get(i).doRendering(g2d, XOffset, YOffset);
                 }
@@ -357,6 +336,7 @@ public class BattleField {
                     if (!thing.equals(object)) {
                         if (thing instanceof Explosive && object instanceof Exploder) {
                             if (!(thing instanceof PlayerTank && object instanceof MyBullet) && !(thing instanceof EnemyTankTemplate && object instanceof EBullet) && !(thing instanceof EnemyTankTemplate && object instanceof ESBullet)) {
+                                System.out.println("UP");
                                 ((Explosive) thing).explode(((Exploder) object).getDamage());
                                 ((Exploder) object).explode();
                             }
@@ -364,6 +344,7 @@ public class BattleField {
                             if (!(object instanceof PlayerTank && thing instanceof MyBullet) && !(object instanceof EnemyTankTemplate && thing instanceof EBullet) && !(object instanceof EnemyTankTemplate && thing instanceof ESBullet)) {
                                 ((Explosive) object).explode((((Exploder) thing).getDamage()));
                                 ((Exploder) thing).explode();
+                                System.out.println("Down");
                             }
                         } else if (thing instanceof HardObject && object instanceof HardObject) {
                             ((HardObject) thing).stop();

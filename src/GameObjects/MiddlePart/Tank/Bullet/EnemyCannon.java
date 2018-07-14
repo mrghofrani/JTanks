@@ -14,6 +14,6 @@ public class EnemyCannon extends EBullet{
         this.IMAGE_PATH += "MyCannon1.png";
         setImage();
         playSound("eshot.wav");
-        act();
+        move();
     }
 }

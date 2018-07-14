@@ -30,7 +30,7 @@ public class CannonBulletCartridgeItem extends GameObject implements Item,Middle
 
     @Override
     public void dispose() {
-       gift = 0;
+       isDeleted = true;
     }
 
     @Override

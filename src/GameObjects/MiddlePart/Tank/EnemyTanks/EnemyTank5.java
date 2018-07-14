@@ -1,6 +1,7 @@
 package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.ESBullet;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyCannon;
@@ -12,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 
-public class EnemyTank5 extends EnemyTankTemplate {
+public class EnemyTank5 extends EnemyTankTemplate implements HardObject {
 
     public EnemyTank5(BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
@@ -25,7 +26,7 @@ public class EnemyTank5 extends EnemyTankTemplate {
         isNear = false;
         setImage();
         setGunImage();
-        fireThread = new Runnable() {
+        fireThread = new Thread() {
             @Override
             public void run() {
                 Timer fireTimer = new Timer(1000, new ActionListener(){
@@ -40,9 +41,9 @@ public class EnemyTank5 extends EnemyTankTemplate {
                 fireTimer.start();
             }
         };
-        ThreadPool.execute(fireThread);
+        fireThread.start();
 
-        aimThread = new Runnable() {
+        aimThread = new Thread() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
@@ -55,7 +56,7 @@ public class EnemyTank5 extends EnemyTankTemplate {
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(aimThread);
+        aimThread.start();
     }
 
 

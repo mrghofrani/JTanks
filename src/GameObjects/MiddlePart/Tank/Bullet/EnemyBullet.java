@@ -15,6 +15,6 @@ public class EnemyBullet extends EBullet {
         this.IMAGE_PATH += "bullet1.png";
         setImage();
         playSound("emachinegun.wav");
-        act();
+        move();
     }
 }

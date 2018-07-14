@@ -24,7 +24,7 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
         isNear = false;
         setImage();
         setGunImage();
-        fireThread = new Runnable() {
+        fireThread = new Thread() {
             @Override
             public void run() {
                 Timer fireTimer = new Timer(1000, new ActionListener(){
@@ -39,8 +39,8 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
             }
         };
 
-        ThreadPool.execute(fireThread);
-        aimThread = new Runnable() {
+        fireThread.start();
+        aimThread = new Thread() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener(){
@@ -52,7 +52,7 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(aimThread);
+        aimThread.start();
     }
 
     @Override

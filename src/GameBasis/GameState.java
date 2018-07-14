@@ -16,7 +16,7 @@ public class GameState {
 
     public int locX, locY;
 
-    public boolean gameOver;
+    public static boolean gameOver;
 
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
     private static boolean mousePress;

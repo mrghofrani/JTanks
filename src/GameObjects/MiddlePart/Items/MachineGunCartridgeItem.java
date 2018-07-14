@@ -23,7 +23,7 @@ public class MachineGunCartridgeItem extends GameObject implements Item,MiddlePa
 
     @Override
     public void dispose() {
-        gift = 0;
+        isDeleted = true;
     }
 
     @Override

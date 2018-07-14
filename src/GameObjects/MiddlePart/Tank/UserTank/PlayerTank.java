@@ -2,10 +2,13 @@ package GameObjects.MiddlePart.Tank.UserTank;
 
 import GameBasis.BattleField;
 import GameBasis.GameFrame;
+import GameBasis.GameLoop;
+import GameBasis.GameState;
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Explosive;
 import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Items.*;
+import GameObjects.MiddlePart.MiddlePart;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayerTank extends GameObject implements Explosive,HardObject{
+public class PlayerTank extends GameObject implements Explosive,HardObject,MiddlePart {
     public double angle = -3 * Math.PI/2;
     private MachineGun machineGun;
     private CannonGun cannonGun;
@@ -25,7 +28,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
     private int savedLocationY;
     private int delay;
     private int life = 3;
-    private int health = 50;
+    private int health ;
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -36,7 +39,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
         cannonGun = new CannonGun();
         machineGun = new MachineGun();
         gun = cannonGun;
-        health = 30;
+        health = 40;
     }
 
 
@@ -351,21 +354,37 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
 
         int savedHealth = health;
 
-        if(savedHealth == 50) {
-            g2d.drawImage(image, 200, 50, null);
+        if(savedHealth == 40) {
+            g2d.drawImage(image, 150, 50, null);
             savedHealth -= 10;
-        }if(savedHealth == 40) {
-            g2d.drawImage(image, 200 + 50, 50, null);
+        }if(savedHealth >= 30 && savedHealth < 40) {
+            g2d.drawImage(image, 150 + 50, 50, null);
             savedHealth -= 10;
-        }if(savedHealth == 30) {
-            g2d.drawImage(image, 200 + 100, 50, null);
+        }if(savedHealth >= 20 && savedHealth < 30) {
+            g2d.drawImage(image, 150 + 100, 50, null);
             savedHealth -= 10;
-        }if(savedHealth == 20) {
-            g2d.drawImage(image, 200 + 150, 50, null);
+        }if(savedHealth >= 10 && savedHealth < 20) {
+            g2d.drawImage(image, 150 + 150, 50, null);
             savedHealth -= 10;
-        }if(savedHealth == 10) {
-            g2d.drawImage(image, 200 + 200, 50, null);
+        }if(savedHealth >= 0 && savedHealth < 10 && health == 40) {
+            g2d.drawImage(image, 150 + 200, 50, null);
+        } else if(savedHealth > 0 && savedHealth < 10){
+            g2d.drawImage(image, 150 + 200, 50, null);
         }
+
+        int lifeTmp = life;
+        if(lifeTmp == 3) {
+            g2d.drawImage(image, 450, 50, null);
+            lifeTmp--;
+        }if(lifeTmp == 2) {
+            g2d.drawImage(image, 500, 50, null);
+            lifeTmp--;
+        }if(lifeTmp== 1) {
+            g2d.drawImage(image, 550, 50, null);
+            lifeTmp--;
+        }
+
+
     }
 
     public void setDefaultLife(){
@@ -430,8 +449,19 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
      */
     @Override
     public void explode(int value) {
+        if(health - value > 0){
+            health -= value;
+            System.out.println(value);
+            System.out.println(health);
+        }else if(life - 1 >= 0){
+            life--;
+            health = 40;
+        } else{
+            GameLoop.gameOver = true;
+            GameState.gameOver = true;
+            System.out.println("here");
+        }
         playSound("EnemyBulletToMyTank.wav");
-        stop();
     }
 
     @Override

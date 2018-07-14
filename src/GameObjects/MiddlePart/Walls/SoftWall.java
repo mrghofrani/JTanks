@@ -48,28 +48,12 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart,HardObj
         }else if(health < 20 && health >= 10) {
             IMAGE_PATH = "files" + File.separator + "Images" + File.separator + "softWall_3.png";
             setImage();
-        }else if(health < 10 && health >= 0) {
+        }else if(health < 10 && health > 0) {
             IMAGE_PATH = "files" + File.separator + "Images" + File.separator + "softWall_4.png";
             setImage();
         }else {
-//            System.out.println("here");
-            battleField.clearScreen();
+           isDeleted = true;
         }
-        /*if(health <= 3 && health > 2) {
-            IMAGE_PATH.substring(0,IMAGE_PATH.lastIndexOf('/') + 1);
-            IMAGE_PATH += "softWall_2.png";
-        }
-        else if(health <= 2 && health > 1) {
-            IMAGE_PATH.substring(0,IMAGE_PATH.lastIndexOf('/') + 1);
-            IMAGE_PATH += "softWall_3.png";
-        }
-        else if(health <=1 && health > 0) {
-            IMAGE_PATH.substring(0,IMAGE_PATH.lastIndexOf('/') + 1);
-            IMAGE_PATH += "softWall_4.png";
-        }
-        else if(health == 0) {
-//            battle.clearScreen();
-        }*/
     }
 
     @Override

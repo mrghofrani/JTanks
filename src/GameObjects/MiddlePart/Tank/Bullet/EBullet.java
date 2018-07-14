@@ -4,15 +4,8 @@ import GameBasis.BattleField;
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Exploder;
 import GameObjects.MiddlePart.MiddlePart;
-import ThreadPool.ThreadPool;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
-import java.io.File;
-import java.util.ArrayList;
 
 public class EBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     protected double angle;
@@ -42,24 +35,15 @@ public class EBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         battleField.collision(this);
     }
 
+    /**
+     * in each turn each of the participants
+     * have right to play and enjoy :)
+     */
     @Override
     public void act() {
-        actions = new Runnable() {
-            @Override
-            public void run() {
-                Timer moveTimer = new Timer(90, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if(damage != 0) {
-                            move();
-                        }
-                    }
-                });
-                moveTimer.start();
-            }
-        };
-        ThreadPool.execute(actions);
+
     }
+
 
     @Override
     public void explode() {
@@ -80,6 +64,6 @@ public class EBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     @Override
     public void dispose() {
         playSound("recosh.wav");
-        damage = 0;
+        isDeleted = true;
     }
 }

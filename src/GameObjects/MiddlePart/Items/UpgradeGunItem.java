@@ -24,7 +24,7 @@ public class UpgradeGunItem extends GameObject implements Item {
 
     @Override
     public void dispose() {
-        gift = 0;
+        isDeleted = true;
     }
 
     @Override

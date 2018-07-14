@@ -1,13 +1,14 @@
 package GameObjects.MiddlePart.Tank.EnemyTanks;
 
 import GameBasis.BattleField;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyCannon;
 import ThreadPool.ThreadPool;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnemyTank1 extends EnemyTankTemplate {
+public class EnemyTank1 extends EnemyTankTemplate implements HardObject {
 
     public EnemyTank1(BattleField battleField, int locationX, int locationY) {
         this.battleField = battleField;
@@ -20,34 +21,31 @@ public class EnemyTank1 extends EnemyTankTemplate {
         isNear = false;
         setImage();
         setGunImage();
-        moveThread = new Runnable() {
+        moveThread = new Thread() {
             @Override
             public void run() {
-                Timer timer = new Timer(100, new ActionListener() {
+                Timer timer = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(act) {
-                            checkNear();
-                            if (isNear && health > 0) {
-                                move();
-                            }
+                        checkNear();
+                        if (isNear && health > 0 && !isDeleted) {
+                            move();
                         }
                     }
                 });
                 timer.start();
             }
         };
-        ThreadPool.execute(moveThread);
-        fireThread = new Runnable() {
+        moveThread.start();
+        fireThread = new Thread() {
             @Override
             public void run() {
-                Timer fireTimer = new Timer(100, new ActionListener() {
+                Timer fireTimer = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(act) {
+                        if (!isDeleted) {
                             if (checkNearGun()) {
-                                if (health > 0)
-                                    shot();
+                                shot();
                             }
                         }
                     }
@@ -55,22 +53,21 @@ public class EnemyTank1 extends EnemyTankTemplate {
                 fireTimer.start();
             }
         };
-        ThreadPool.execute(fireThread);
-        aimThread = new Runnable() {
+        fireThread.start();
+        aimThread = new Thread() {
             @Override
             public void run() {
                 Timer aimTimer = new Timer(100, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(act){
+                        if (!isDeleted)
                             aim();
-                        }
                     }
                 });
                 aimTimer.start();
             }
         };
-        ThreadPool.execute(aimThread);
+        aimThread.start();
     }
 
 

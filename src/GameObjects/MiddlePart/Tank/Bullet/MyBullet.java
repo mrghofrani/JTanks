@@ -25,7 +25,9 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     protected int savedLocationY;
     protected Runnable actions;
 
+
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
+        move();
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
         at.rotate(angle - Math.PI/2,locationX + XOffset, locationY + YOffset);
@@ -42,23 +44,15 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
         battleField.collision(this);
     }
 
+    /**
+     * in each turn each of the participants
+     * have right to play and enjoy :)
+     */
     @Override
     public void act() {
-        actions = new Runnable() {
-            @Override
-            public void run() {
-                Timer moveTimer = new Timer(90, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if(damage != 0)
-                            move();
-                    }
-                });
-                moveTimer.start();
-            }
-        };
-        ThreadPool.execute(actions);
+
     }
+
 
     @Override
     public void explode() {
@@ -74,8 +68,7 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     @Override
     public void dispose() {
         playSound("recosh.wav");
-        damage = 0;
-        battleField.clearScreen();
+        isDeleted = true;
     }
 
     @Override

@@ -112,6 +112,6 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     @Override
     public void dispose() {
         playSound("recosh.wav");
-        damage = 0;
+        isDeleted = true;
     }
 }
