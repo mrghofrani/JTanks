@@ -92,14 +92,4 @@ public class EnemyTank1 extends EnemyTankTemplate {
     public void explode(int value) {
 
     }
-
-    @Override
-    public void damage(double value) {
-
-    }
-
-    @Override
-    public void explode() {
-
-    }
 }

@@ -15,9 +15,9 @@ public abstract class PlayerGun {
 
     protected BufferedImage image;
     protected double angle;
-    protected int damagePower;
     protected int numberOfBullet;
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator;
+    protected int level;
 
 
     public abstract void shot(BattleField battleField,int locationX,int locationY);

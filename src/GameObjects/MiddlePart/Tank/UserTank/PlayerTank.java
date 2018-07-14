@@ -26,7 +26,6 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
     private int delay;
     private int life = 3;
     private int health = 50;
-    private ArrayList<String> explodeImages = new ArrayList<>(9);
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -37,9 +36,6 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
         cannonGun = new CannonGun();
         machineGun = new MachineGun();
         gun = cannonGun;
-        for(int i = 0 ; i < 9; i++) {
-            explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
-        }
         health = 30;
     }
 
@@ -82,7 +78,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
             if(angle == mainAngle)
                 this.locationY -= 4;
             else
-                this.locationY -= 1;
+                this.locationY -= 2;
         }
 
         else if(keyDOWN && !keyLEFT && !keyRIGHT){
@@ -104,7 +100,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
             if(angle == mainAngle)
                 this.locationY += 4;
             else
-                this.locationY += 1;
+                this.locationY += 2;
         }
 
         else if(keyRIGHT && !keyUP && !keyDOWN){
@@ -130,7 +126,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
             if(angle == 0)
                 this.locationX += 4;
             else
-                this.locationX += 1;
+                this.locationX += 2;
         }
 
         else if(keyLEFT && !keyUP && !keyDOWN){
@@ -150,7 +146,7 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
             if(angle == mainAngle)
                 this.locationX -= 4;
             else
-                this.locationX -= 1;
+                this.locationX -= 2;
         }
 
         else if(keyLEFT && keyUP) {
@@ -201,8 +197,8 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
                 this.locationY += 4;
             }
             else{
-                this.locationX -= 1;
-                this.locationY += 1;
+                this.locationX -= 2;
+                this.locationY += 2;
             }
         }
 
@@ -230,8 +226,8 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
                 this.locationY += 4;
             }
             else{
-                this.locationX += 1;
-                this.locationY += 1;
+                this.locationX += 2;
+                this.locationY += 2;
             }
         }
 
@@ -259,8 +255,8 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
                 this.locationY -= 4;
             }
             else{
-                this.locationX += 1;
-                this.locationY -= 1;
+                this.locationX += 2;
+                this.locationY -= 2;
             }
         }
         restrictMovement();
@@ -433,15 +429,6 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
      */
     @Override
     public void explode(int value) {
-        for (String item: explodeImages) {
-            IMAGE_PATH = item;
-            setImage();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         playSound("EnemyBulletToMyTank.wav");
         stop();
     }
@@ -453,5 +440,11 @@ public class PlayerTank extends GameObject implements Explosive,HardObject{
         battleField.stop();
     }
 
+    public int getWidth(){
+        return image.getWidth();
+    }
 
+    public int getHeight(){
+        return image.getHeight();
+    }
 }

@@ -19,7 +19,6 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     protected int speed;
     private int damage;
     protected BattleField battleField;
-    private ArrayList<String> explodeImages = new ArrayList<>(9);
     private int savedLocationX;
     private int savedLocationY;
 
@@ -33,10 +32,6 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         setImage();
         playSound("esbullet.wav");
 
-
-        for(int i = 0 ; i < 9; i++) {
-            explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
-        }
 
 
         Runnable runnable3 = new Runnable() {
@@ -99,16 +94,7 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
 
     @Override
     public void explode() {
-        for (String item: explodeImages) {
-            IMAGE_PATH = item;
-            setImage();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        playSound("EnemyBulletToMyTank.wav");
+        dispose();
         stop();
     }
 

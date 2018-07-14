@@ -5,8 +5,7 @@ import ThreadPool.ThreadPool;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,7 +32,7 @@ public class MainMenu {
 
     public MainMenu(){
         // initializing components
-        playSound();
+        backgroundSound();
         frame = new JFrame("Wellcome to JTanks");
         mainPanel = new JPanel(new BorderLayout(5,5));
         topPanel = new JPanel();
@@ -45,24 +44,184 @@ public class MainMenu {
         continueButton = new JButton("Continue Old Game");
         continueButton.addActionListener(eventHandler);
         continueButton.setVisible(false);
+        Font font = continueButton.getFont().deriveFont(20f);
+        continueButton.setFont(font);
+        continueButton.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                continueButton.setForeground(Color.YELLOW);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                continueButton.setForeground(Color.YELLOW);
+            }
+        });
+
+
         easyGameButton = new JButton("Easy");
         easyGameButton.setForeground(Color.WHITE);
         easyGameButton.setOpaque(false);
         easyGameButton.setContentAreaFilled(false);
         easyGameButton.setBorderPainted(false);
         easyGameButton.addActionListener(eventHandler);
+        easyGameButton.setFont(font);
+        easyGameButton.setPreferredSize(new Dimension((int)easyGameButton.getPreferredSize().getWidth(),(int)easyGameButton.getPreferredSize().getHeight()));
+        easyGameButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.YELLOW);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                easyGameButton.setForeground(Color.WHITE);
+            }
+        });
+        easyGameButton.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                easyGameButton.setForeground(Color.YELLOW);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.WHITE);
+                selectSound();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                easyGameButton.setForeground(Color.WHITE);
+            }
+        });
+
+
+
+
         mediumGameButton = new JButton("Medium");
         mediumGameButton.setForeground(Color.WHITE);
         mediumGameButton.setOpaque(false);
         mediumGameButton.setContentAreaFilled(false);
         mediumGameButton.setBorderPainted(false);
         mediumGameButton.addActionListener(eventHandler);
+        mediumGameButton.setFont(font);
+        mediumGameButton.setPreferredSize(new Dimension((int)mediumGameButton.getPreferredSize().getWidth(),(int)mediumGameButton.getPreferredSize().getHeight()));
+        mediumGameButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.YELLOW);
+                hardGameButton.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                mediumGameButton.setForeground(Color.WHITE);
+            }
+        });
+        mediumGameButton.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.YELLOW);
+                hardGameButton.setForeground(Color.WHITE);
+                selectSound();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                mediumGameButton.setForeground(Color.WHITE);
+            }
+        });
+
+
+
+
         hardGameButton = new JButton("Hard");
         hardGameButton.setForeground(Color.WHITE);
         hardGameButton.setOpaque(false);
         hardGameButton.setContentAreaFilled(false);
         hardGameButton.setBorderPainted(false);
+        hardGameButton.setFont(font);
+        hardGameButton.setPreferredSize(new Dimension((int)hardGameButton.getPreferredSize().getWidth(),(int)hardGameButton.getPreferredSize().getHeight()));
         hardGameButton.addActionListener(eventHandler);
+        hardGameButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.YELLOW);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                hardGameButton.setForeground(Color.WHITE);
+            }
+        });
+        hardGameButton.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.YELLOW);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                hardGameButton.setForeground(Color.WHITE);
+            }
+        });
+
+
         soundButton = new JButton();
         soundButton.addActionListener(eventHandler);
         soundButton.setOpaque(false);
@@ -118,34 +277,29 @@ public class MainMenu {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            agreeSound();
             if(e.getSource().equals(continueButton)){
                 // TODO we should implement this part later
             } else if(e.getSource().equals(easyGameButton)){
                 gameLevel = 1;
-                frame.dispose();
-                clip.stop();
-                startTheGame();
+                easyGameButton.setForeground(Color.YELLOW);
+                soundState();
             } else if(e.getSource().equals(mediumGameButton)){
                 gameLevel = 2;
-                frame.dispose();
-                clip.stop();
-                startTheGame();
+                mediumGameButton.setForeground(Color.YELLOW);
+                soundState();
             } else if(e.getSource().equals(hardGameButton)) {
                 gameLevel = 3;
-                frame.dispose();
-                clip.stop();
-                startTheGame();
+                hardGameButton.setForeground(Color.YELLOW);
+                soundState();
             }
-//            } else if(e.getSource().equals(soundButton)){
-//                if(soundButton.getIcon().equals(muteIcon)){
-//                    soundButton.setIcon(playIcon);
-//                    soundState = true;
-//                } else if(soundButton.getIcon().equals(playIcon)){
-//                    soundButton.setIcon(muteIcon);
-//                    soundState = false;
-//                }
-//            }
         }
+    }
+
+    private void soundState(){
+        frame.dispose();
+        clip.stop();
+        startTheGame();
     }
 
     /**
@@ -178,13 +332,49 @@ public class MainMenu {
     /**
      * This method is used to play the desired clip
      */
-    private void playSound(){
+    private void backgroundSound(){
         try {
             File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "startup.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioIn);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-10.0f);
             clip.loop(1000);
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void selectSound(){
+        try {
+            Clip clip;
+            File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "select.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void agreeSound(){
+        try {
+            Clip clip;
+            File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "agree.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {

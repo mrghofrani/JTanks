@@ -2,10 +2,7 @@ package GameBasis;
 
 import GameObjects.BottomPart.BottomPart;
 import GameObjects.BottomPart.Ground;
-import GameObjects.MiddlePart.Items.CannonBulletCartridgeItem;
-import GameObjects.MiddlePart.Items.Item;
-import GameObjects.MiddlePart.Items.MachineGunCartridgeItem;
-import GameObjects.MiddlePart.Items.RepairItem;
+import GameObjects.MiddlePart.Items.*;
 import GameObjects.MiddlePart.Tank.Bullet.Bullet;
 import GameObjects.MiddlePart.Tank.Bullet.MyBullet;
 import GameObjects.MiddlePart.Tank.Bullet.EBullet;
@@ -18,8 +15,7 @@ import GameObjects.TopPart.*;
 import GameObjects.MiddlePart.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 public class BattleField {
@@ -35,6 +31,9 @@ public class BattleField {
     public int XOffset;
     public int YOffset;
     private boolean stop;
+    private final int MAP_HEIGTH = 1200;
+    private final int MAP_WIDTH = 1200;
+    private Camera camera;
 
     public BattleField() {
         // Hi Mahandes !!!
@@ -45,6 +44,7 @@ public class BattleField {
         middlePart = Collections.synchronizedList(new ArrayList<>());
         topPart = new ArrayList<>();
         initialize();
+        camera = new Camera(0,0);
     }
 
     /**
@@ -76,6 +76,8 @@ public class BattleField {
                                 playerTank = new PlayerTank(this,200, 200);
                                 middlePart.add(new EnemyTank4(this,300,500));
                                 everything.add(new EnemyTank4(this,300,500));
+                                middlePart.add(new UpgradeGunItem(this,100,100));
+                                everything.add(new UpgradeGunItem(this,100,100));
                                 everything.add(playerTank);
                                 middlePart.add(playerTank);
                             } else if (tmp[i].equals("F"))
@@ -115,7 +117,7 @@ public class BattleField {
                 everything.add(new HardWall(courserX, courserY));
                 break;
             case "&":
-                everything.add(new SoftWall(courserX, courserY));
+                everything.add(new SoftWall(this,courserX, courserY));
                 break;
             case "*":
                 everything.add(new Grass(courserX, courserY));
@@ -175,12 +177,64 @@ public class BattleField {
      */
     public void clearScreen() {
         synchronized (middlePart) {
-            for (GameObject gameObject : everything) {
-                if (gameObject.getHealth() == 0) {
-               /* if (gameObject instanceof SoftWall) {
+            GameObject[] everyThingArray = new GameObject[everything.size()];
+            everyThingArray = everything.toArray(everyThingArray);
+
+            for (int i = 0; i < everyThingArray.length; i++) {
+                if (everyThingArray[i] instanceof SoftWall) {
+                    if (everyThingArray[i].getHealth() == 0) {
+                        everyThingArray[i] = new Ground(everyThingArray[i].getLocationX(),everyThingArray[i].getLocationY());
+                        System.out.println(this.getClass().getName() + " line 188");
+                    }
+                }
+                if (everyThingArray[i] instanceof Item) {
+                    if (((Item) everyThingArray[i]).getGift() == 0) {
+                        everyThingArray[i] = null;
+                    }
+                }
+                if (everyThingArray[i] instanceof Bullet) {
+                    if (((Bullet) everyThingArray[i]).getDamage() == 0) {
+                        everyThingArray[i] = null;
+                    }
+                }
+            }
+            everything = new ArrayList<GameObject>();
+            for (int i = 0; i < everyThingArray.length; i++) {
+                if(everyThingArray[i] != null)
+                    middlePart.add(everyThingArray[i]);
+            }
+
+            GameObject[] middlePartArray = new GameObject[middlePart.size()];
+            middlePartArray = middlePart.toArray(middlePartArray);
+
+            for (int i = 0; i < middlePartArray.length; i++) {
+                if (middlePartArray[i] instanceof SoftWall) {
+                    if (middlePartArray[i].getHealth() == 0)
+                        middlePartArray[i] = new Ground(middlePartArray[i].getLocationX(),everyThingArray[i].getLocationY());
+                }
+                if (middlePartArray[i] instanceof Item) {
+                    if (((Item) middlePartArray[i]).getGift() == 0) {
+                        middlePartArray[i] = null;
+                    }
+                }
+                if (middlePartArray[i] instanceof Bullet) {
+                    if (((Bullet) middlePartArray[i]).getDamage() == 0) {
+                        middlePartArray[i] = null;
+                    }
+                }
+            }
+            middlePart = new ArrayList<GameObject>();
+            for (int i = 0; i < middlePartArray.length; i++) {
+                if(middlePartArray[i] != null)
+                    middlePart.add(middlePartArray[i]);
+            }
+        }
+            /*for (GameObject gameObject : everything) {
+
+               *//* if (gameObject instanceof SoftWall) {
                     GameObject tmp = new Ground(gameObject.getLocationX(), gameObject.getLocationY());
                     gameObject = tmp;
-                }*/
+                }*//*
 //                if(gameObject instanceof Tank){
 //                    GameObject tmp = new BottomPart.ExplodedGround(gameObject.getLocationX(),gameObject.getLocationY());
 //                    gameObject = tmp;
@@ -194,8 +248,7 @@ public class BattleField {
                             middlePart.remove(gameObject);
                     }
                 }
-            }
-        }
+        }*/
     }
 
     /**
@@ -217,14 +270,21 @@ public class BattleField {
         if(playerTank.getLocationY() - viewRangeYDown < 0) viewRangeYDown = playerTank.getLocationY();
         Rectangle viewPoint = new Rectangle (playerTank.getLocationX() - viewRangeXLeft, playerTank.getLocationY() - viewRangeYUp
                                             , viewRangeXLeft + viewRangeXRight , viewRangeYDown + viewRangeYUp);*/
+
         synchronized (bottomPart) {
             for (GameObject object : bottomPart) {
                 object.doRendering(g2d, XOffset, YOffset);
             }
         }
         synchronized (middlePart) {
-            for (GameObject object : middlePart) {
-                object.doRendering(g2d, XOffset, YOffset);
+            int size = middlePart.size();
+            for (int i = 0; i < size - 2; i++) {
+                middlePart.get(i).doRendering(g2d,XOffset,YOffset);
+            }
+            if(size - 1 < middlePart.size()) {
+                for (int i = size ; i < middlePart.size(); i++) {
+                    middlePart.get(i).doRendering(g2d, XOffset, YOffset);
+                }
             }
         }
         synchronized (topPart) {
@@ -252,13 +312,13 @@ public class BattleField {
     public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
         if(!stop) {
             if (keyUP)
-                YOffset += 4;
+                YOffset += 2;
             if (keyDOWN)
-                YOffset -= 4;
+                YOffset -= 2;
             if (keyLEFT)
-                XOffset += 4;
+                XOffset += 2;
             if (keyRIGHT)
-                XOffset -= 4;
+                XOffset -= 2;
         }
     }
 
@@ -269,9 +329,7 @@ public class BattleField {
     public void move(){
         stop = false;
     }
-    public ArrayList<GameObject> getEverything() {
-        return everything;
-    }
+
 
 //    public void initializeSound(){
 //        soundState = Main.getSoundState();
@@ -298,9 +356,11 @@ public class BattleField {
                         if(!(thing instanceof PlayerTank && object instanceof MyBullet) && !(thing instanceof EnemyTankTemplate && object instanceof EBullet)) {
                             ((Explosive) thing).explode(((Exploder) object).getDamage());
                             ((Exploder) object).explode();
+                            System.out.println(this.getClass().getName());
                         }
                     } else if(thing instanceof Exploder && object instanceof Explosive) {
                         if(!(object instanceof PlayerTank && thing instanceof MyBullet) && !(object instanceof EnemyTankTemplate && thing instanceof EBullet)) {
+                            System.out.println(this.getClass().getName());
                             ((Explosive) object).explode((((Exploder) thing).getDamage()));
                             ((Exploder) thing).explode();
                         }
@@ -345,6 +405,35 @@ public class BattleField {
         return playerTank;
     }
 
+    private class Camera {
 
+        private int x;
+        private int y;
+
+        private int xmov;
+        private int ymov;
+
+        Camera(int x, int y) {
+            this.x = x;
+            this.y = y;
+            xmov = 0;
+            ymov = 0;
+        }
+
+        private void update(PlayerTank playerTank) {
+            int xnew = playerTank.getLocationX();
+            int ynew = playerTank.getLocationY();
+            int xCam = Math.min(Math.max(0, (xnew + playerTank.getWidth() / 2) - GameFrame.GAME_WIDTH / 2),
+                     MAP_WIDTH - GameFrame.GAME_WIDTH);
+            int yCam = Math.min(Math.max(0, (ynew + playerTank.getHeight() / 2) - GameFrame.GAME_HEIGHT / 2),
+                    MAP_HEIGTH - GameFrame.GAME_HEIGHT);
+
+            xmov = xCam - x;
+            x = xCam;
+
+            ymov = yCam - y;
+            y = yCam;
+        }
+    }
 }
 

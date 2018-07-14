@@ -20,13 +20,7 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     protected BattleField battleField;
     protected int savedLocationX;
     protected int savedLocationY;
-    private ArrayList<String> explodeImages = new ArrayList<>(9);
 
-    public MyBullet(){
-        for(int i = 0 ; i < 9; i++) {
-            explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
-        }
-    }
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         move();
         AffineTransform backup = g2d.getTransform();
@@ -52,16 +46,7 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
 
     @Override
     public void explode() {
-//        for (String item: explodeImages) {
-//            IMAGE_PATH = item;
-//            setImage();
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        playSound("EnemyBulletToMyTank.wav");
+        dispose();
         stop();
     }
 

@@ -173,8 +173,6 @@ public class GameState {
                     mousePress = true;
                     clickTime = System.currentTimeMillis();
                 }
-                System.out.println(clickTime + "pressed");
-//              TODO:  System.out.println(clickTime);
             }
 
         }
@@ -206,8 +204,6 @@ public class GameState {
                 mousePress = true;
                 clickTime = System.currentTimeMillis();
             }
-            System.out.println(clickTime + "drag");
-//          TODO:  System.out.println(clickTime);
         }
 
         @Override

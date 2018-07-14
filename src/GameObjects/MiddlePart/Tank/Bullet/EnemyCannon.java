@@ -15,6 +15,5 @@ public class EnemyCannon extends EBullet{
         setImage();
         playSound("eshot.wav");
         move();
-        System.out.println("shot");
     }
 }
