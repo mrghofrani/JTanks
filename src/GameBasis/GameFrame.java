@@ -156,7 +156,7 @@ public class GameFrame extends JFrame {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioIn);
-			clip.loop(1000);
+//			clip.loop(1000);
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

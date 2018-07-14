@@ -2,6 +2,7 @@ package GameObjects.MiddlePart.Tank.Bullet;
 
 import GameBasis.BattleField;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.Exploder;
 import GameObjects.MiddlePart.MiddlePart;
 import ThreadPool.ThreadPool;
 
@@ -10,20 +11,33 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
+import java.io.File;
+import java.util.ArrayList;
 
-public class ESBullet extends GameObject implements MiddlePart {
+public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     protected double angle;
     protected int speed;
+    private int damage;
     protected BattleField battleField;
+    private ArrayList<String> explodeImages = new ArrayList<>(9);
+    private int savedLocationX;
+    private int savedLocationY;
 
     public ESBullet(BattleField battleField, int locationX, int locationY, int mouseX, int mouseY) {
         this.locationX = locationX;
         this.locationY = locationY;
         this.battleField = battleField;
         speed = 8;
+        damage = 10;
         this.IMAGE_PATH += "esbullet.png";
         setImage();
         playSound("esbullet.wav");
+
+
+        for(int i = 0 ; i < 9; i++) {
+            explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
+        }
+
 
         Runnable runnable3 = new Runnable() {
             @Override
@@ -63,8 +77,11 @@ public class ESBullet extends GameObject implements MiddlePart {
     }
 
     private void move(){
+        savedLocationX = locationX;
+        savedLocationY = locationY;
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
+        battleField.collision(this);
     }
 
     protected void aim(){
@@ -78,5 +95,37 @@ public class ESBullet extends GameObject implements MiddlePart {
     @Override
     public void act() {
 
+    }
+
+    @Override
+    public void explode() {
+        for (String item: explodeImages) {
+            IMAGE_PATH = item;
+            setImage();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        playSound("EnemyBulletToMyTank.wav");
+        stop();
+    }
+
+
+    private void stop(){
+        locationX = savedLocationX;
+        locationY = savedLocationY;
+    }
+
+    @Override
+    public int getDamage() {
+        return damage;
+    }
+
+    @Override
+    public void dispose() {
+        playSound("recosh.wav");
+        damage = 0;
     }
 }

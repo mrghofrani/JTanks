@@ -2,6 +2,7 @@ package GameObjects.MiddlePart.Walls;
 
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Explosive;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.MiddlePart;
 import GameBasis.*;
 import javax.imageio.ImageIO;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class SoftWall extends GameObject implements Explosive,MiddlePart{
+public class SoftWall extends GameObject implements Explosive,MiddlePart,HardObject {
     public SoftWall(int locationX ,int locationY){
         this.locationX = locationX;
         this.locationY = locationY;
@@ -33,7 +34,7 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart{
      * going to be damaged
      */
     @Override
-    public void damage(double value) {
+    public void explode(int value) {
         if(health - value > 0)
             health -= value;
         else
@@ -53,5 +54,10 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart{
         else if(health == 0) {
 //            battle.clearScreen();
         }
+    }
+
+    @Override
+    public void stop() {
+        // nothing
     }
 }

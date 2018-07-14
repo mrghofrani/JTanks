@@ -65,8 +65,20 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
         g2d.drawImage(image,locationX + XOffset ,locationY + YOffset ,null);
     }
 
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
     @Override
-    public void damage(double value) {
+    public void explode(int value) {
 
+    }
+
+    @Override
+    public void stop() {
+        // like a hard wall
     }
 }

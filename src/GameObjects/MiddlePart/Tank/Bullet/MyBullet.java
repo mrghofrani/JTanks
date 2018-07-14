@@ -4,27 +4,29 @@ import GameBasis.BattleField;
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Exploder;
 import GameObjects.MiddlePart.MiddlePart;
+import ThreadPool.ThreadPool;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class EBullet extends GameObject implements MiddlePart,Exploder,Bullet {
+public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     protected double angle;
     protected int speed;
-    protected BattleField battleField;
     protected int damage;
-    private ArrayList<String> explodeImages = new ArrayList<>(9);
+    protected BattleField battleField;
     protected int savedLocationX;
     protected int savedLocationY;
+    private ArrayList<String> explodeImages = new ArrayList<>(9);
 
-    protected EBullet(){
+    public MyBullet(){
         for(int i = 0 ; i < 9; i++) {
             explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
         }
     }
-
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         move();
         AffineTransform backup = g2d.getTransform();
@@ -50,32 +52,32 @@ public class EBullet extends GameObject implements MiddlePart,Exploder,Bullet {
 
     @Override
     public void explode() {
-        for (String item: explodeImages) {
-            IMAGE_PATH = item;
-            setImage();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        playSound("EnemyBulletToMyTank.wav");
+//        for (String item: explodeImages) {
+//            IMAGE_PATH = item;
+//            setImage();
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        playSound("EnemyBulletToMyTank.wav");
         stop();
     }
 
-    protected void stop(){
+    public void stop(){
         locationX = savedLocationX;
         locationY = savedLocationY;
-    }
-
-    @Override
-    public int getDamage() {
-        return damage;
     }
 
     @Override
     public void dispose() {
         playSound("recosh.wav");
         damage = 0;
+    }
+
+    @Override
+    public int getDamage() {
+        return damage;
     }
 }

@@ -3,6 +3,7 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 import GameBasis.BattleField;
 import GameObjects.GameObject;
 import GameObjects.MiddlePart.Explosive;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.MiddlePart;
 
 import javax.imageio.ImageIO;
@@ -14,14 +15,15 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class EnemyTankTemplate  extends GameObject implements MiddlePart,Explosive {
+public abstract class EnemyTankTemplate  extends GameObject implements MiddlePart,Explosive,HardObject {
     protected double angle;
     protected int speed;
 
     protected double gunAngle;
     protected String GUN_IMAGE = "files" + File.separator + "Images" + File.separator;
     protected BufferedImage gunImage;
-
+    protected int savedLocationX;
+    protected int savedLocationY;
 
     protected boolean isNear;
     protected BattleField battleField;
@@ -66,10 +68,7 @@ public abstract class EnemyTankTemplate  extends GameObject implements MiddlePar
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX);
         locationX += speed * Math.cos(angle);
         locationY += speed * Math.sin(angle);
-        if(battleField.collisionTest(this)){
-            locationX = backUpLocationX;
-            locationY = backUpLocationY;
-        }
+        battleField.collision(this);
     }
 
     protected void checkNear(){

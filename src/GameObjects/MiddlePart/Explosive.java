@@ -11,6 +11,5 @@ public interface Explosive {
      * a explosive object is
      * going to be damaged
      */
-    public void damage(double value);
-    public void explode();
+    public void explode(int value);
 }

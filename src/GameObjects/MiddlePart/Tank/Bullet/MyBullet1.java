@@ -2,17 +2,16 @@ package GameObjects.MiddlePart.Tank.Bullet;
 
 
 import GameBasis.BattleField;
-import GameObjects.GameObject;
-import GameObjects.MiddlePart.Exploder;
-import GameObjects.MiddlePart.MiddlePart;
 
-public class Bullet1 extends Bullet {
+public class MyBullet1 extends MyBullet {
 
-    public Bullet1(BattleField battleField, int locationX, int locationY, double angle) {
+    public MyBullet1(BattleField battleField, int locationX, int locationY, double angle) {
+        super();
         this.locationX = locationX;
         this.locationY = locationY;
         this.battleField = battleField;
         speed = 10;
+        damage = 2;
         this.angle = angle;
         this.IMAGE_PATH += "bullet1.png";
         setImage();

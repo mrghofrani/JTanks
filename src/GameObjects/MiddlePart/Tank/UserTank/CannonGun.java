@@ -1,12 +1,10 @@
 package GameObjects.MiddlePart.Tank.UserTank;
 
 import GameBasis.BattleField;
-import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
+import GameObjects.MiddlePart.Tank.Bullet.MyCannon1;
 
 
 public class CannonGun extends PlayerGun {
-
-
 
 
     public CannonGun(){
@@ -19,7 +17,7 @@ public class CannonGun extends PlayerGun {
     @Override
     public void shot(BattleField battleField,int locationX,int locationY) {
         if(numberOfBullet > 0) {
-            battleField.add(new Cannon1(battleField,locationX,locationY ,angle));
+            battleField.add(new MyCannon1(battleField,locationX,locationY ,angle));
             numberOfBullet--;
         }else{
             outOfBulletSound();

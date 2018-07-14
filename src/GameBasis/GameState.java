@@ -1,11 +1,8 @@
 /*** In The Name of Allah ***/
 package GameBasis;
 
-import GameObjects.MiddlePart.Tank.Bullet.Cannon1;
 import GameObjects.MiddlePart.Tank.UserTank.PlayerTank;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -128,8 +125,8 @@ public class GameState {
 					keyRIGHT = false;
 					break;
                 case KeyEvent.VK_SHIFT:
-                    System.out.println("cheat mode is on!");
-                    battleField.isCheatMode = true;
+//                    System.out.println("cheat mode is on!");
+//                    battleField.isCheatMode = true;
                     break;
                 case KeyEvent.VK_P:
                     //TODO playerTank.promoteWeapon();
@@ -170,6 +167,7 @@ public class GameState {
                     difference = 200;
                 if(clickTime == 0){
                     clickTime = System.currentTimeMillis();
+                    playerTank.shot();
                 } else if (System.currentTimeMillis() - clickTime > difference){
                     playerTank.shot();
                     mousePress = true;
@@ -183,7 +181,7 @@ public class GameState {
 //
 //        public void mouseClicked(MouseEvent e){
 //            if(e.getButton() == 1){
-//                BattleField.add(new Cannon1(playerTank.getLocationX(), e.getX(),playerTank.getLocationY(),e.getY()));
+//                BattleField.add(new MyCannon1(playerTank.getLocationX(), e.getX(),playerTank.getLocationY(),e.getY()));
 //                mousePress = true;
 //            }
 //        }
@@ -202,6 +200,7 @@ public class GameState {
                 difference = 200;
             if(clickTime == 0){
                 clickTime = System.currentTimeMillis();
+                playerTank.shot();
             } else if (System.currentTimeMillis() - clickTime > difference){
                 playerTank.shot();
                 mousePress = true;

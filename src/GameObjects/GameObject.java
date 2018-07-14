@@ -14,7 +14,7 @@ public abstract class GameObject {
     protected String IMAGE_PATH = "files" + File.separator + "Images" + File.separator; // Main part of image of the object
     protected String SOUND_PATH = "files" + File.separator + "Sounds" + File.separator; // Main part of sound of the object
     protected BufferedImage image;// image of the object
-    protected double health;
+    protected int health;
 
     /**
      * in each turn each of the participants

@@ -28,7 +28,10 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
                         if(isNear && health > 0){
+                            savedLocationX = locationX;
+                            savedLocationY = locationY;
                             move();
+                            battleField.collision(EnemyTank2.this);
                         }
                     }
                 });
@@ -86,7 +89,13 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
      * @param value
      */
     @Override
-    public void damage(double value) {
+    public void explode(int value) {
 
+    }
+
+    @Override
+    public void stop() {
+        locationX = savedLocationX;
+        locationY = savedLocationY;
     }
 }

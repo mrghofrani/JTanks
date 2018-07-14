@@ -3,6 +3,8 @@ package GameObjects.MiddlePart.Tank.UserTank;
 import GameBasis.BattleField;
 import GameBasis.GameFrame;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.Explosive;
+import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Items.*;
 
 import javax.imageio.ImageIO;
@@ -11,8 +13,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class PlayerTank extends GameObject {
+public class PlayerTank extends GameObject implements Explosive,HardObject{
     public double angle = -3 * Math.PI/2;
     private MachineGun machineGun;
     private CannonGun cannonGun;
@@ -22,7 +25,8 @@ public class PlayerTank extends GameObject {
     private int savedLocationY;
     private int delay;
     private int life = 3;
-    private int health = 5;
+    private int health = 50;
+    private ArrayList<String> explodeImages = new ArrayList<>(9);
 
     public PlayerTank(BattleField battleField, int locationX, int locationY) {
         this.IMAGE_PATH += "playerTank.png";
@@ -33,6 +37,10 @@ public class PlayerTank extends GameObject {
         cannonGun = new CannonGun();
         machineGun = new MachineGun();
         gun = cannonGun;
+        for(int i = 0 ; i < 9; i++) {
+            explodeImages.add("files" + File.separator + "Images" + File.separator + "explode" + File.separator + "f" + (i + 1) + ".png");
+        }
+        health = 30;
     }
 
 
@@ -270,13 +278,7 @@ public class PlayerTank extends GameObject {
         if(locationY < 0 - image.getHeight()/2 || locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2)
             locationY = savedLocationY;
 
-        if(battleField.collisionTest(this)) {
-            locationX = savedLocationX;
-            locationY = savedLocationY;
-            battleField.stop();
-        } else
-            battleField.move();
-
+        battleField.collision(this);
     }
 
     /**
@@ -353,43 +355,48 @@ public class PlayerTank extends GameObject {
 
         int savedHealth = health;
 
-        if(savedHealth == 5) {
+        if(savedHealth == 50) {
             g2d.drawImage(image, 200, 50, null);
-            savedHealth--;
-        }if(savedHealth == 4) {
+            savedHealth -= 10;
+        }if(savedHealth == 40) {
             g2d.drawImage(image, 200 + 50, 50, null);
-            savedHealth--;
-        }if(savedHealth == 3) {
+            savedHealth -= 10;
+        }if(savedHealth == 30) {
             g2d.drawImage(image, 200 + 100, 50, null);
-            savedHealth--;
-        }if(savedHealth == 2) {
+            savedHealth -= 10;
+        }if(savedHealth == 20) {
             g2d.drawImage(image, 200 + 150, 50, null);
-            savedHealth--;
-        }if(savedHealth == 1) {
+            savedHealth -= 10;
+        }if(savedHealth == 10) {
             g2d.drawImage(image, 200 + 200, 50, null);
-            savedHealth--;
         }
-
     }
+
     public void setDefaultLife(){
         life = 3;
     }
 
-    public void setDefaultHealth(){
-        health = 5;
+    public boolean repair(){
+        int tmp = health;
+        if(health != 50)
+            health += 10;
+        return tmp != health;
     }
 
     public void eatItem(Item item){
         if(item instanceof CannonBulletCartridgeItem){
-            cannonGun.numberOfBullet += ((CannonBulletCartridgeItem) item).getAddingCannonBullet();
+            cannonGun.numberOfBullet += item.getGift();
+            item.dispose();
         }else if(item instanceof MachineGunCartridgeItem){
-            machineGun.numberOfBullet += ((MachineGunCartridgeItem)item).getAddingCartridge();
+            machineGun.numberOfBullet += item.getGift();
+            item.dispose();
         }else if(item instanceof RepairItem){
-            setDefaultHealth();
+            if(repair())
+                item.dispose();
         }else if(item instanceof UpgradeGunItem){
             promoteWeapon();
+            item.dispose();
         }
-//        item.dispose();
     }
 
 
@@ -411,5 +418,40 @@ public class PlayerTank extends GameObject {
     private void promoteWeapon(){
         gun.promote();
     }
+
+
+    public void setDefaultHealth(){
+        health = 50;
+    }
+
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
+    @Override
+    public void explode(int value) {
+        for (String item: explodeImages) {
+            IMAGE_PATH = item;
+            setImage();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        playSound("EnemyBulletToMyTank.wav");
+        stop();
+    }
+
+    @Override
+    public void stop() {
+        locationX = savedLocationX;
+        locationY = savedLocationY;
+        battleField.stop();
+    }
+
 
 }

@@ -1,6 +1,6 @@
 package Bullet.Cannon;
 
-//import Bullet.Explosive; // what is explosive????
+//import MyBullet.Explosive; // what is explosive????
 
 public abstract class EnemyCannonBullet extends CannonBullet{
     protected abstract void initialize(int locationX,int locationY, int degree);

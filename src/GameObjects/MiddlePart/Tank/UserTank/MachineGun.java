@@ -2,7 +2,7 @@ package GameObjects.MiddlePart.Tank.UserTank;
 
 
 import GameBasis.BattleField;
-import GameObjects.MiddlePart.Tank.Bullet.Bullet1;
+import GameObjects.MiddlePart.Tank.Bullet.MyBullet1;
 
 
 public class MachineGun extends PlayerGun {
@@ -18,7 +18,7 @@ public class MachineGun extends PlayerGun {
     @Override
     public void shot(BattleField battleField, int locationX,int locationY) {
         if(numberOfBullet > 0) {
-            battleField.add(new Bullet1(battleField,locationX, locationY, angle));
+            battleField.add(new MyBullet1(battleField,locationX, locationY, angle));
             numberOfBullet--;
         }
         else

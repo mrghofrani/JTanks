@@ -28,7 +28,10 @@ public class EnemyTank1 extends EnemyTankTemplate {
                     public void actionPerformed(ActionEvent e) {
                         checkNear();
                         if(isNear && health > 0){
+                            savedLocationX = locationX;
+                            savedLocationY = locationY;
                             move();
+                            battleField.collision(EnemyTank1.this);
                         }
                     }
                 });
@@ -69,11 +72,24 @@ public class EnemyTank1 extends EnemyTankTemplate {
 
     @Override
     protected void shot() {
-        battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX() + 50,battleField.getPlayerTank().getLocationY() + 50));
-    }
+        battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX() + 50,battleField.getPlayerTank().getLocationY() + 50)); }
+
 
     @Override
-    public void damage(double value) {
+    public void stop() {
+        locationX = savedLocationX;
+        locationY = savedLocationY;
+    }
+
+    /**
+     * This method runs when
+     * a explosive object is
+     * going to be damaged
+     *
+     * @param value
+     */
+    @Override
+    public void explode(int value) {
 
     }
 }
