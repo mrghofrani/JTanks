@@ -84,7 +84,7 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
     }
 
     protected boolean checkNearGun(){
-        return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 2000 && health >0;
+        return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200 && health >0;
     }
 
     protected void aim(){

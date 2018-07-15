@@ -35,8 +35,8 @@ public class BattleField {
     public int XOffset;
     public int YOffset;
     private boolean stop;
-    private final int MAP_HEIGHT = 1200;
-    private final int MAP_WIDTH = 1200;
+    private final int MAP_HEIGHT = 2000;
+    private final int MAP_WIDTH = 2000;
 
     public BattleField() {
         // Hi Mahandes !!!
@@ -129,30 +129,30 @@ public class BattleField {
             case "CI":
                 everything.add(new CannonBulletCartridgeItem(this,courserX, courserY));
                 break;
+            case "UI":
+                everything.add(new UpgradeGunItem(this,courserX,courserY));
+                break;
             case "S":
                 ((Ground) everything.get(everything.size() - 1)).setStartingPoint();
                 break;
             case "F":
                 ((Ground) everything.get(everything.size() - 1)).setFinishingPoint();
                 break;
-//            case "player GameObjects.MiddlePart.Tank.EnemyTank2.Tank":
-//                everything.add(new UserTank(courserX,courserY));
-//                break;
-//            case "Enemy Tank1":
-//                everything.add(new EnemyTank1Pack(courserX,courserY));
-//                break;
-//            case "Enemy Tank2":
-//                everything.add(new EnemyTank2(courserX,courserY));
-//                break;
-//            case "Enemy Tank3":
-//                everything.add(new EnemyTank3(courserX,courserY));
-//                break;
-//            case "Enemy Tank4":
-//                everything.add(new EnemyTank4(courserX,courserY));
-//                break;
-//            case "Enemy Tank5":
-//                everything.add(new EnemyTank5(courserX,courserY));
-//                break;
+            case "E1":
+                everything.add(new EnemyTank1(this,courserX,courserY));
+                break;
+            case "E2":
+                everything.add(new EnemyTank2(this,courserX,courserY));
+                break;
+            case "E3":
+                everything.add(new EnemyTank3(this,courserX,courserY));
+                break;
+            case "E4":
+                everything.add(new EnemyTank4(this,courserX,courserY));
+                break;
+            case "E5":
+                everything.add(new EnemyTank5(this,courserX,courserY));
+                break;
             default:
                 throw new Exception("Object not found");
         }
@@ -249,8 +249,8 @@ public class BattleField {
     public void drawAllObjects(Graphics2D g2d) {
         if (XOffset > 0) XOffset = 0;
         if (YOffset > 0) YOffset = 0;
-        if (XOffset + 1200 < 600) XOffset = -600;
-        if (YOffset + 1200 < 600) YOffset = -600;
+        if (XOffset < -795) XOffset = -795;
+        if (YOffset < -960) YOffset = -960;
 
         clearScreen();
         synchronized (bottomPart) {
@@ -285,7 +285,7 @@ public class BattleField {
                 FILE_PATH += "easyMap.txt";
                 break;
             case 2:
-                FILE_PATH += "JustTesting.txt";
+                FILE_PATH += "MediumMap.txt";
                 break;
             case 3:
                 FILE_PATH += "hardMap.txt";
@@ -296,13 +296,13 @@ public class BattleField {
     public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
         if(!stop) {
             if (keyUP)
-                YOffset += 2;
+                YOffset += 3;
             if (keyDOWN)
-                YOffset -= 2;
+                YOffset -= 3;
             if (keyLEFT)
-                XOffset += 2;
+                XOffset += 3;
             if (keyRIGHT)
-                XOffset -= 2;
+                XOffset -= 3;
         }
     }
 

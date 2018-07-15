@@ -2,8 +2,9 @@ package GameObjects.MiddlePart.Items;
 
 import GameBasis.BattleField;
 import GameObjects.GameObject;
+import GameObjects.MiddlePart.MiddlePart;
 
-public class UpgradeGunItem extends GameObject implements Item {
+public class UpgradeGunItem extends GameObject implements Item,MiddlePart {
 
     private BattleField battleField;
     private int gift = 1;
@@ -12,7 +13,7 @@ public class UpgradeGunItem extends GameObject implements Item {
         this.locationX = locationX;
         this.locationY = locationY;
         this.battleField = battleField;
-        this.IMAGE_PATH += "upgradeGunItem.png";
+        this.IMAGE_PATH += "UpgradeGunItem.png";
         setImage();
     }
 

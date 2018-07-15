@@ -22,15 +22,24 @@ public class MainMenu {
     private JButton easyGameButton;
     private JButton mediumGameButton;
     private JButton hardGameButton;
+    private JButton mapEditorButton;
     private JButton soundButton;
-    private ImageIcon muteIcon;
-    private ImageIcon playIcon;
     private int gameLevel;
-    private boolean soundState;
     private EventHandler eventHandler = new EventHandler();
     private Clip clip;
 
     public MainMenu(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         // initializing components
         backgroundSound();
         frame = new JFrame("Wellcome to JTanks");
@@ -89,6 +98,7 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.YELLOW);
                 mediumGameButton.setForeground(Color.WHITE);
                 hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.WHITE);
             }
 
             @Override
@@ -102,6 +112,7 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.YELLOW);
                 mediumGameButton.setForeground(Color.WHITE);
                 hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.WHITE);
                 selectSound();
             }
 
@@ -144,6 +155,7 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.WHITE);
                 mediumGameButton.setForeground(Color.YELLOW);
                 hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.WHITE);
             }
 
             @Override
@@ -157,6 +169,7 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.WHITE);
                 mediumGameButton.setForeground(Color.YELLOW);
                 hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.WHITE);
                 selectSound();
             }
 
@@ -199,6 +212,7 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.WHITE);
                 mediumGameButton.setForeground(Color.WHITE);
                 hardGameButton.setForeground(Color.YELLOW);
+                mapEditorButton.setForeground(Color.WHITE);
             }
 
             @Override
@@ -213,11 +227,65 @@ public class MainMenu {
                 easyGameButton.setForeground(Color.WHITE);
                 mediumGameButton.setForeground(Color.WHITE);
                 hardGameButton.setForeground(Color.YELLOW);
+                mapEditorButton.setForeground(Color.WHITE);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 hardGameButton.setForeground(Color.WHITE);
+            }
+        });
+
+        mapEditorButton = new JButton("Map Editor");
+        mapEditorButton.setForeground(Color.WHITE);
+        mapEditorButton.setOpaque(true);
+        mapEditorButton.setContentAreaFilled(false);
+        mapEditorButton.setBorderPainted(false);
+        mapEditorButton.setFont(font);
+        mapEditorButton.setPreferredSize(new Dimension((int)hardGameButton.getPreferredSize().getWidth(),(int)hardGameButton.getPreferredSize().getHeight()));
+        mapEditorButton.addActionListener(eventHandler);
+        mapEditorButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.YELLOW);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                mapEditorButton.setForeground(Color.WHITE);
+            }
+        });
+        mapEditorButton.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                selectSound();
+                easyGameButton.setForeground(Color.WHITE);
+                mediumGameButton.setForeground(Color.WHITE);
+                hardGameButton.setForeground(Color.WHITE);
+                mapEditorButton.setForeground(Color.YELLOW);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                mapEditorButton.setForeground(Color.WHITE);
             }
         });
 
@@ -227,8 +295,6 @@ public class MainMenu {
         soundButton.setOpaque(false);
         soundButton.setContentAreaFilled(false);
         soundButton.setBorderPainted(false);
-        muteIcon = new  ImageIcon("files" + File.separator + "Images" + File.separator + "mute.png");
-        playIcon = new ImageIcon("files" + File.separator + "Images" + File.separator + "play.png");
 //        soundButton.setIcon(muteIcon);
 
         // Buttons part
@@ -236,6 +302,7 @@ public class MainMenu {
         rightBottomPanel.add(easyGameButton);
         rightBottomPanel.add(mediumGameButton);
         rightBottomPanel.add(hardGameButton);
+        rightBottomPanel.add(mapEditorButton);
 //        rightBottomPanel.add(soundButton);
 
         // GameLogo part
@@ -292,6 +359,10 @@ public class MainMenu {
                 gameLevel = 3;
                 hardGameButton.setForeground(Color.YELLOW);
                 soundState();
+            }else if(e.getSource().equals(mapEditorButton)){
+                frame.dispose();
+                clip.stop();
+                (new MapEditor()).show();
             }
         }
     }

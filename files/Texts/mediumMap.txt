@@ -1,10 +1,20 @@
-enemyTank|ground|ground|ground|finishGround|
-hardWAll|hardWAll|enemyTank|hardWAll|hardWAll|
-enemyTank|enemyTank|ground|enemyTank|enemyTank|
-ground|ground|hardWAll|ground|ground|
-enemyTank|ground|ground|ground|enemyTank|
-hardWAll|hardWAll|enemyTank|hardWAll|hardWall|
-ground|ground|ground|hardWall|item2|
-enemyTank|hardWall|ground|softwall|Item1|
-hardWall|hardWall|ground|hardWall|hardWall|
-playerTank|ground|ground|ground|ground
+ | | | :UI| :&| | | | |#| | | | | | | | | | :F|
+ | | | | :&| | | | |#| | | | | | | | | | |
+ | | | | :&| | | | |#| | | | | | :E4| | | | |
+ | | | | :&| | | | |#| | | | | | | | | | |
+ | | | |#| | | | |#| | | | | | | | | | |
+ | | | |#| :E3| | | |#| | | | | | | | | | |
+#|#|#|#|#:*| | | | |#| | | | | | | | | | |
+ | :MI| :MI| | | | | | |#:*| :CI| | | | | | | | | |
+ | | | | | | | | | :E5| :CI| | | | | | | | | |
+ | | | | | | | | | | | | | | | | :E1| | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | | | :&| :&| | | | | | | | | | | | | | | |
+ | | | | | | | | | | | | :E2| | | | | | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | :E4| | | | | :E4| | | | | | :E2| | | | | | | |
+ | | | | | | | | | | | | | | | | | | | |
+ | | | | | | | | | :RI| | | | | | | | | | |
