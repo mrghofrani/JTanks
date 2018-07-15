@@ -275,9 +275,9 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
      */
     private void restrictMovement(){
         // The condition that allows the movement of tank or not
-        if(locationX < 0 - image.getWidth()/2 || locationX > 2*GameFrame.GAME_WIDTH - image.getWidth()/2)
+        if(locationX < 0 - image.getWidth()/2 || locationX > 1930)
             locationX = savedLocationX;
-        if(locationY < 0 - image.getHeight()/2 || locationY > 2*GameFrame.GAME_HEIGHT - image.getHeight()/2)
+        if(locationY < 0 - image.getHeight()/2 || locationY > 1930)
             locationY = savedLocationY;
         battleField.move();
         battleField.collision(this);

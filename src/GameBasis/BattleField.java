@@ -256,8 +256,8 @@ public class BattleField {
     public void drawAllObjects(Graphics2D g2d) {
         if (XOffset > 0) XOffset = 0;
         if (YOffset > 0) YOffset = 0;
-        if (XOffset + 1200 < 600) XOffset = -600;
-        if (YOffset + 1200 < 600) YOffset = -600;
+        if (XOffset  < -795) XOffset = -795;
+        if (YOffset < -960) YOffset = -960;
 
         clearScreen();
         synchronized (bottomPart) {
