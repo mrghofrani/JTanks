@@ -1,5 +1,8 @@
 package GameBasis;
-
+/**
+ * @Authors Seyyed hassan saadat and mohamadreza ghofrani
+ *
+ */
 import GameObjects.BottomPart.BottomPart;
 import GameObjects.BottomPart.ExplodedGround;
 import GameObjects.BottomPart.Ground;
@@ -22,7 +25,9 @@ import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
+/**
+ * BattleField class controls battlefield and objects on it
+ */
 public class BattleField {
     private String FILE_PATH = "files" + File.separator + "Texts" + File.separator;
     private ArrayList<GameObject> everything;
@@ -37,7 +42,9 @@ public class BattleField {
     private boolean stop;
     private final int MAP_HEIGHT = 1200;
     private final int MAP_WIDTH = 1200;
-
+    /**
+     * first initializing
+     */
     public BattleField() {
         // Hi Mahandes !!!
         // YaAllah !!!
@@ -278,7 +285,9 @@ public class BattleField {
         }
         playerTank.drawDetails(g2d);
     }
-
+    /**
+     * a method for defining game level of difficulty
+     */
     public void initializeGameLevel() {
         switch (Main.getGameLevel()) {
             case 1:
@@ -292,7 +301,13 @@ public class BattleField {
                 break;
         }
     }
-
+    /**
+     * a method that works like camera
+     * @param keyUP defines pressing up arrow key
+     * @param keyDOWN defines pressing down arrow key
+     * @param keyRIGHT defines pressing right arrow key
+     * @param keyLEFT   defines pressing left arrow key
+     */
     public void changeSeenArea(boolean keyUP,boolean keyDOWN,boolean keyRIGHT,boolean keyLEFT){
         if(!stop) {
             if (keyUP)
@@ -305,11 +320,15 @@ public class BattleField {
                 XOffset -= 2;
         }
     }
-
+    /**
+     * stops battlefield move(camera move in fact)
+     */
     public void stop(){
         stop = true;
     }
-
+    /**
+     * moves camera
+     */
     public void move(){
         stop = false;
     }
@@ -374,7 +393,10 @@ public class BattleField {
         }
     }
 
-
+    /**
+     * a method to add gameobjects to battlefield
+     * @param gameObject is object that must be added to field
+     */
     public void add(GameObject gameObject) {
         ArrayList<GameObject> everythingTmp = new ArrayList(everything);
         everythingTmp.add(gameObject);
@@ -401,7 +423,9 @@ public class BattleField {
             }
         }
     }
-
+    /**
+     * @return a reference of user tank
+     */
     public PlayerTank getPlayerTank() {
         return playerTank;
     }

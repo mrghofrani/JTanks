@@ -8,7 +8,9 @@ import GameObjects.MiddlePart.Tank.Bullet.MyCannon2;
 
 import java.io.File;
 
-
+/**
+ * This class represent's a canon gun
+ */
 public class CannonGun extends PlayerGun {
 
 
@@ -18,7 +20,12 @@ public class CannonGun extends PlayerGun {
         setImage();
         numberOfBullet = 100;
     }
-
+    /**
+     * this method job is shooting a cannon bullet
+     * @param battleField
+     * @param locationX
+     * @param locationY
+     */
     @Override
     public void shot(BattleField battleField,int locationX,int locationY) {
 //        double angle = Math.atan2(mouseY - locationY, mouseX - locationX);
@@ -36,19 +43,29 @@ public class CannonGun extends PlayerGun {
             outOfBulletSound();
         }
     }
-
+    /**
+     * manage's promotion
+     */
     @Override
     public void promote(){
         IMAGE_PATH = "files" + File.separator + "Images" + File.separator + "playerCannonGun1.png";
         setImage();
         this.level = 2;
     }
-
+    /**
+     * manage's aiming
+     * @param locationX
+     * @param locationY
+     * @param mouseX
+     * @param mouseY
+     */
     @Override
     public void aim(int locationX,int locationY,int mouseX, int mouseY) {
         angle = Math.atan2(mouseY - locationY,mouseX - locationX);
     }
-
+    /**
+     * increased number of bullets of tank
+     */
     @Override
     public void setNumberOfBulletsToDefault() {
         numberOfBullet += 100;

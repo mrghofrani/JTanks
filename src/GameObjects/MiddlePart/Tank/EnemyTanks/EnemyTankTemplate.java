@@ -17,7 +17,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * This class shows enemy tank skeleton(basis)
+ */
 public abstract class EnemyTankTemplate extends GameObject implements MiddlePart,Explosive {
     protected double angle;
     protected int speed;
@@ -36,7 +38,9 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
     protected Thread fireThread;
     protected Thread aimThread;
 
-
+    /**
+     * this method set's gun image
+     */
     protected void setGunImage(){
         File file = new File(GUN_IMAGE);
         try {
@@ -46,11 +50,22 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
         }
     }
 
+    /**
+     * paint's tank
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         paintTank(g2d,XOffset,YOffset);
         paintGun(g2d,XOffset,YOffset);
     }
-
+    /**
+     * paint's tank
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
     protected void paintTank(Graphics2D g2d, int XOffset, int YOffset){
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
@@ -59,7 +74,12 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
         g2d.drawImage(image,locationX + XOffset ,locationY + YOffset ,null);
         g2d.setTransform(backup);
     }
-
+    /**
+     * paint's gun
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
     protected void paintGun(Graphics2D g2d, int XOffset, int YOffset){
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
@@ -68,7 +88,9 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
         g2d.drawImage(gunImage,locationX + XOffset + 30,locationY + YOffset + 30,null);
         g2d.setTransform(backup);
     }
-
+    /**
+     * move's tank
+     */
     protected void move(){
         savedLocationX = locationX;
         savedLocationY = locationY;
@@ -77,28 +99,41 @@ public abstract class EnemyTankTemplate extends GameObject implements MiddlePart
         locationY += speed * Math.sin(angle);
         battleField.collision(this);
     }
-
+    /**
+     * check's if target is close to him or not
+     */
     protected void checkNear(){
         isNear = (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200)
                 && (Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) > 100);
     }
-
+    /**
+     * @return test's whether anything is near him or not
+     */
     protected boolean checkNearGun(){
         return Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 2000 && health >0;
     }
-
+    /**
+     * this method calculate's angle of this object and target
+     */
     protected void aim(){
         gunAngle = Math.atan2(battleField.getPlayerTank().getLocationY() - (locationY + 50),battleField.getPlayerTank().getLocationX() - (locationX + 50));
     }
-
+    /**
+     * this method designed to shotting to target
+     */
     protected abstract void shot();
 
     @Override
 
+    /**
+     * this method is from game object class and not used
+     */
     public void act() {
 
     }
-
+    /**
+     * handle's stop action
+     */
     public void stop(){
         locationY = savedLocationY;
         locationX = savedLocationX;

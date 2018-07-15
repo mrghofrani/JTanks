@@ -33,7 +33,9 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         playSound("esbullet.wav");
 
 
-
+/**
+ * this is thread of aiming target
+ */
         Runnable runnable3 = new Runnable() {
             @Override
             public void run() {
@@ -47,6 +49,9 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
             }
         };
         ThreadPool.execute(runnable3);
+        /**
+         * this is thread of moving bullet
+         */
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -61,7 +66,12 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         };
         ThreadPool.execute(runnable);
     }
-
+    /**
+     * this method job is drawing bullet
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
@@ -70,7 +80,9 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         g2d.drawImage(image,locationX + XOffset + image.getWidth(),locationY + YOffset,null);
         g2d.setTransform(backup);
     }
-
+    /**
+     * this method handles moving bullet
+     */
     private void move(){
         savedLocationX = locationX;
         savedLocationY = locationY;
@@ -78,7 +90,9 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
         locationY += speed * Math.sin(angle);
         battleField.collision(this);
     }
-
+    /**
+     * this method handles aiming target by calculating angle
+     */
     protected void aim(){
         angle = Math.atan2(battleField.getPlayerTank().getLocationY() - locationY,battleField.getPlayerTank().getLocationX() - locationX );
     }
@@ -91,24 +105,32 @@ public class ESBullet extends GameObject implements MiddlePart,Exploder,Bullet {
     public void act() {
 
     }
-
+    /**
+     * handle's exploding bullet
+     */
     @Override
     public void explode() {
         dispose();
         stop();
     }
 
-
+    /**
+     *  stop's bullet
+     */
     private void stop(){
         locationX = savedLocationX;
         locationY = savedLocationY;
     }
-
+    /**
+     * @return damage value
+     */
     @Override
     public int getDamage() {
         return damage;
     }
-
+    /**
+     * handles deleting bullet
+     */
     @Override
     public void dispose() {
         playSound("recosh.wav");

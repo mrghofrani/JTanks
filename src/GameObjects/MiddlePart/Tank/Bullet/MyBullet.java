@@ -24,7 +24,12 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
     protected int savedLocationX;
     protected int savedLocationY;
     protected Runnable actions;
-
+    /**
+     * draw's MyBullet
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
 
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         move();
@@ -35,7 +40,9 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
         g2d.drawImage(image,locationX + XOffset + image.getWidth(),locationY + YOffset,null);
         g2d.setTransform(backup);
     }
-
+    /**
+     * this method handles moving bullet
+     */
     public void move(){
         savedLocationX = locationX;
         savedLocationY = locationY;
@@ -53,24 +60,32 @@ public class MyBullet extends GameObject implements Exploder,MiddlePart,Bullet {
 
     }
 
-
+    /**
+     * handle's exploding bullet
+     */
     @Override
     public void explode() {
         dispose();
         stop();
     }
-
+    /**
+     *  stop's bullet
+     */
     public void stop(){
         locationX = savedLocationX;
         locationY = savedLocationY;
     }
-
+    /**
+     * handles deleting bullet
+     */
     @Override
     public void dispose() {
         playSound("recosh.wav");
         isDeleted = true;
     }
-
+    /**
+     * @return damage value
+     */
     @Override
     public int getDamage() {
         return damage;

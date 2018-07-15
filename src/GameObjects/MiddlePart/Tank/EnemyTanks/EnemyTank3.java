@@ -12,7 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
-
+    /**
+     * this class is an implementation of an enemy tank
+     * @param battleField
+     * @param locationX
+     * @param locationY
+     */
     public EnemyTank3(BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
         this.locationX = locationX;
@@ -58,17 +63,26 @@ public class EnemyTank3 extends EnemyTankTemplate implements HardObject {
         };
         aimThread.start();
     }
-
+    /**
+     * handle's shotting action of tank
+     */
     @Override
     protected void shot() {
         battleField.add(new EnemyCannon(battleField,locationX + 60,locationY + 50,battleField.getPlayerTank().getLocationX() + 50,battleField.getPlayerTank().getLocationY() + 50));
     }
-
+    /**
+     * this method job is painting tank
+     * @param g2d
+     * @param XOffset
+     * @param YOffset
+     */
     @Override
     protected void paintTank(Graphics2D g2d, int XOffset, int YOffset) {
         g2d.drawImage(image,locationX + XOffset ,locationY + YOffset ,null);
     }
-
+    /**
+     * doing nothing just for decor
+     */
     @Override
     public void stop() {
         // like a hard wall

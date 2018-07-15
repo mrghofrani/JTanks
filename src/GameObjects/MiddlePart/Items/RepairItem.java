@@ -15,17 +15,23 @@ public class RepairItem extends GameObject implements Item,MiddlePart {
         this.IMAGE_PATH += "RepairItem.png";
         setImage();
     }
-
+    /**
+     * manage's act of this object
+     */
     @Override
     public void act() {
         // Do nothing just be in your place
     }
-
+    /**
+     * manage's deleting this object
+     */
     @Override
     public void dispose() {
         isDeleted = true;
     }
-
+    /**
+     * @return number of adding cartridge
+     */
     @Override
     public int getGift() {
         return gift;

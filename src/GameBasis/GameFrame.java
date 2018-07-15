@@ -156,8 +156,10 @@ public class GameFrame extends JFrame {
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
 		}
 	}
-	
-	
+
+	/**
+	 * this method plays sounds of the game
+	 */
 	private void playSound(){
 		try {
 			File soundFile = new File("files" + File.separator + "Sounds" + File.separator + "gameSound1.wav");
@@ -174,10 +176,17 @@ public class GameFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * set's battleField
+	 * @param battleField
+	 */
 	public void setBattleField(BattleField battleField) {
 		this.battleField = battleField;
 	}
 
+    /**
+     * stop's sound clip
+     */
 	public void stop(){
 		clip.stop();
 	}

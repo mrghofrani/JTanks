@@ -3,7 +3,14 @@ package GameObjects.MiddlePart.Tank.Bullet;
 import GameBasis.BattleField;
 
 public class EnemyBullet extends EBullet {
-
+    /**
+     * initializing enemy bullet
+     * @param battleField is main field reference
+     * @param locationX is x coordinate
+     * @param locationY is y coordinate
+     * @param mouseX is mouse x location
+     * @param mouseY is mouse y location
+     */
     public EnemyBullet(BattleField battleField, int locationX, int locationY, int mouseX, int mouseY) {
         super();
         this.locationX = locationX;
