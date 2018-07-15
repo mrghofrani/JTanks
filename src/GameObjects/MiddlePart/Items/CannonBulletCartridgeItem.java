@@ -14,7 +14,12 @@ public class CannonBulletCartridgeItem extends GameObject implements Item,Middle
 
     private int gift = 100;
     private BattleField battleField;
-
+    /**
+     * first initializing of canonbulletcartdige item
+     * @param battleField
+     * @param locationX
+     * @param locationY
+     */
     public CannonBulletCartridgeItem(BattleField battleField,int locationX, int locationY){
         this.locationX = locationX;
         this.locationY = locationY;
@@ -22,17 +27,23 @@ public class CannonBulletCartridgeItem extends GameObject implements Item,Middle
         this.IMAGE_PATH += "CannonBulletCartridgeItem.png";
         setImage();
     }
-
+    /**
+     * manage's act of this object
+     */
     @Override
     public void act() {
         // Do nothing just be in your place
     }
-
+    /**
+     * manage deleting this object
+     */
     @Override
     public void dispose() {
        isDeleted = true;
     }
-
+    /**
+     * @return number of canon bullets is adding to tank
+     */
     @Override
     public int getGift() {
         return gift;

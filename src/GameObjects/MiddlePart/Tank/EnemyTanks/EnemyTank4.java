@@ -11,7 +11,12 @@ import java.awt.event.ActionListener;
 
 public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
     private int damage;
-
+    /**
+     * represent's a kind of enemy tanks(khengEnemy)
+     * @param battleField
+     * @param locationX
+     * @param locationY
+     */
     public EnemyTank4 (BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
         this.locationX = locationX;
@@ -61,25 +66,36 @@ public class EnemyTank4 extends EnemyTankTemplate implements Exploder {
         };
         aimThread.start();
     }
-
+    /**
+     * this method job is checking if player tank is neat it zone or no
+     */
     protected void checkNear(){
         isNear = Math.hypot(battleField.getPlayerTank().getLocationX() - locationX ,battleField.getPlayerTank().getLocationY() - locationY) < 200;
     }
+    /**
+     * shotting action is not mentioned for this animal
+     */
     @Override
     protected void shot() {
 
     }
-
+    /**
+     * trigger's  exploding action is this method job
+     */
     @Override
     public void explode() {
         dispose();
     }
-
+    /**
+     * handle deleting this enemy
+     */
     public void dispose() {
         playSound("heavygun.wav");
         isDeleted = true;
     }
-
+    /**
+     * @return damage value
+     */
     @Override
     public int getDamage() {
         return damage;

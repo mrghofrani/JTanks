@@ -333,13 +333,17 @@ public class MainMenu {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
     }
-
+    /**
+     * method of showing main frame
+     */
     public void show(){
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+    /**
+     * this is a class to handle selecting levels
+     */
     private class EventHandler implements ActionListener{
 
         @Override
@@ -367,6 +371,9 @@ public class MainMenu {
         }
     }
 
+    /**
+     * this method defines state of sound
+     */
     private void soundState(){
         frame.dispose();
         clip.stop();
@@ -421,6 +428,9 @@ public class MainMenu {
         }
     }
 
+    /**
+     * is used to select a sound
+     */
     private void selectSound(){
         try {
             Clip clip;
@@ -438,6 +448,9 @@ public class MainMenu {
         }
     }
 
+    /**
+     * is use to play agree sound
+     */
     private void agreeSound(){
         try {
             Clip clip;

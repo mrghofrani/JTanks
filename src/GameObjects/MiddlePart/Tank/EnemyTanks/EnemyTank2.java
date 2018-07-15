@@ -11,7 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
-
+    /**
+     * represent's an enemy tank
+     * @param battleField is main field
+     * @param locationX is x coordinate's of tank
+     * @param locationY is y coordinate's of tank
+     */
     public EnemyTank2(BattleField battleField, int locationX, int locationY){
         this.battleField = battleField;
         this.locationX = locationX;
@@ -37,6 +42,9 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
             }
         };
         moveThread.interrupt();
+        /**
+         * this thread represent's firing of enemy tank
+         */
         fireThread = new Thread() {
             @Override
             public void run() {
@@ -54,6 +62,9 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
             }
         };
         fireThread.start();
+        /**
+         * represent's aiming thread
+         */
         aimThread = new Thread() {
             @Override
             public void run() {
@@ -70,7 +81,9 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         };
         aimThread.start();
     }
-
+    /**
+     * handle's shotting act of tank
+     */
     @Override
     protected void shot() {
         for (int i = 0; i < 2; i++) {
@@ -83,7 +96,9 @@ public class EnemyTank2 extends EnemyTankTemplate implements HardObject {
         }
     }
 
-
+    /**
+     * this method stop's tank
+     */
     @Override
     public void stop() {
         locationX = savedLocationX;

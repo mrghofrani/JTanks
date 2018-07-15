@@ -17,17 +17,24 @@ public class UpgradeGunItem extends GameObject implements Item,MiddlePart {
         setImage();
     }
 
-
+    /**
+     * manage's act of this object
+     */
     @Override
     public void act() {
 
     }
-
+    /**
+     * manage's deleting this object
+     */
     @Override
     public void dispose() {
         isDeleted = true;
     }
-
+    /**
+     * @return number of adding cartridge
+     * (this object doesn't add cartride but upgrade current gun of tank)
+     */
     @Override
     public int getGift() {
         return gift;

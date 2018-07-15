@@ -9,7 +9,12 @@ import java.awt.geom.AffineTransform;
 public class ExplodedGround extends GameObject implements MiddlePart {
 
     private double angle;
-
+    /**
+     * this class defines exploded ground
+     * @param locationX is x coordinates of exploded object
+     * @param locationY is y coordinates of exploded object
+     * @param angle is angle of exploding
+     */
     public ExplodedGround(int locationX,int locationY,double angle){
         this.locationX = locationX;
         this.locationY = locationY;
@@ -17,7 +22,12 @@ public class ExplodedGround extends GameObject implements MiddlePart {
         this.angle = angle;
         setImage();
     }
-
+    /**
+     * this method draw's picture of exploded object
+     * @param g2d is graphics to draw
+     * @param XOffset x location of object that is drawing
+     * @param YOffset y location of object that is drawing
+     */
     @Override
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset) {
         AffineTransform backup = g2d.getTransform();

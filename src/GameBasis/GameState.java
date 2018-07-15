@@ -70,15 +70,24 @@ public class GameState {
 ////		locY = Math.min(locY, GameBasis.GameFrame.GAME_HEIGHT - (int)tankHeight);
     }
 
-
+    /**
+     * get's key listener
+     * @return keyHandler
+     */
     public KeyListener getKeyListener() {
         return keyHandler;
     }
-
+    /**
+     * get's mouse listener
+     * @return keyHandler
+     */
     public MouseListener getMouseListener() {
         return mouseHandler;
     }
-
+    /**
+     * get's mouse handler
+     * @return mouse handler
+     */
     public MouseMotionListener getMouseMotionListener() {
         return mouseHandler;
     }
@@ -94,15 +103,19 @@ public class GameState {
 			switch (e.getKeyCode())
 			{
 				case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
 					keyUP = true;
 					break;
 				case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
 					keyDOWN = true;
 					break;
 				case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
                     keyLEFT = true;
 					break;
 				case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
                     keyRIGHT = true;
 					break;
 				case KeyEvent.VK_ESCAPE:
@@ -110,21 +123,27 @@ public class GameState {
 					break;
 			}
 		}
-
+        /**
+         * @param e is event of pressing a key
+         */
 		@Override
 		public void keyReleased(KeyEvent e) {
 			switch (e.getKeyCode())
 			{
 				case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
 					keyUP = false;
 					break;
 				case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
 					keyDOWN = false;
 					break;
 				case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
 					keyLEFT = false;
 					break;
 				case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
 					keyRIGHT = false;
 					break;
                 case KeyEvent.VK_SHIFT:
@@ -132,14 +151,13 @@ public class GameState {
 //                    battleField.isCheatMode = true;
                     break;
                 case KeyEvent.VK_P:
-                    //TODO playerTank.promoteWeapon();
+                    playerTank.promoteWeapon();
                     break;
                 case KeyEvent.VK_T:
                     playerTank.getGun().setNumberOfBulletsToDefault();
                     break;
                 case KeyEvent.VK_I:
                     playerTank.getGun().setNumberOfBulletsToInfinite();
-                    System.out.println("rey gamaj!");
                     break;
                 case KeyEvent.VK_L:
                     playerTank.setDefaultLife();
@@ -188,12 +206,18 @@ public class GameState {
 //                mousePress = true;
 //            }
 //        }
+        /**
+         * @param e is mouse releasing event
+         */
         @Override
         public void mouseReleased(MouseEvent e) {
             mousePress = false;
         }
 //
-
+        /**
+         *
+         * @param e is mouse drag event
+         */
         @Override
         public void mouseDragged(MouseEvent e) {
             playerTank.aim(e.getX(),e.getY());
@@ -210,7 +234,10 @@ public class GameState {
                 clickTime = System.currentTimeMillis();
             }
         }
-
+        /**
+         *
+         * @param e is mouse event that occurred
+         */
         @Override
         public void mouseMoved(MouseEvent e){
             playerTank.aim(e.getX(),e.getY());

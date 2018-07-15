@@ -44,7 +44,9 @@ public class Ground extends GameObject implements  BottomPart {
         return startingPoint;
     }
 
-
+    /**
+     * is just for decor
+     */
     @Override
     public void act() {
         // Do nothing just be in your place

@@ -56,6 +56,9 @@ public class SoftWall extends GameObject implements Explosive,MiddlePart,HardObj
         }
     }
 
+    /**
+     * just for decor
+     */
     @Override
     public void stop() {
         // nothing

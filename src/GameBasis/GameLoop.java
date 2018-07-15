@@ -48,7 +48,9 @@ public class GameLoop implements Runnable {
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
 
 	}
-
+	/**
+	 * this method controls loop of game
+	 */
 	@Override
 	public void run() {
 		while (!gameOver && !gameWon) {

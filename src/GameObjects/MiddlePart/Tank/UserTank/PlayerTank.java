@@ -17,7 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * This is our main player gun
+ */
 public class PlayerTank extends GameObject implements Explosive,HardObject,MiddlePart {
     public double angle = -3 * Math.PI/2;
     private MachineGun machineGun;
@@ -41,7 +43,9 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
         health = 40;
     }
 
-
+    /**
+     * This method is useless
+     */
     @Override
     public void act() {
 
@@ -305,13 +309,24 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
             gun = cannonGun;
     }
 
-
+    /**
+     * Using this method player gun paints itself
+     * on the screen
+     * @param g2d the brush used to draw
+     * @param XOffset how long does the map moved in X axis
+     * @param YOffset how long does the map moved in Y axis
+     */
     public void doRendering(Graphics2D g2d, int XOffset, int YOffset){
         paintTank(g2d,XOffset,YOffset);
         gun.doRendering(g2d,locationX + XOffset,locationY + YOffset);
     }
 
-
+    /**
+     * This method draws the body of the tank to the screen
+     * @param g2d the brush used to draw
+     * @param XOffset how long does the map moved in X axis
+     * @param YOffset how long does the map moved in Y axis
+     */
     private void paintTank(Graphics2D g2d,int XOffset,int YOffset){
         AffineTransform backup = g2d.getTransform();
         AffineTransform at = new AffineTransform();
@@ -321,7 +336,13 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
         g2d.setTransform(backup);
     }
 
-
+    /**
+     * draws details of the tank such as
+     * number of CannonBullet
+     * number of MachineGunBullet
+     * health of the tank
+     * @param g2d brush used to paint
+     */
     public void drawDetails(Graphics2D g2d){
         BufferedImage image = null;
         try {
@@ -391,18 +412,25 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
 
 
     }
-
+    /**
+     * set the life to its initial value
+     */
     public void setDefaultLife(){
         life = 3;
     }
-
+    /**
+     * repairs the tank that's it.
+     */
     public boolean repair(){
         int tmp = health;
         if(health != 50)
             health += 10;
         return tmp != health;
     }
-
+    /**
+     * used to eat an item
+     * @param item item supposed to be eaten
+     */
     public void eatItem(Item item){
         if(item instanceof CannonBulletCartridgeItem){
             cannonGun.numberOfBullet += item.getGift();
@@ -418,28 +446,42 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
             item.dispose();
         }
     }
-
-
+    /**
+     * @return true if player is using the main gun
+     * if the player uses secondary gun returns false
+     */
     public boolean isMainGun(){
         return gun == cannonGun;
     }
 
+    /**
+     * @return location x
+     */
     public int getLocationX(){
         return this.locationX;
     }
 
+    /**
+     * @return location y
+     */
     public int getLocationY(){
         return this.locationY;
     }
-
+    /**
+     * @returns current gun of the player
+     */
     public PlayerGun getGun() {
         return gun;
     }
-
-    private void promoteWeapon(){
+    /**
+     * upgrades the weapon
+     */
+    public void promoteWeapon(){
         gun.promote();
     }
-
+    /**
+     * resets the health to default values
+     */
 
     public void setDefaultHealth(){
         health = 50;
@@ -468,18 +510,25 @@ public class PlayerTank extends GameObject implements Explosive,HardObject,Middl
         }
         playSound("EnemyBulletToMyTank.wav");
     }
-
+    /**
+     * stop the tank from moving
+     */
     @Override
     public void stop() {
         locationX = savedLocationX;
         locationY = savedLocationY;
         battleField.stop();
     }
-
+    /**
+     * @returns the width of the tank's body
+     */
     public int getWidth(){
         return image.getWidth();
     }
 
+    /**
+     * @returns the height of the tank's body
+     */
     public int getHeight(){
         return image.getHeight();
     }
