@@ -3,8 +3,6 @@ package GameObjects.MiddlePart.Tank.EnemyTanks;
 import GameBasis.BattleField;
 import GameObjects.MiddlePart.HardObject;
 import GameObjects.MiddlePart.Tank.Bullet.EnemyBullet;
-import ThreadPool.ThreadPool;
-import sun.print.PrintJob2D;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -15,7 +15,7 @@ import GameObjects.MiddlePart.Walls.SoftWall;
 import GameObjects.GameObject;
 import GameObjects.TopPart.*;
 import GameObjects.MiddlePart.*;
-import javafx.collections.transformation.TransformationList;
+
 
 import java.awt.*;
 import java.io.*;
