@@ -20,8 +20,6 @@ import GameObjects.MiddlePart.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BattleField {
     private String FILE_PATH = "files" + File.separator + "Texts" + File.separator;
@@ -285,7 +283,7 @@ public class BattleField {
                 FILE_PATH += "easyMap.txt";
                 break;
             case 2:
-                FILE_PATH += "MediumMap.txt";
+                FILE_PATH += "mediumMap.txt";
                 break;
             case 3:
                 FILE_PATH += "hardMap.txt";

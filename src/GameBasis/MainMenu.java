@@ -366,7 +366,7 @@ public class MainMenu {
             }else if(e.getSource().equals(mapEditorButton)){
                 frame.dispose();
                 clip.stop();
-                //(new MapEditor()).show();
+                (new MapEditor()).show();
             }
         }
     }
